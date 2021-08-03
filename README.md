@@ -98,7 +98,59 @@ This scenario simulates publishing messages from multiple clients to a single de
 
 This scenario simulates publishing messages from one client to another. Consider a use case where a user can unlock their car from a mobile app. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario4)
  
-## Resources
+## Topic Spaces and Topic Templates
+  TODO : this section describes CRUD and limitations around TopicSpaces and topic templates
+
+## Message routing for MQTT Broker enabled IoT Hubs 
+  TODO : this section decribes new/limited routing for broker messages
+
+** System properties added
+** What query conditions for broker topics 
+** What is going to continue to work (twin) 
+** What will not work (body query) 
+* What kinds of Message Routing capabilities are supported? 
+* MQTT Broker messages support routing capabilities mostly same as existing one: 
+** Same types of custom endpoints 
+** same filtering/query capabilities in routing, with exception of query based on message body 
+* Some behaviors are different and worth to point out: 
+** Query based on message body is not available and will be later. 
+** Unlike existing Hub Telemetry, MQTT messages WON'T flow to built-in endpoint automatically. Customers need explicitly set routing for MQTT custom topics as source to the choice of endpoint (built-in Event Hubs, or other custom endpoints).   
+
+  
+To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub message routing](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c)
+  
+## Throttle limits 
+
+For this release, the following limits are imposed to protect the services and ensure performance. The limits might be revised for future releases. 
+  
+## Reference of Updated Hub APIs  
+
+If you do not want to use the  samples, then you can use these APIs to connect device to IoT Hub. 
+[TODO- Max] – also where in the doc or instructions should customer leverage this? 
+PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226 . Need comments in PR for guidance around updates. 
+
+*What would happen to existing Hub MQTT?  
+IoT Hub will be backward compatible. So the MQTT as-is will continue be supported.   
+
+*How is Broker related with existing D2C, direct method, etc?  
+
+IoT Hub currently supports seven ways of communicating or transferring data from devices (see illustration below). By adding an MQTT broker, we are adding an additional way to communicate with devices that allows us to connect millions of existing devices that reply on the MQTT broker functionality.  
+
+*Is Hub Broker compatible with MQTT protocol? 
+
+IoT Hub MQTT Broker is intended to be fully compliant with MQTT protocols, with a few caveats: 
+The broker supports MQTT v3.1.1 for this release and will support v5 in future releases.  
+The broker supports Qos 0 and 1. Right now we don’t have plan to support QoS 2 though.  
+Not all MQTT features are available at this release (see the Capabilities section above). We will bring more features along our roadmap.  
+
+We intend to provide consistent experience across IoT Edge Broker and IoT Hub Broker. So devices can connect either IoT Hub or IoT Edge without awareness of the target. However, some MQTT features might be available to IoT Edge sooner.  
+
+ 
+
+### Frequently asked questionsFrequently asked questions 
+* What happens if your device disconnects (session cleanup) 
+  
+## Other Resources
 
 (Any additional resources or related projects)
 
