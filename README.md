@@ -130,7 +130,7 @@ For this release, the following limits are imposed to protect the services and e
 ## Reference of Updated Hub APIs  
 
 If you do not want to use the  samples, then you can use these APIs to connect device to IoT Hub. 
-[TODO- Max] – also where in the doc or instructions should customer leverage this? 
+[TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this? 
 PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226 . Need comments in PR for guidance around updates. 
 
 *What would happen to existing Hub MQTT?  
