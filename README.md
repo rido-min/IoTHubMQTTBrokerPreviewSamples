@@ -84,16 +84,19 @@ Here are a few additional scenarios you can try out. Please refer the details be
 
 ### Scenario 1 – Route data published on a topic to the built-in-endpoint 
 
-This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example “vehicles/<VIN>/GPS”. A message routing configuration is set up to route all MQTT Broker message to built-in Event Hubs. For instructions see [README](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples/tree/main/Scenario1).
+This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example “vehicles/<VIN>/GPS”. A message routing configuration is set up to route all MQTT Broker message to built-in Event Hubs. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario1).
   
 ### Scenario 2 – Fan-out (one-to-many) messages over custom topics 
 
-This scenario simulates cloud to device commands to several devices and can be leveraged for use cases such as sending alerts to devices. Consider the use case where a fleet management service needs to send a weather alert to all the vehicles in the fleet. For instructions see [README](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples/tree/main/Scenario2).
+This scenario simulates cloud to device commands to several devices and can be leveraged for use cases such as sending alerts to devices. Consider the use case where a fleet management service needs to send a weather alert to all the vehicles in the fleet. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario2).
 
 ### Scenario 3– Fan-in (many to one) messaging over custom topics  
 
-This scenario simulates publishing messages from multiple clients to a single device. For instructions see [README](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples/tree/main/Scenario3)
+This scenario simulates publishing messages from multiple clients to a single device. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario3)
 
+### Scenario 4– One to one messaging over custom topics  
+
+This scenario simulates publishing messages from one client to another. Consider a use case where a user can unlock their car from a mobile app. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario4)
  
 ## Resources
 
