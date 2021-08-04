@@ -96,7 +96,7 @@ Here are a few additional scenarios you can try out. Please refer the details be
 
 ### Scenario 1 – Route data published on a topic to the built-in-endpoint
 
-This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example “vehicles/<VIN>/GPS”. This scenario also showcases routing query and message enrichments which are existing IoT Hub message routing capabilities. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario1). Also see (**TODO** link routing section)
+This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example “vehicles/<VIN>/GPS”. This scenario also showcases routing query and message enrichments which are existing IoT Hub message routing capabilities. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario1). 
 
 ### Scenario 2 – Fan-out (one-to-many) messages over custom topics
 
