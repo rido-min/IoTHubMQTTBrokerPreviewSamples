@@ -1,0 +1,102 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hubname": {
+            "type": "string",
+            "defaultValue": "mqttbroker-01"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "eastus"
+        },
+        "customTopicQuery" : {
+            "type" : "string",
+            "defaultValue": "STARTS_WITH($mqtt-topic, \"vehicles/GPS/\") and $twin.tags.floor = 1"
+        },
+        "sku_name": {
+            "type": "string",
+            "defaultValue": "S1",
+            "metadata" : {
+                "description": "https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-scaling#basic-and-standard-tiers"
+            }
+        },
+        "sku_units": {
+            "type": "string",
+            "defaultValue": "1",
+             "metadata" : {
+                "description": "https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-scaling#message-throughput"
+            }
+        },
+        "d2c_partitions": {
+            "type": "string",
+            "defaultValue": "4"
+        },
+        "features": {
+            "type": "string",
+            "defaultValue": "MqttBroker"
+        },
+        "cloudEnvironment": {
+            "type": "string",
+            "metadata": {
+                "description": "Cloud environment to deploy"
+            },
+            "allowedValues": [
+                "public"
+            ],
+            "defaultValue": "public"
+        }
+    },
+    "resources": [    
+        {
+            "apiVersion": "2021-07-01-preview",
+            "type": "Microsoft.Devices/IotHubs",
+            "name": "[parameters('hubname')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "eventHubEndpoints": {
+                    "events": {
+                        "retentionTimeInDays": 1,
+                        "partitionCount": "[parameters('d2c_partitions')]"
+                    }
+                },
+                "features": "[parameters('features')]",
+                "routing": {
+                    "routes": [
+                        {
+                        "name": "MqttBrokerRoute",
+                        "source": "MqttBrokerMessages",
+                        "condition": "[parameters('customTopicQuery')]",
+                        "endpointNames": [
+                            "events"
+                        ],
+                        "isEnabled": true
+                        },
+                                                                     {
+                        "name": "MqttBrokerRoute",
+                        "source": "MqttBrokerMessages",
+                        "condition": "[parameters('customTopicQuery')]",
+                        "endpointNames": [
+                            "events"
+                        ],
+                        "isEnabled": true
+                        }
+                    ],
+                    "fallbackRoute": {
+                        "name": "$fallback",
+                        "source": "DeviceMessages",
+                        "condition": "true",
+                        "endpointNames": [
+                        "events"
+                        ],
+                        "isEnabled": true
+                    }
+                }
+            },
+            "sku": {
+                "name": "[parameters('sku_name')]",
+                "capacity": "[parameters('sku_units')]"
+            }
+        }
+    ]
+}
