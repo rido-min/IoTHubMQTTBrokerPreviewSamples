@@ -110,9 +110,6 @@ This scenario simulates publishing messages from multiple clients to a single de
 
 This scenario simulates publishing messages from one client to another. Consider a use case where a user can unlock their car from a mobile app. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario4)
 
-### Scenario 7: Pub/sub to any non-system topic custom ($)
-
-
 ## Topic Spaces and Topic Templates
   TODO : this section describes CRUD and limitations around TopicSpaces and topic templates
 
