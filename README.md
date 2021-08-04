@@ -66,11 +66,11 @@ The following features are not in scope for this release, but they will be suppo
 4. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
 5. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 6. To use the Azure IoT extension for Azure CLI with Topic Space, first remove the current Azure IoT extension using:
-  ```
+  ```azurecli
   az extension remove -n azure-iot
   ```
   Then, run the following command after you installed an Azure CLI version of 2.17.1 or later:
-  ```
+  ```azurecli
   az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
   ```
   For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension).
@@ -79,11 +79,21 @@ The following features are not in scope for this release, but they will be suppo
 
 Follow these steps to configure the IoT Hub MQTT Broker with one client enabled to publish and subscribe (many to many) –
 1. We will enable the feature for the subscription ID you shared in the sign up form emailed to you. If you haven't responded, please fill out [this form](https://aka.ms/IoTHubMQTTBrokerPreviewSignup)
-3. Configure TopicSpace using the Azure CLI command guidance below:
+3. Configure TopicSpace using one of the two Azure CLI command guidance below:
+* If you know the IoT Hub name and resource group:
   ```azurecli
-  az iot hub topic-space create --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout"
+  az iot hub topic-space create -n {IoT_Hub_name} -g {IoT_Hub_resource_group} --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout"
   ```
-  For more details see Topic Spaces and Topic Templates (TODO : LINK TO SECTION)
+* If you know the IoT Hub connection string:
+  ```azurecli
+  az iot hub topic-space create -l {IoT_Hub_connection_string} --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout"
+  ```
+* For help and more examples for create, run the command below. This will include examples that allow the characters $ and | within the topic space template.
+  ```azurecli
+  az iot hub topic-space create -h
+  ```
+* For more details see Topic Spaces and Topic Templates (TODO : LINK TO SECTION)
+
 3. Register devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
 4. Clone the samples from this GitHub Repo and follow the [README instructions](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples)
 * Update connection strings
