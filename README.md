@@ -118,33 +118,23 @@ This scenario simulates publishing messages from one client to another. Consider
   TODO : this section describes CRUD and limitations around TopicSpaces and topic templates
 
 ## Message routing for MQTT Broker enabled IoT Hubs
-  TODO : this section decribes new/limited routing for broker messages
-
-** System properties added
-** What query conditions for broker topics
-** What is going to continue to work (twin)
-** What will not work (body query)
-* What kinds of Message Routing capabilities are supported?
-* MQTT Broker messages support routing capabilities mostly same as existing one:
-** Same types of custom endpoints
-** same filtering/query capabilities in routing, with exception of query based on message body
-* Some behaviors are different and worth to point out:
-** Query based on message body is not available and will be later.
-** Unlike existing Hub Telemetry, MQTT messages WON'T flow to built-in endpoint automatically. Customers need explicitly set routing for MQTT custom topics as source to the choice of endpoint (built-in Event Hubs, or other custom endpoints).  
-
-
+  
+* New system properties `mqtt-topic` and `mqtt-qos` have been added. You can utilize these in a [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax) with a few limitations. The table below lists all the system properties that are supported when the routing `broker` messages. 
+ 
 | Properties | Keyword for routing query|
-| -------- | --------------- |
-|  iothub-connection-device-id | connectionDeviceId |
-|  iothub-connection-module-id | connectionModuleId |
-|  iothub-connection-auth-generation-id | connectionDeviceGenerationId |
-|  iothub-connection-auth-method | connectionAuthMethod |
-|  iothub-enqueuedtime | enqueuedTime |
-|  Mqtt-topic | Mqtt-topic |
-|  Mqtt-qos | Mqtt-qos |
-|  iothub-message-source | iothub-message-source |
+| -------- | --------------- |---------- |
+|  iothub-connection-device-id | connectionDeviceId ||
+|  iothub-connection-module-id | connectionModuleId | |
+|  iothub-connection-auth-generation-id | connectionDeviceGenerationId | |
+|  iothub-enqueuedtime | enqueuedTime ||
+|  mqtt-topic | mqtt-topic | topic on which message was published | 
+|  mqtt-qos | mqtt-qos | qos level of the message published | 
+|  iothub-message-source | iothub-message-source | routing message source | 
 
-
+* Querying on body and application properties is not supported for `broker` messages.
+* Unlike existing Hub Telemetry, `broker` messages will not flow to the built-in endpoint by default. Customers need to explicitly set routing for MQTT custom topics as source to the choice of endpoint (built-in Event Hubs, or other custom endpoints).  
+* When routing messages for `broker` the dropped messages will not go to the fallback route (**TODO** to be tested) if the query condition is not met.
+  
 To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub message routing](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c)
 
 ## Throttle limits
@@ -152,11 +142,11 @@ To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub mess
 For this release, the following limits are imposed to protect the services and ensure performance. The limits might be revised for future releases.
  Table in section 9.3 in [instructions doc](https://microsoft.sharepoint.com/:w:/r/teams/Azure_IoT/_layouts/15/Doc.aspx?sourcedoc=%7B567cfc86-23b8-43db-8d8b-48aafc2c3b8b%7D&action=edit&wdPid=1054f99c&share=IQGG_HxWuCPbQ42LSKr8LDuLAVwreCP06LQbBlEbM_eeEs0&cid=27c9a266-2a79-44e0-a5f8-e040ebea8b9d)
 
-  **TBD** Review TABLE - We should add a DESCRIPTION COLUMN
+  **TBD INTERNAL BUG BASH : Review TABLE**
 
-### Broker pub/sub
+### Broker
 
-| Category | Feature | Limit |
+| Category | Description | Limit |
 | -------- | ---- | ----------- |
 | connect | Connect requests per second per client ID | 1 |
 | connect | Keep alive limit (max delay for liveness check - 28.5min) | 19 mins |
@@ -169,8 +159,8 @@ For this release, the following limits are imposed to protect the services and e
 | sub | Maximum subscriptions per subscribe request | 8 |
 | throughput | Throughput per second per connection  | (maximum inbound and outbound publish rates * number of 4KB) (**TBD** CONFIRM) |
 
-### Topics
-| Category | Feature | Limit |
+### Topic Spaces
+| Category | Description | Limit |
 | -------- | ---- | ----------- |
 | topic space | lowFanout: Total subscriptions per substituted values set (e.g. for devices/{deviceID}/# filter, devices/d1/#, devices/d2/# are counted toward this limit.  | 50 |
 | topic space | lowFanout: Message rate per topic | 100 messages/second |
@@ -181,29 +171,20 @@ For this release, the following limits are imposed to protect the services and e
 | topic space | maximum number of topic spaces per Hub | 10 |
 | topic space management APIs | requests/s | 1/s with burst 10/s |
 
-## Test using Code (**TODO** RIDO/SEJAL)
-At this point there is not an official Microsoft SDK to interact with the broker, instead we are creating samples using existing MQTT libraries, these samples include helper functions that can be used in your own applications. In the next release, We will provide a modular SDK, that will still require a 3rd party MQTT client.
-
-We are providing sample code in Python using the Paho MQTT client (TBD if we can include .NET with MQTTnet) To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations should work.
-
-
-The samples use authentication based on SharedAccessKeys
-
-
 ## Reference of Updated Hub APIs
 
 If you do not want to use the  samples, then you can use these APIs to connect device to IoT Hub.
 [TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this?
 PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226 . Need comments in PR for guidance around updates.
 
-*What would happen to existing Hub MQTT? 
+* What would happen to existing Hub MQTT? 
 IoT Hub will be backward compatible. So the MQTT as-is will continue be supported.  
 
-*How is Broker related with existing D2C, direct method, etc? 
+* How is Broker related with existing D2C, direct method, etc? 
 
 IoT Hub currently supports seven ways of communicating or transferring data from devices (see illustration below). By adding an MQTT broker, we are adding an additional way to communicate with devices that allows us to connect millions of existing devices that reply on the MQTT broker functionality. 
 
-*Is Hub Broker compatible with MQTT protocol?
+* Is Hub Broker compatible with MQTT protocol?
 
 IoT Hub MQTT Broker is intended to be fully compliant with MQTT protocols, with a few caveats:
 The broker supports MQTT v3.1.1 for this release and will support v5 in future releases.
