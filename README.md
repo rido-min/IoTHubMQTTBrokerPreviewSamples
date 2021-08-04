@@ -18,8 +18,8 @@ IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of 
 
 * [MQTT standard protocol](https://mqtt.org/)
 * [IoT Hub overview](https://docs.microsoft.com/azure/iot-hub/about-iot-hub)
-* Topic Space and Topic Template (TODO: ADD LINK TO DOC HEADING)
-* Device authentication (TODO ADD LINK TO DOC HEADING)
+* Topic Space and Topic Template (**TODO** ADD LINK TO DOC HEADING)
+* Device authentication (**TODO** ADD LINK TO DOC HEADING)
 
 ## Capabilities available in this release
 
@@ -74,6 +74,7 @@ The following features are not in scope for this release, but they will be suppo
   az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
   ```
   For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension).
+7. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations will work (**TODO** LINK info on connect packet). The samples use authentication based on SharedAccessKeys.
 
 ### Quickstart
 
