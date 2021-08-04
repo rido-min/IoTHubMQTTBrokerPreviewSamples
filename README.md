@@ -63,9 +63,10 @@ The following features are not in scope for this release, but they will be suppo
 * The template will also create an Event Hubs as a custom endpoint for your IoT Hub.
 * You can customize the routing query. See Routing limitations.
 * The routing source “MQTT Broker” is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.
-4. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
-5. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-6. To use the Azure IoT extension for Azure CLI with Topic Space, first remove the current Azure IoT extension using:
+* 
+3. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+4. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+5. To use the Azure IoT extension for Azure CLI with Topic Space, first remove the current Azure IoT extension using:
   ```
   az extension remove -n azure-iot
   ```
@@ -74,7 +75,8 @@ The following features are not in scope for this release, but they will be suppo
   az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
   ```
   For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension).
-7. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations will work (**TODO** LINK info on connect packet). The samples use authentication based on SharedAccessKeys.
+  
+6. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations will work (**TODO** LINK info on connect packet). The samples use authentication based on SharedAccessKeys.
 
 ### Quickstart
 
@@ -85,6 +87,7 @@ Follow these steps to configure the IoT Hub MQTT Broker with one client enabled 
   az iot hub topic-space create --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout"
   ```
   For more details see Topic Spaces and Topic Templates (TODO : LINK TO SECTION)
+  
 3. Register devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
 4. Clone the samples from this GitHub Repo and follow the [README instructions](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples)
 * Update connection strings
