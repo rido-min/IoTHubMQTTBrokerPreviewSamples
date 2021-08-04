@@ -18,8 +18,8 @@ IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of 
 
 * [MQTT standard protocol](https://mqtt.org/)
 * [IoT Hub overview](https://docs.microsoft.com/azure/iot-hub/about-iot-hub)
-* Topic Space and Topic Template (**TODO** ADD LINK TO DOC HEADING)
-* Device authentication (**TODO** ADD LINK TO DOC HEADING)
+* [Topic spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
+* [Device authentication](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#Device-authentication)
 
 ## Capabilities available in this release
 
@@ -190,6 +190,7 @@ If you do not want to use the  samples, then you can use these APIs to connect d
 [TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this?
 PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226 . Need comments in PR for guidance around updates.
   
+### Device authentication
   **TODO** Device auth
   
 ## Message routing for MQTT Broker enabled IoT Hubs
