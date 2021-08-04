@@ -8,7 +8,7 @@ IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of 
 
 ## Private preview program information 
 
-* Timeline: The private preview will run till 10/15/2021(TBD:date to be updated based on deployment timelines). The private preview is only for testing. Please do NOT use it for your production.   
+* Timeline: The private preview will run till 11/11/2021. The private preview is only for testing. Please do NOT use it for your production.   
 * Engagement: We will actively engage with you during the preview. At any point, feel free to connect with us for questions/concerns by creating issues in the Samples repo, confidential questions can be asked to iothubmqttbroker@microsoft.com.
 * Feedback: At the end of the preview, will capture additional feedback using [this form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR_mpSbs5LlNPijuErBTOYwFUOUxYUFM3MkJZM1dZWlBKVUFJTVIzQTJDTC4u)
 * Cost to use: For this release, MQTT Broker is available for no additional charge. Currently, you are charged when you send a message to an IoT Hub. You will only be charged once for that message, even if the message goes to multiple TopicSpaces or routing endpoints. Charges for IoT Hub remain unchanged and will be based on the tier purchased. Free, Basic and Standard tiers are supported. See IoT Hub pricing. 
@@ -132,7 +132,43 @@ To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub mess
 For this release, the following limits are imposed to protect the services and ensure performance. The limits might be revised for future releases. 
  Table in section 9.3 in [instructions doc](https://microsoft.sharepoint.com/:w:/r/teams/Azure_IoT/_layouts/15/Doc.aspx?sourcedoc=%7B567cfc86-23b8-43db-8d8b-48aafc2c3b8b%7D&action=edit&wdPid=1054f99c&share=IQGG_HxWuCPbQ42LSKr8LDuLAVwreCP06LQbBlEbM_eeEs0&cid=27c9a266-2a79-44e0-a5f8-e040ebea8b9d)
   
-  TODO ADD TABLE
+  **TBD** Review TABLE - We should add a DESCRIPTION COLUMN
+ 
+### Broker pub/sub
+  
+| Category | Feature | Limit |
+| -------- | ---- | ----------- |
+| connect | Connect requests per second per client ID | 1 |
+| connect | Keep alive limit (max delay for liveness check - 28.5min) | 19 mins |
+| pub inbound | Inbound publish requests per second per IoT Hub per unit (counted together with D2C) | Varies per SKU, details in [Device-to-cloud sends](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-quotas-throttling#operation-throttles) |
+| pub inbound | inbound Publish requests per second per connection (counted with D2C) | 100 |
+| pub inbound | Maximum inbound unacknowledged QoS 1 publish requests (Receive Maximum (maximum number of allowed outstanding unacknowledged PUBLISH packets (in client-server direction) with QoS: 1)). If Hub failed to ack pub request for more than the limit, Hub will reject new pub request and disconnect the client. | 16 |
+| sub | total Subscriptions (system topics are not counted here) per Hub | 1 million (**TBD** CONFIRM) |
+| sub | maximum subscriptions (system topics are not counted here) per connection (Single client can have no more than X subscriptions (**TBD** CONFIRM TEXT).| 50 |
+| sub | individual Subscriptions (system topics are not counted here)  per second per Hub per unit | same as existing (**TBD** confirm limit) |
+| sub | Maximum subscriptions per subscribe request | 8 |
+| throughput | Throughput per second per connection  | (maximum inbound and outbound publish rates * number of 4KB) (**TBD** CONFIRM) |
+  
+### Topics
+| Category | Feature | Limit |
+| -------- | ---- | ----------- |
+| topic space | lowFanout: Total subscriptions per substituted values set (e.g. for devices/{deviceID}/# filter, devices/d1/#, devices/d2/# are counted toward this limit.  | 50 |
+| topic space | lowFanout: Message rate per topic | 100 messages/second |
+| topic space | lowFanout: Total subscriptions | Unbounded (up to the limit for the hub) (**TBD** Confirm text) |
+| topic | Maximum number of slashes in topic and topic filter | 10 |
+| topic | Topic size | 256 bytes |
+| topic space | maximum of topic templates that can have within a topic space | 5 |
+| topic space | maximum number of topic spaces per Hub | 10 |
+| topic space management APIs | requests/s | 1/s with burst 10/s |
+  
+## Test using Code (**TODO** RIDO/SEJAL)
+At this point there is not an official Microsoft SDK to interact with the broker, instead we are creating samples using existing MQTT libraries, these samples include helper functions that can be used in your own applications. In the next release, We will provide a modular SDK, that will still require a 3rd party MQTT client.
+
+We are providing sample code in Python using the Paho MQTT client (TBD if we can include .NET with MQTTnet) To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations should work.
+
+
+The samples use authentication based on SharedAccessKeys
+
   
 ## Reference of Updated Hub APIs  
 
