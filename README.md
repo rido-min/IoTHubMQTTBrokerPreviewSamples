@@ -155,9 +155,7 @@ The broker supports Qos 0 and 1. Right now we don’t have plan to support QoS 2
 Not all MQTT features are available at this release (see the Capabilities section above). We will bring more features along our roadmap.  
 
 We intend to provide consistent experience across IoT Edge Broker and IoT Hub Broker. So devices can connect either IoT Hub or IoT Edge without awareness of the target. However, some MQTT features might be available to IoT Edge sooner.  
-
  
-
 ### Frequently asked questionsFrequently asked questions 
 * What happens if your device disconnects (session cleanup) 
   
