@@ -185,4 +185,7 @@ For this release, the following limits are imposed to protect the services and e
 * What happens if device attempts to pub/sub on a topic when a matching topic space is not found?
   Device connection will be closed. We will add monitoring metrics and diagnostic logs in the next release.
 
+* How long does it take for topic space updates to propagate?
+  It takes upto 5 minutes to propagate a topic space update.
+
 
