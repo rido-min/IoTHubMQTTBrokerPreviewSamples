@@ -2,7 +2,7 @@ This scenario simulates cloud to device commands to several devices and can be l
 
  
 
-Configure TopicSpace using the Azure CLI command guidance below: 
+1. Configure TopicSpace using the Azure CLI command guidance below: 
 ```azurecli
 az iot hub topic-space create --topic-space-name mytopicspace --topic-template "commands/request/${principal.deviceid}/#" --type LowFanout --hub-name myhub 
 
