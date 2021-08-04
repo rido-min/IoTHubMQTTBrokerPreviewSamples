@@ -64,12 +64,14 @@ The following features are not in scope for this release, but they will be suppo
 *The routing source “MQTT Broker” is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.  
 
 3. Instructions for CLI  (TBD LINK) 
+4. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+5. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.0.76 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
 ### Quickstart
 
 Follow these steps to configure the IoT Hub MQTT Broker with one client enabled to publish and subscribe (many to many) –  
-1. We will enable the feature for the subscription ID you shared in the sign up form emailed to you. 
-2. Configure TopicSpace using the Azure CLI command guidance below: 
+1. We will enable the feature for the subscription ID you shared in the sign up form emailed to you. If you haven't responded, please fill out [this form](https://aka.ms/IoTHubMQTTBrokerPreviewSignup)
+3. Configure TopicSpace using the Azure CLI command guidance below: 
   az iot hub topic-space create --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout" 
   For more details see Topic Spaces and Topic Templates (TODO : LINK TO SECTION)
 3. Register devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create) 
