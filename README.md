@@ -125,7 +125,7 @@ This scenario simulates publishing messages from one client to another. Consider
 
   
 | Properties | Keyword for routing query|
-| -------- | ---- | ----------- |
+| -------- | --------------- |
 |  iothub-connection-device-id | connectionDeviceId |
 |  iothub-connection-module-id | connectionModuleId |
 |  iothub-connection-auth-generation-id | connectionDeviceGenerationId |  
