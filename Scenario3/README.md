@@ -1,4 +1,4 @@
- This scenario simulates publishing messages from multiple clients to a single device. For instructions see README
+ This scenario simulates publishing messages from multiple clients to a single device.
 
 
  1.	Configure TopicSpace using the Azure CLI command guidance below:
