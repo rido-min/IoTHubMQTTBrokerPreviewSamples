@@ -123,7 +123,18 @@ This scenario simulates publishing messages from one client to another. Consider
 ** Query based on message body is not available and will be later. 
 ** Unlike existing Hub Telemetry, MQTT messages WON'T flow to built-in endpoint automatically. Customers need explicitly set routing for MQTT custom topics as source to the choice of endpoint (built-in Event Hubs, or other custom endpoints).   
 
-  TODO Add table from section 9.2 in [instructions doc](https://microsoft.sharepoint.com/:w:/r/teams/Azure_IoT/_layouts/15/Doc.aspx?sourcedoc=%7B567cfc86-23b8-43db-8d8b-48aafc2c3b8b%7D&action=edit&wdPid=1054f99c&share=IQGG_HxWuCPbQ42LSKr8LDuLAVwreCP06LQbBlEbM_eeEs0&cid=27c9a266-2a79-44e0-a5f8-e040ebea8b9d)
+  
+| Properties | Keyword for routing query|
+| -------- | ---- | ----------- |
+|  iothub-connection-device-id | connectionDeviceId |
+|  iothub-connection-module-id | connectionModuleId |
+|  iothub-connection-auth-generation-id | connectionDeviceGenerationId |  
+|  iothub-connection-auth-method | connectionAuthMethod |
+|  iothub-enqueuedtime | enqueuedTime |
+|  Mqtt-topic | Mqtt-topic |
+|  Mqtt-qos | Mqtt-qos |
+|  iothub-message-source | iothub-message-source |
+
   
 To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub message routing](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c)
   
