@@ -71,7 +71,9 @@ The following features are not in scope for this release, but they will be suppo
 Follow these steps to configure the IoT Hub MQTT Broker with one client enabled to publish and subscribe (many to many) –  
 1. We will enable the feature for the subscription ID you shared in the sign up form emailed to you. If you haven't responded, please fill out [this form](https://aka.ms/IoTHubMQTTBrokerPreviewSignup)
 3. Configure TopicSpace using the Azure CLI command guidance below: 
+  ```azurecli
   az iot hub topic-space create --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout" 
+  ```
   For more details see Topic Spaces and Topic Templates (TODO : LINK TO SECTION)
 3. Register devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create) 
 4. Clone the samples from this GitHub Repo and follow the [README instructions](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples)
