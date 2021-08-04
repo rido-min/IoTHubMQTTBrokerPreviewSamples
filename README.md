@@ -16,7 +16,7 @@ IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of 
 
 ## IoT Hub MQTT Broker Concepts 
 
-* MQTT](https://mqtt.org/) standard protocol 
+* [MQTT standard protocol](https://mqtt.org/)
 * [IoT Hub overview](https://docs.microsoft.com/azure/iot-hub/about-iot-hub)
 * Topic Space and Topic Template (TODO: ADD LINK TO DOC HEADING) 
 * Device authentication (TODO ADD LINK TO DOC HEADING)
