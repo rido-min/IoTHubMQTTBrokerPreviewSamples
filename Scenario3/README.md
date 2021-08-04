@@ -1,4 +1,6 @@
- 
+ This scenario simulates publishing messages from multiple clients to a single device. For instructions see README
+
+
  1.	Configure TopicSpace using the Azure CLI command guidance below:
  ```azurecli
 az iot hub topic-space create --topic-space-name mytopicspace --topic-template "vehicles/+/GPS” --type LowFanout --hub-name myhub
