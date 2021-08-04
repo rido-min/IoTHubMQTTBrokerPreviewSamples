@@ -190,8 +190,7 @@ If you do not want to use the  samples, then you can use these APIs to connect d
 [TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this?
 PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226 . Need comments in PR for guidance around updates.
   
-  Device auth 
-  
+  **TODO** Device auth
   
 ## Message routing for MQTT Broker enabled IoT Hubs
   
