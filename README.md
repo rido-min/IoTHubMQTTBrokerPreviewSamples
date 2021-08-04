@@ -56,12 +56,13 @@ The following features are not in scope for this release, but they will be suppo
 
 1. To create an IoT Hub without routing use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker). 
 2. To create an IoT Hub with routing use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages).
-*The new IoT Hub will be created in your subscription. This feature is not available for existing IoT Hubs in this release. 
-*Central EUAP is the only region where MQTT Broker is currently supported.  
-*You can customize the SKU and number of units for this IoT Hub in the template. 
-*The template will also create an Event Hubs as a custom endpoint for your IoT Hub. 
-*You can customize the routing query. See Routing limitations. 
-*The routing source “MQTT Broker” is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.  
+
+* The new IoT Hub will be created in your subscription. This feature is not available for existing IoT Hubs in this release. 
+* Central EUAP is the only region where MQTT Broker is currently supported.  
+* You can customize the SKU and number of units for this IoT Hub in the template. 
+* The template will also create an Event Hubs as a custom endpoint for your IoT Hub. 
+* You can customize the routing query. See Routing limitations. 
+* The routing source “MQTT Broker” is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.  
 4. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
 5. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.0.76 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 6. Any Topic Space CLI setup needed? **TODO**
