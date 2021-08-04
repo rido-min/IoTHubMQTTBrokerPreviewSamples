@@ -1,6 +1,6 @@
 ## Scenarios 1 - Route data published on a topic to the built-in-endpoint
 
-This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example “vehicles/<VIN>/GPS”. A message routing configuration is set up to route all MQTT Broker message to built-in Event Hubs. This scenario also showcases routing query and message enrichments which are existing IoT Hub message routing capabilities. Also see (**TODO** link routing section)
+This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example “vehicles/<VIN>/GPS”. This scenario also showcases routing query and message enrichments which are existing IoT Hub message routing capabilities. Also see (**TODO** link routing section)
 
 
 1. Configure TopicSpace using the Azure CLI command guidance below: 
