@@ -181,7 +181,9 @@ Similarly, `vehicles/vehicle1/telemetry/#` and `vehicles/${principal.deviceId}/t
 
 '"vehicles/${principal.deviceId|dollar}/#"' 
 'vehicles/${principal.deviceId"|"dollar}/#'
-
+  
+**TODO** add example for bash
+  
 ## Reference of Updated Hub APIs
 
 If you do not want to use the  samples, then you can use these APIs to connect device to IoT Hub.
