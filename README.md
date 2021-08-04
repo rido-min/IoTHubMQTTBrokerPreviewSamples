@@ -9,8 +9,8 @@ IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of 
 ## Private preview program information 
 
 * Timeline: The private preview will run till 10/15/2021(TBD:date to be updated based on deployment timelines). The private preview is only for testing. Please do NOT use it for your production.   
-* Engagement: We will actively engage with you during the preview. At any point, feel free to connect with us for questions/concerns by creating issues in the Samples repo, confidential questions can be asked to  asrastog@microsoft.com  
-* Feedback: At the end of the preview, will capture additional feedback using this form 
+* Engagement: We will actively engage with you during the preview. At any point, feel free to connect with us for questions/concerns by creating issues in the Samples repo, confidential questions can be asked to iothubmqttbroker@microsoft.com.
+* Feedback: At the end of the preview, will capture additional feedback using [this form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR_mpSbs5LlNPijuErBTOYwFUOUxYUFM3MkJZM1dZWlBKVUFJTVIzQTJDTC4u)
 * Cost to use: For this release, MQTT Broker is available for no additional charge. Currently, you are charged when you send a message to an IoT Hub. You will only be charged once for that message, even if the message goes to multiple TopicSpaces or routing endpoints. Charges for IoT Hub remain unchanged and will be based on the tier purchased. Free, Basic and Standard tiers are supported. See IoT Hub pricing. 
 * Cleanup: When the preview program ends, or when your tests are complete, we will delete the IoT Hubs that were created in this preview with MQTT Broker capabilities. All the data stored within the IoT Hub will also be deleted.   
 
