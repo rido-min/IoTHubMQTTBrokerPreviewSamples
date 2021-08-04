@@ -1,8 +1,8 @@
 # Create IoT Hub with Mqtt Broker support and with routing enabled.
 
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FIoTHubMQTTBrokerPreviewSamples%2Fmaster%2Ftemplates%2Fiothub-mqtt-broker-route-messages%2Fazuredeploy.json)
+[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FIoTHubMQTTBrokerPreviewSamples%2Fmain%2Ftemplates%2Fiothub-mqtt-broker-route-messages%2Fazuredeploy.json)
 
-[[Deploy To Dogfood]](https://df.onecloud.azure-test.net/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FIoTHubMQTTBrokerPreviewSamples%2Fmaster%2Ftemplates%2Fiothub-mqtt-broker-route-messages%2Fazuredeploy.json)
+[[Deploy To Dogfood]](https://df.onecloud.azure-test.net/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FIoTHubMQTTBrokerPreviewSamples%2Fmain%2Ftemplates%2Fiothub-mqtt-broker-route-messages%2Fazuredeploy.json)
 
 This template creates an IoT Hub instance with Mqtt Broker support.
 
