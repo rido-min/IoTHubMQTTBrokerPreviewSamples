@@ -143,9 +143,8 @@ We support topic space CRUD using Azure CLI.
   ```
 #### Get topic space
   ```azurecli
-  az iot hub topic-space get --topic-name "SampleZero" --hub-name myhub
+  az iot hub topic-space show --topic-name "SampleZero" --hub-name myhub
   ```
-(**TODO** Confirm "show" or "get")
 
 #### List topic spaces
   ```azurecli
@@ -156,7 +155,8 @@ This can take up to 5 minutes to propagate. Type cannot be updated.
   ```azurecli
   az iot hub topic-space update --topic-name "SampleZero" --topic-template "sampleupdate/#" --hub-name myhub
   ```
-(**TODO** ADD exmaple for updating topic space with multiple templates)
+(**TODO** ADD exmaple for updating topic space with multiple templates
+  **TODO** check that 'type' doesnt need to be in the command)
   
 #### Delete topic space
 This can take up to 5 minutes to propagate.
@@ -187,6 +187,9 @@ Similarly, `vehicles/vehicle1/telemetry/#` and `vehicles/${principal.deviceId}/t
 If you do not want to use the  samples, then you can use these APIs to connect device to IoT Hub.
 [TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this?
 PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226 . Need comments in PR for guidance around updates.
+  
+  Device auth 
+  
   
 ## Message routing for MQTT Broker enabled IoT Hubs
   
