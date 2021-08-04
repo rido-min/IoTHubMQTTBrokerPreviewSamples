@@ -35,7 +35,7 @@ This private preview provides the following capabilities -
 * Topic Spaces and Topic Templates are new concepts introduced to simplify management of topics and topic filters used for pub/sub
 * Routing messages from MQTT Broker to custom endpoints
 * Code samples based on existing MQTT libraries
-* See throttle limits
+* See throttle limits (**TODO** LINK SECTION)
 
 ## Capabilities coming up in future releases
 
@@ -117,6 +117,12 @@ This scenario simulates publishing messages from one client to another. Consider
 ## Topic Spaces and Topic Templates
   TODO : this section describes CRUD and limitations around TopicSpaces and topic templates
 
+## Reference of Updated Hub APIs
+
+If you do not want to use the  samples, then you can use these APIs to connect device to IoT Hub.
+[TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this?
+PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226 . Need comments in PR for guidance around updates.
+  
 ## Message routing for MQTT Broker enabled IoT Hubs
   
 * New system properties `mqtt-topic` and `mqtt-qos` have been added. You can utilize these in a [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax) with a few limitations. The table below lists all the system properties that are supported when the routing `broker` messages. 
@@ -171,32 +177,12 @@ For this release, the following limits are imposed to protect the services and e
 | topic space | maximum number of topic spaces per Hub | 10 |
 | topic space management APIs | requests/s | 1/s with burst 10/s |
 
-## Reference of Updated Hub APIs
-
-If you do not want to use the  samples, then you can use these APIs to connect device to IoT Hub.
-[TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this?
-PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226 . Need comments in PR for guidance around updates.
-
-* What would happen to existing Hub MQTT? 
-IoT Hub will be backward compatible. So the MQTT as-is will continue be supported.  
-
-* How is Broker related with existing D2C, direct method, etc? 
-
-IoT Hub currently supports seven ways of communicating or transferring data from devices (see illustration below). By adding an MQTT broker, we are adding an additional way to communicate with devices that allows us to connect millions of existing devices that reply on the MQTT broker functionality. 
-
-* Is Hub Broker compatible with MQTT protocol?
-
-IoT Hub MQTT Broker is intended to be fully compliant with MQTT protocols, with a few caveats:
-The broker supports MQTT v3.1.1 for this release and will support v5 in future releases.
-The broker supports Qos 0 and 1. Right now we don’t have plan to support QoS 2 though.
-Not all MQTT features are available at this release (see the Capabilities section above). We will bring more features along our roadmap.
-
-We intend to provide consistent experience across IoT Edge Broker and IoT Hub Broker. So devices can connect either IoT Hub or IoT Edge without awareness of the target. However, some MQTT features might be available to IoT Edge sooner.
-
 ### Frequently asked questionsFrequently asked questions
-* What happens if your device disconnects (session cleanup)
+  
+* What happens if your device disconnects? 
+  Persistent sessions are cleaned up by IoT Hub after an hour.
 
-## Other Resources
+* What happens if device attempts to pub/sub on a topic when a matching topic space is not found?
+  Device connection will be closed. We will add monitoring metrics and diagnostic logs in the next release.
 
-(Any additional resources or related projects)
 
