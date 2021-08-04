@@ -84,7 +84,7 @@ Follow these steps to configure the IoT Hub MQTT Broker with one client enabled 
 1. We will enable the feature for the subscription ID you shared in the sign up form emailed to you. If you haven't responded, please fill out [this form](https://aka.ms/IoTHubMQTTBrokerPreviewSignup)
 3. Configure TopicSpace using the Azure CLI command guidance below:
   ```azurecli
-  az iot hub topic-space create --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout"
+  az iot hub topic-space create --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout" --hub-name myhub
   ```
   For more details see Topic Spaces and Topic Templates (TODO : LINK TO SECTION)
   
@@ -114,8 +114,73 @@ This scenario simulates publishing messages from multiple clients to a single de
 
 This scenario simulates publishing messages from one client to another. Consider a use case where a user can unlock their car from a mobile app. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario4)
 
-## Topic Spaces and Topic Templates
-  TODO : this section describes CRUD and limitations around TopicSpaces and topic templates
+## Topic Spaces
+  
+Topic space is a new concept introduced to simplify management of pub/sub topics.
+  
+### Terminology 
+
+**Topic space** – A topic space is a set of topics within a hub. Topic space is defined using MQTT topic filters with support for MQTT wildcards and variable substitutions. It can be used to limit the set of topics based on the properties of the MQTT device.
+
+**Topic filter** – An [MQTT topic filter](http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718106) is an MQTT topic, possibly with wildcards for one or more segments allowing it to match multiple MQTT topics. Supported wildcards are ‘+’, which matches a single segment and ‘#’, which matches zero or more segments at the end of the topic. See [Topic Wilcards](https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718107) from the MQTT spec for more details. 
+  
+**Topic template** – Topic templates are an extension of the topic filter that includes support for variables. This simplifies management for high scale applications. A topic space can consist of multiple topic templates. 
+For example - vehicles/${principal.deviceid}/GPS/#. Here, ${principal.deviceid} part is the variable that substitutes into the device ID during an MQTT session.  
+
+ **Variable** - A value in a topic template that will be filled in based on the properties of the session and the authenticated device. A variable can represent a portion of a segment or an entire segment but cannot cover more than one segment. 
+For example if we want the device to publish on its own topic, you can use the topic `vehicles/${principal.deviceId}/GPS/location`. For this topic template, vehicle1 can only publish to vehicles/vehicle1/GPS/location. If vehicle1 attempts to publish on vehicles/vehicle2/GPS/location, it will fail. 
+
+**Topic space type** - The type of the topic space. Must be one of ‘LowFanout’ or ‘PublishOnly’. The low fanout type is needed to adjust for the expected number of devices receiving each message, while the publish only option makes a topic space useable only for publishing.
+
+**Fanout** - The number of devices that will receive a given message. A low fanout message would be received by only a small number of devices. See [throttle limit](**TODO** LINK Limits table)
+
+### Topic space management operations 
+We support topic space CRUD using Azure CLI. 
+
+#### Create topic space
+  ```azurecli
+  az iot hub topic-space create --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout" --hub-name myhub
+  ```
+#### Get topic space
+  ```azurecli
+  az iot hub topic-space get --topic-name "SampleZero" --hub-name myhub
+  ```
+(**TODO** Confirm "show" or "get")
+
+#### List topic spaces
+  ```azurecli
+  az iot hub topic-space list --hub-name myhub
+  ```
+#### Update topic space
+This can take up to 5 minutes to propagate. Type cannot be updated.
+  ```azurecli
+  az iot hub topic-space update --topic-name "SampleZero" --topic-template "sampleupdate/#" --hub-name myhub
+  ```
+(**TODO** ADD exmaple for updating topic space with multiple templates)
+  
+#### Delete topic space
+This can take up to 5 minutes to propagate.
+
+  ```azurecli
+  az iot hub topic-space delete --topic-name "SampleZero" --hub-name myhub
+  ```  
+  
+### Topic space considerations
+
+* To publish or subscribe to any custom topic, a matching topic space must be configured.   
+* Topic spaces cannot overlap each other. Trying to create a new topic space that overlaps with an existing result in a conflict error. A conflict exists if a topic could exist in more than one topic space. 
+For example, `vehicles/vehicle1/telemetry/#` and `vehicles/+/telemetry/#` conflict because the second template covers the first one via wildcard. 
+Similarly, `vehicles/vehicle1/telemetry/#` and `vehicles/${principal.deviceId}/telemetry/#` conflict because in the second template the segment with variable is treated as single level wildcard `+` and hence, covers the first topic template.
+* The only two variable available in this release are ${principal.deviceid} and ${dollar}. 
+  Example 1: `vehicles/${principal.deviceId}/GPS/location` substitutes the device ID in the topic template. 
+  Example 2: Topic filter vehicles\$telemetry\# can be escaped with the topic template   vehicles\${dollar}telemetry\# 
+* The only topic space types that are supported in this release are “LowFanout” and “PublishOnly”.  
+* Topic space updates are eventually consistent, and usually takes about 5 minutes to propagate.  
+* Topic space `type` is immutable. To change the topic space `type` delete the topic space and create a new topic space with the desired `type`.
+* Topic templates use special characters `$` and `|` and these need to be escaped differently based on the shell being used. For powershell, please see examples below.
+
+'"vehicles/${principal.deviceId|dollar}/#"' 
+'vehicles/${principal.deviceId"|"dollar}/#'
 
 ## Reference of Updated Hub APIs
 
