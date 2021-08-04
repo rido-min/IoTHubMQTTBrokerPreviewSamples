@@ -3,17 +3,14 @@ This scenario simulates cloud to device commands to several devices and can be l
  
 
 Configure TopicSpace using the Azure CLI command guidance below: 
-
+```azurecli
 az iot hub topic-space create --topic-space-name mytopicspace --topic-template "commands/request/${principal.deviceid}/#" --type LowFanout --hub-name myhub 
 
 az iot hub topic-space create --topic-space-name servicetopicspace --topic-template "commands/request/+/#" --type PublishOnly --hub-name myhub 
+  ```
+  For more details see Topic Spaces and Topic Templates (**TODO** Add link to section)
 
-For more details see Topic Spaces and Topic Templates 
-
-Register devices using the CLI  
-
-Download the SDK samples (SDK team to add git link for these)
-
-Use the solution code to publish to the topic  
-
-Use the device sample to subscribe to the topic.  
+2. Register devices using the [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create) 
+3. Download the SDK samples (**TODO** SDK team to add git link for these)
+4. Use the solution code (**TODO** LINK) to publish to the topic.
+5. Use the device sample (**TODO** LINK) to subscribe to the topic.
