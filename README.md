@@ -4,7 +4,7 @@ The Microsoft Azure IoT team invites you and your organization to preview the MQ
 
 ## Overview of IoT Hub MQTT Broker  
 
-IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of messages to and from IoT devices and applications. You can now use MQTT’s flexible topic structure to send and receive messages from millions of devices and support flexible messaging patterns such as command and control and as well as broadcast messages to devices at scale.   
+IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of messages to and from IoT devices and applications. You can now use MQTT’s flexible topic structure to send and receive messages from your devices/services and support flexible messaging patterns such as command and control and as well as broadcast messages to devices/services.   
 
 ## Private preview program information 
 
