@@ -96,7 +96,7 @@ Here are a few additional scenarios you can try out. Please refer the details be
 
 ### Scenario 1 – Route data published on a topic to the built-in-endpoint
 
-This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example “vehicles/<VIN>/GPS”. A message routing configuration is set up to route all MQTT Broker message to built-in Event Hubs. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario1).
+This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example “vehicles/<VIN>/GPS”. This scenario also showcases routing query and message enrichments which are existing IoT Hub message routing capabilities. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario1). Also see (**TODO** link routing section)
 
 ### Scenario 2 – Fan-out (one-to-many) messages over custom topics
 
@@ -109,10 +109,6 @@ This scenario simulates publishing messages from multiple clients to a single de
 ### Scenario 4– One to one messaging over custom topics
 
 This scenario simulates publishing messages from one client to another. Consider a use case where a user can unlock their car from a mobile app. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario4)
-
-### Scenario 5: Routing Query on system property (TODO, can we make this part of scn 1)?
-
-### Scenario 6: Apply message enrichment to broker message being routed (TODO, can we make this part of scn 1)?
 
 ### Scenario 7: Pub/sub to any non-system topic custom ($)
 
