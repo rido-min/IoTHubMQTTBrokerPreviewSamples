@@ -74,17 +74,32 @@ To use the Azure IoT extension for Azure CLI with Topic Space, first remove the 
 
 ## Quickstart
 
-Follow these steps to configure the IoT Hub MQTT Broker with one clients enabled to publish and subscribe (many to many) –
-1. Configure TopicSpace using the below Azure CLI command: 
+Let us get started with a hello world scenario, with a publisher and subscriber communicating on a custom topic.
+Below table enumerate the devices, topics and topic space used in this example.
+| Device | Role| Topic | Topic Template |
+| -------- | --------------- |---------- |---------- |
+| pub_device | publisher | sample/topic | sample/# |
+| sub_device | subscriber | sample/topic | sample/# |
+1.  To enable pub/sub on `sample/#`, configure TopicSpace using the below Azure CLI command: 
   ```azurecli
   az iot hub topic-space create -n myhub --tsn SampleZero --tst LowFanout --template sample/#
   ```
-  For more details see [topic spaces](#topic-spaces)
-2. Register devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create).
-3. Clone the samples from this GitHub Repo and follow the [README instructions](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples)
-  * Update connection strings
-  * Execute the publish and subscribe programs
-4. Observe messages published from the client to the devices.
+  For more details see [topic spaces](#topic-spaces).
+  
+2. Register publisher and subscriber devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create) 
+Additionally use `connection-string` command to fetch the connection strings for these devices.
+```azurecli
+az iot hub device-identity create -n myhub -d pub_device --am shared_private_key
+az iot hub device-identity connection-string show -n myhub -d pub_device
+
+az iot hub device-identity create -n myhub -d sub_device --am shared_private_key
+az iot hub device-identity connection-string show -n myhub -d sub_device
+```
+3. Clone the [samples](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/dotnet)
+  * Build both publish and subscribe programs.
+  * Update environment variable CS with connection string for publisher and subscriber.
+  * Execute the publish and subscribe programs.
+4. Observe published messages to be delivered to subscriber.
 
 ## Scenarios
 
