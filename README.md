@@ -74,7 +74,7 @@ To use the Azure IoT extension for Azure CLI with Topic Space, first remove the 
   az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
   ```
 
-  For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension).
+  For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension). For Windows, please use `PowerShell`.
   
 5. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations will work (**TODO LINK info on connect packet**). The samples use authentication based on SharedAccessKeys.
 
@@ -106,10 +106,12 @@ az iot hub device-identity create -n myhub -d sub_device --am shared_private_key
 az iot hub device-identity connection-string show -n myhub -d sub_device
 ```
 
-3. Clone the [samples](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/dotnet)
-   * Build both publish and subscribe programs.
-   * Update environment variable CS with connection string for publisher and subscriber.
-   * Execute the publish and subscribe programs.
+3. Clone the [samples](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
+   * [dotnet](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/dotnet)
+    1. Build both publish and subscribe programs. 
+    2. Update environment variable CS with connection string for publisher and subscriber.
+    3. Execute the publish and subscribe programs.
+   * [python](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python)
 4. Observe published messages to be delivered to subscriber.
 
 ## Scenarios
