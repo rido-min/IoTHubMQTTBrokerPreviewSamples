@@ -29,6 +29,11 @@ Then, create your virtual environment in some directory.  This can go anywhere. 
 python3 -m venv ~/env/iothub-broker
 ```
 
+In case of `The virtual environment was not created successfully because ensurepip is not available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.` error, install `sudo apt install python3.8-venv`
+
+    
+
 Then, activate your virtual environment.  You need to do this any time you wnat to work with this code.
 ```
 source ~/env/iothub-broker/bin/activate
