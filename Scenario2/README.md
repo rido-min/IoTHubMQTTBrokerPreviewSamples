@@ -2,7 +2,7 @@ This scenario simulates cloud to device commands to several devices and can be l
 
 | Device | Role| Topic | 
 | -------- | --------------- |---------- |
-| mobile_device | publisher | vehicles/alerts/weather/alert1  |
+| fleet_mgt_device | publisher | vehicles/alerts/weather/alert1  |
 | vehicle1 | subscriber | vehicles/alerts/# | 
 | vehicle2 | subscriber | vehicles/alerts/# |
 1. Configure TopicSpace using the Azure CLI command guidance below: 
@@ -13,8 +13,8 @@ az iot hub topic-space create -n myhub --tsn alerts_ts --tst LowFanout --templat
 
 2. Register devices using the [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create) 
 ```azure cli
-az iot hub device-identity create -n myhub -d mobile_device --am shared_private_key
-az iot hub device-identity connection-string show -n myhub -d mobile_device
+az iot hub device-identity create -n myhub -d fleet_mgt_device --am shared_private_key
+az iot hub device-identity connection-string show -n myhub -d fleet_mgt_device
 
 az iot hub device-identity create -n myhub -d vehicle1 --am shared_private_key
 az iot hub device-identity connection-string show -n myhub -d vehicle1
