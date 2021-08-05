@@ -10,7 +10,7 @@ IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of 
 
 * **Timeline**: The private preview will run till 11/11/2021. The private preview is only for testing. Please do NOT use it for your production. 
 * **Engagement**: We will actively engage with you during the preview. At any point, feel free to connect with us for questions/concerns by creating issues in the Samples repo, confidential questions can be asked to iothubmqttbroker@microsoft.com.
-* **Feedback**: At the end of the preview, will capture additional feedback using [this form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR_mpSbs5LlNPijuErBTOYwFUOUxYUFM3MkJZM1dZWlBKVUFJTVIzQTJDTC4u)
+* **Feedback**: At the end of the preview, will capture additional feedback using [this form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR_mpSbs5LlNPijuErBTOYwFUOUxYUFM3MkJZM1dZWlBKVUFJTVIzQTJDTC4u).
 * **Cost to use**: For this release, MQTT Broker is available for no additional charge. Currently, you are charged when you send a message to an IoT Hub. You will only be charged once for that message, even if the message goes to multiple TopicSpaces or routing endpoints. Charges for IoT Hub remain unchanged and will be based on the tier purchased. Free, Basic and Standard tiers are supported. See IoT Hub pricing.
 * **Cleanup**: When the preview program ends, or when your tests are complete, we will delete the IoT Hubs that were created in this preview with MQTT Broker capabilities. All the data stored within the IoT Hub will also be deleted.
 
@@ -73,7 +73,7 @@ To use the Azure IoT extension for Azure CLI with Topic Space, first remove the 
   az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
   ```
   For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension).
-6. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations will work (**TODO LINK info on connect packet**). The samples use authentication based on SharedAccessKeys.
+5. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations will work (**TODO LINK info on connect packet**). The samples use authentication based on SharedAccessKeys.
 
 ## Quickstart
 
