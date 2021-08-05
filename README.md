@@ -195,7 +195,7 @@ This can take up to 5 minutes to propagate.
 #### List topic spaces within a hub
 
   ```azurecli
-  az iot hub topic-space list --n myhub
+  az iot hub topic-space list -n myhub
   ```
 
 ### Topic space considerations
