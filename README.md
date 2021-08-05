@@ -26,7 +26,7 @@ IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of 
 This private preview provides the following capabilities -
 
 * MQTT v3.1.1
-* Ability for registered devices to publish or subscribe to any custom topics
+* Ability for registered devices to publish or subscribe to any topic
 * QoS 0 and QoS 1
 * Wildcards support for topics
 * Persistent session
@@ -80,7 +80,7 @@ To use the Azure IoT extension for Azure CLI with Topic Space, first remove the 
 
 ## Quickstart
 
-Let us get started with a hello world scenario, with a publisher and subscriber communicating on a custom topic.
+Let us get started with a hello world scenario, with a publisher and subscriber communicating on a topic.
 Below table enumerate the devices, topics and topic space used in this example.
 | Device | Role| Topic | Topic Template |
 | -------- | --------------- |---------- |---------- |
@@ -120,17 +120,17 @@ Here are a few additional scenarios you can try out. Please refer the details be
 
 ### Scenario 1 – Route data published on a topic to the built-in-endpoint
 
-This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. This scenario also uses routing query and message enrichments which are existing IoT Hub message routing capabilities. Consider a use case where one needs to identify location of vehicles. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario1-broker-messages-routing).
+This scenario showcases how to configure route to send filtered messages from broker to the built-in Event Hubs endpoint. This scenario also uses routing query and message enrichments which are existing IoT Hub message routing capabilities. Consider a use case where one needs to identify location of vehicles. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario1-broker-messages-routing).
 
-### Scenario 2 – Fan-out (one-to-many) messages over custom topics
+### Scenario 2 – Fan-out (one-to-many) messages
 
 This scenario simulates cloud to device commands to several devices and can be leveraged for use cases such as sending alerts to devices. Consider the use case where a fleet management service needs to send a weather alert to all the vehicles in the fleet. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario2-fan-out).
 
-### Scenario 3 – Fan-in (many to one) messaging over custom topics
+### Scenario 3 – Fan-in (many to one) messaging
 
 This scenario simulates publishing messages from multiple clients to a single client. Consider a use case where one needs to identify location of vehicles on a map. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario3-fan-in)
 
-### Scenario 4 – One to one messaging over custom topics
+### Scenario 4 – One to one messaging
 
 This scenario simulates publishing messages from one client to another. Consider a use case where a user can unlock their car from a mobile app. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario4-request-response)
 
@@ -200,7 +200,8 @@ This can take up to 5 minutes to propagate.
 
 ### Topic space considerations
 
-* To publish or subscribe to any custom topic, a matching topic space must be configured.
+* To publish or subscribe to any topic, a matching topic space must be configured.
+Pub/sub on system topics do not require topic spaces.
 * The only topic space types that are supported in this release are `LowFanout` and `PublishOnly`.  
 * Low Fanout topic spaces cannot overlap each other. Trying to create a new topic space that overlaps with an existing result in a conflict error. A conflict exists if a topic could exist in more than one topic space.
 For example, `vehicles/vehicle1/telemetry/#` and `vehicles/+/telemetry/#` conflict because the second template covers the first one via wildcard.
@@ -238,8 +239,8 @@ New system properties `mqtt-topic` and `mqtt-qos` have been added that can be ut
 |  iothub-connection-module-id | connectionModuleId | An ID set by IoT Hub on broker messages. It contains the moduleId of the device that sent the message. |
 |  iothub-connection-auth-generation-id | connectionDeviceGenerationId | An ID set by IoT Hub on broker messages. It contains the connectionDeviceGenerationId (as per [device identity properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties)) of the device that sent the message.|
 |  iothub-enqueuedtime | enqueuedTime | Date and time the [Device-to-Cloud](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-d2c-guidance) message was received by IoT Hub. |
-|  mqtt-topic | mqtt-topic | Topic on which message was published, this is set by IoT Hub on messages sent to custom topics. |
-|  mqtt-qos | mqtt-qos | QoS level of the message published, this is set by IoT Hub on messages sent to custom topics. |
+|  mqtt-topic | mqtt-topic | Topic on which message was published, this is set by IoT Hub on messages sent to broker topics. |
+|  mqtt-qos | mqtt-qos | QoS level of the message published, this is set by IoT Hub on messages sent to broker topics. |
 |  iothub-message-source | iothub-message-source | The routing message source |
 
 * Querying on body and application properties is not supported for `broker` messages.
