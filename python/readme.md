@@ -21,6 +21,8 @@ First, install the `virtualenv` library
 python3 -m pip install virtualenv
 ```
 
+In case of `/usr/bin/python3: No module named pip` error, install `sudo apt install python3-pip`
+
 Then, create your virtual environment in some directory.  This can go anywhere.  The last directory segment defines the name of the environment.  Let's use `~/env/iothub-broker`:
 
 ```
