@@ -242,12 +242,12 @@ For this release, the following limits are imposed to protect the services and e
 ### Frequently asked questionsFrequently asked questions
   
 * What happens if your device disconnects? 
-  Persistent sessions are cleaned up by IoT Hub after an hour.
+   Persistent sessions are cleaned up by IoT Hub after an hour.
 
 * What happens if device attempts to pub/sub on a topic when a matching topic space is not found?
-  Device connection will be closed. We will add monitoring metrics and diagnostic logs in the next release.
+   Device connection will be closed. We will add monitoring metrics and diagnostic logs in the next release.
 
 * How long does it take for topic space updates to propagate?
-  It takes upto 5 minutes to propagate a topic space update.
+   It takes upto 5 minutes to propagate a topic space update.
 
 
