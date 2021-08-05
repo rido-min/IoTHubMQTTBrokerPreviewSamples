@@ -214,15 +214,15 @@ New system properties `mqtt-topic` and `mqtt-qos` have been added that can be ut
 |  mqtt-qos | mqtt-qos | QoS level of the message published, this is set by IoT Hub on messages sent to custom topics. | 
 |  iothub-message-source | iothub-message-source | The routing message source | 
 
-* Querying on body and application properties is not supported for `MqttBroker` messages.
-* Unlike existing Hub Telemetry, `MqttBroker` messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for `MqttBrokerMessages` as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
-* When routing messages for `MqttBroker` the dropped messages will not go to the fallback route (**TODO to be tested**) if the query condition is not met.
+* Querying on body and application properties is not supported for `broker` messages.
+* Unlike existing Hub Telemetry, `broker` messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for `broker` as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
+* When routing messages for `broker` the dropped messages will not go to the fallback route (**TODO to be tested**) if the query condition is not met.
   
 To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub message routing](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c)
 
 ## Throttle limits
 
-For this release, the following limits are imposed to protect the services and ensure performance. The limits might be revised for future releases.
+For this release, the following limits are supported. The limits might be revised for future releases.
 
   **TBD INTERNAL BUG BASH : Review TABLE**
 
