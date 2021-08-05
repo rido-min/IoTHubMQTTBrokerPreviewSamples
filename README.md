@@ -4,11 +4,11 @@ The Microsoft Azure IoT team invites you and your organization to preview the MQ
 
 ## Overview of IoT Hub MQTT Broker
 
-IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of messages to and from IoT devices and applications. You can now use MQTT’s flexible topic structure to send and receive messages from your devices/services and support flexible messaging patterns such as command and control and as well as broadcast messages to devices/services. 
+IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of messages to and from IoT devices and applications. You can now use MQTT’s flexible topic structure to send and receive messages from your devices/services and support flexible messaging patterns such as command and control and as well as broadcast messages to devices/services.
 
 ## Private preview program information
 
-* **Timeline**: The private preview will run till 11/11/2021. The private preview is only for testing. Please do NOT use it for your production. 
+* **Timeline**: The private preview will run till 11/11/2021. The private preview is only for testing. Please do NOT use it for your production.
 * **Engagement**: We will actively engage with you during the preview. At any point, feel free to connect with us for questions/concerns by creating issues in the Samples repo, confidential questions can be asked to iothubmqttbroker@microsoft.com.
 * **Feedback**: At the end of the preview, will capture additional feedback using [this form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR_mpSbs5LlNPijuErBTOYwFUOUxYUFM3MkJZM1dZWlBKVUFJTVIzQTJDTC4u).
 * **Cost to use**: For this release, MQTT Broker is available for no additional charge. Currently, you are charged when you send a message to an IoT Hub. You will only be charged once for that message, even if the message goes to multiple clients or routing endpoints. Charges for IoT Hub remain unchanged and will be based on the tier purchased. Free, Basic and Standard tiers are supported. See [IoT Hub pricing](https://azure.microsoft.com/en-us/pricing/details/iot-hub/).
@@ -52,6 +52,7 @@ The following features are not in scope for this release, but they will be suppo
 * IoT Edge broker
 
 ## Prerequisites
+
 1. We will enable the feature for the subscription ID you shared in the sign up form emailed to you. If you haven't responded, please fill out [this form](https://aka.ms/IoTHubMQTTBrokerPreviewSignup)
 2. To create an IoT Hub without routing use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker).
 3. To create an IoT Hub with routing use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages).
@@ -62,13 +63,17 @@ The following features are not in scope for this release, but they will be suppo
    * The routing source `MQTTBrokerMessages` is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.
 4. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 To use the Azure IoT extension for Azure CLI with Topic Space, first remove the current Azure IoT extension using:
-  ```
+
+  ``` azure cli
   az extension remove -n azure-iot
   ```
+
    Then, run the following command:
-  ```
+
+  ``` azure cli
   az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
   ```
+
   For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension).
   
 5. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations will work (**TODO LINK info on connect packet**). The samples use authentication based on SharedAccessKeys.
@@ -81,14 +86,18 @@ Below table enumerate the devices, topics and topic space used in this example.
 | -------- | --------------- |---------- |---------- |
 | pub_device | publisher | sample/topic | sample/# |
 | sub_device | subscriber | sample/topic | sample/# |
-1.  To enable pub/sub on `sample/#`, configure TopicSpace using the below Azure CLI command: 
+
+1. To enable pub/sub on `sample/#`, configure TopicSpace using the below Azure CLI command:
+
   ```azurecli
   az iot hub topic-space create -n myhub --tsn SampleZero --tst LowFanout --template sample/#
   ```
+
   For more details see [topic spaces](#topic-spaces).
   
-2. Register publisher and subscriber devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create) 
+2. Register publisher and subscriber devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
 Additionally use `connection-string` command to fetch the connection strings for these devices.
+
 ```azurecli
 az iot hub device-identity create -n myhub -d pub_device --am shared_private_key
 az iot hub device-identity connection-string show -n myhub -d pub_device
@@ -96,6 +105,7 @@ az iot hub device-identity connection-string show -n myhub -d pub_device
 az iot hub device-identity create -n myhub -d sub_device --am shared_private_key
 az iot hub device-identity connection-string show -n myhub -d sub_device
 ```
+
 3. Clone the [samples](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/dotnet)
    * Build both publish and subscribe programs.
    * Update environment variable CS with connection string for publisher and subscriber.
@@ -108,7 +118,7 @@ Here are a few additional scenarios you can try out. Please refer the details be
 
 ### Scenario 1 – Route data published on a topic to the built-in-endpoint
 
-This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. This scenario also uses routing query and message enrichments which are existing IoT Hub message routing capabilities. Consider a use case where one needs to identify location of vehicles. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario1). 
+This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. This scenario also uses routing query and message enrichments which are existing IoT Hub message routing capabilities. Consider a use case where one needs to identify location of vehicles. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario1).
 
 ### Scenario 2 – Fan-out (one-to-many) messages over custom topics
 
@@ -126,93 +136,109 @@ This scenario simulates publishing messages from one client to another. Consider
   
 Topic space is a new concept introduced to simplify management of topics used for pub/sub.
   
-### Terminology 
+### Terminology
 
 **Topic space** – A topic space is a set of topics within a hub. Topic space is defined using MQTT topic filters with support for MQTT wildcards and variable substitutions. It can be used to limit the set of topics based on the properties of the MQTT device.
 
-**Topic filter** – An [MQTT topic filter](http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718106) is an MQTT topic, possibly with wildcards for one or more segments allowing it to match multiple MQTT topics. Supported wildcards are `+`, which matches a single segment and `#`, which matches zero or more segments at the end of the topic. See [Topic Wilcards](https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718107) from the MQTT spec for more details. 
+**Topic filter** – An [MQTT topic filter](http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718106) is an MQTT topic, possibly with wildcards for one or more segments allowing it to match multiple MQTT topics. Supported wildcards are `+`, which matches a single segment and `#`, which matches zero or more segments at the end of the topic. See [Topic Wilcards](https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718107) from the MQTT spec for more details.
   
-**Topic template** – Topic templates are an extension of the topic filter that includes support for variables. This simplifies management for high scale applications. A topic space can consist of multiple topic templates. 
+**Topic template** – Topic templates are an extension of the topic filter that includes support for variables. This simplifies management for high scale applications. A topic space can consist of multiple topic templates.
 For example, `vehicles/${principal.deviceid}/GPS/#`. Here, `${principal.deviceid}` part is the variable that substitutes into the device Id during an MQTT session.  
 
- **Variable** - A value in a topic template that will be filled in based on the properties of the authenticated device. A variable can represent a portion of a segment or an entire segment but cannot cover more than one segment. 
-For example, if we want the device to publish on its own topic, you can use the topic `vehicles/${principal.deviceId}/GPS/location`. For this topic template, `vehicle1` can only publish to `vehicles/vehicle1/GPS/location`. If `vehicle1` attempts to publish on topic `vehicles/vehicle2/GPS/location`, it will fail. 
+ **Variable** - A value in a topic template that will be filled in based on the properties of the authenticated device. A variable can represent a portion of a segment or an entire segment but cannot cover more than one segment.
+For example, if we want the device to publish on its own topic, you can use the topic `vehicles/${principal.deviceId}/GPS/location`. For this topic template, `vehicle1` can only publish to `vehicles/vehicle1/GPS/location`. If `vehicle1` attempts to publish on topic `vehicles/vehicle2/GPS/location`, it will fail.
 
 **Topic space type** - The type of the topic space. Must be one of `LowFanout` or `PublishOnly`. The low fanout type is needed to adjust for the expected number of devices receiving each message, while the publish only option makes a topic space useable only for publishing.
 
 **Fanout** - The number of devices that will receive a given message. A low fanout message would be received by only a small number of devices. See [throttle limit](#throttle-limits)
 
-### Topic space management operations 
+### Topic space management operations
+
 We support topic space CRUD using Azure CLI. See [prerequisites](#prerequisites).
 
 #### Create topic space
+
   ```azurecli
   az iot hub topic-space create -n myhub --tsn samplezero --template sample/# --tst LowFanout --hub-name myhub
   ```
-  Topic space CLI can also use be configured using iot hub connection string 
+
+  Topic space CLI can also use be configured using IoT hub connection string
   
   ```azurecli
   az iot hub topic-space create -n myhub --tsn samplezero --template sample/# --tst LowFanout -l "##connectionString##"
   ```
+
 #### Get topic space
+
   ```azurecli
   az iot hub topic-space show -n myhub --tsn samplezero
   ```
+
 #### Update topic space
+
 This can take up to 5 minutes to propagate. Type cannot be updated.
+
   ```azurecli
   az iot hub topic-space create -n myhub --tsn samplezero --template sample/# sampleupdate/#
   ```  
+
 #### Delete topic space
+
 This can take up to 5 minutes to propagate.
+
   ```azurecli
   az iot hub topic-space delete -n myhub --tsn samplezero
   ```
+
 #### List topic spaces within a hub
+
   ```azurecli
   az iot hub topic-space list --n myhub
   ```
+
 ### Topic space considerations
 
-* To publish or subscribe to any custom topic, a matching topic space must be configured. 
+* To publish or subscribe to any custom topic, a matching topic space must be configured.
 * The only topic space types that are supported in this release are `LowFanout` and `PublishOnly`.  
-* Low Fanout topic spaces cannot overlap each other. Trying to create a new topic space that overlaps with an existing result in a conflict error. A conflict exists if a topic could exist in more than one topic space. 
-For example, `vehicles/vehicle1/telemetry/#` and `vehicles/+/telemetry/#` conflict because the second template covers the first one via wildcard. 
+* Low Fanout topic spaces cannot overlap each other. Trying to create a new topic space that overlaps with an existing result in a conflict error. A conflict exists if a topic could exist in more than one topic space.
+For example, `vehicles/vehicle1/telemetry/#` and `vehicles/+/telemetry/#` conflict because the second template covers the first one via wildcard.
 Similarly, `vehicles/vehicle1/telemetry/#` and `vehicles/${principal.deviceId}/telemetry/#` conflict because in the second template the segment with variable is treated as single level wildcard `+` and hence, covers the first topic template.
 `PublishOnly` topic spaces can overlap with `LowFanout` topic spaces.
-* The only two variables available in this release are `${principal.deviceid}` and `${dollar}`. 
-  Example 1: `vehicles/${principal.deviceId}/GPS/location` substitutes the device ID in the topic template. 
+* The only two variables available in this release are `${principal.deviceid}` and `${dollar}`.
+  Example 1: `vehicles/${principal.deviceId}/GPS/location` substitutes the device ID in the topic template.
   Example 2: For topic filter `vehicles\$telemetry\#`, `$` can be escaped with `vehicles\${dollar}telemetry\#`.
 * Topic space updates take upto 5 minutes to propagate.  
 * Topic space `type` is immutable. To change the topic space `type` delete the topic space and create a new topic space with the desired `type`.
 * Topic templates use special characters `$` and `|` and these need to be escaped differently based on the shell being used. For powershell, please see examples below.
-'"vehicles/${principal.deviceId|dollar}/#"' 
+'"vehicles/${principal.deviceId|dollar}/#"'
 'vehicles/${principal.deviceId"|"dollar}/#'
   
 **TODO add example for bash**
   
 ## Reference of Updated Hub APIs
-**TODO update this section** 
+
+**TODO update this section**
 If you do not want to use the  samples, then you can use these APIs to connect device to IoT Hub.
 [TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this?
-PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226 . Need comments in PR for guidance around updates.
+PR Created to update doc - <https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226> . Need comments in PR for guidance around updates.
   
 ### Device authentication
+
   **TODO Device auth section**
   
 ## Message routing for MQTT Broker enabled IoT Hubs
 
-New system properties `mqtt-topic` and `mqtt-qos` have been added that can be utilized for [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax). The table below lists all the system properties that are supported when the routing `broker` messages. 
- 
+New system properties `mqtt-topic` and `mqtt-qos` have been added that can be utilized for [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax). The table below lists all the system properties that are supported when the routing `broker` messages.
+
 | Properties | Keyword for routing query| Description |
 | -------- | --------------- |---------- |
 |  iothub-connection-device-id | connectionDeviceId | An ID set by IoT Hub on broker messages. It contains the deviceId of the device that sent the message. |
 |  iothub-connection-module-id | connectionModuleId | An ID set by IoT Hub on broker messages. It contains the moduleId of the device that sent the message. |
 |  iothub-connection-auth-generation-id | connectionDeviceGenerationId | An ID set by IoT Hub on broker messages. It contains the connectionDeviceGenerationId (as per [device identity properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties)) of the device that sent the message.|
 |  iothub-enqueuedtime | enqueuedTime | Date and time the [Device-to-Cloud](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-d2c-guidance) message was received by IoT Hub. |
-|  mqtt-topic | mqtt-topic | Topic on which message was published, this is set by IoT Hub on messages sent to custom topics. | 
-|  mqtt-qos | mqtt-qos | QoS level of the message published, this is set by IoT Hub on messages sent to custom topics. | 
-|  iothub-message-source | iothub-message-source | The routing message source | 
+|  mqtt-topic | mqtt-topic | Topic on which message was published, this is set by IoT Hub on messages sent to custom topics. |
+|  mqtt-qos | mqtt-qos | QoS level of the message published, this is set by IoT Hub on messages sent to custom topics. |
+|  iothub-message-source | iothub-message-source | The routing message source |
 
 * Querying on body and application properties is not supported for `broker` messages.
 * Unlike existing Hub Telemetry, `broker` messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for `broker` as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
@@ -241,7 +267,8 @@ For this release, the following limits are supported. The limits might be revise
 | sub | Maximum subscriptions per subscribe request | 8 |
 | throughput | Throughput per second per connection  | (maximum inbound and outbound publish rates * number of 4KB) |
 
-### Topic Spaces
+### Topic Spaces Limits
+
 | Category | Description | Limit |
 | -------- | ---- | ----------- |
 | topic space | lowFanout: Total subscriptions per substituted values set (e.g. for `devices/{deviceID}/#` you can have 10 subscriptions for topics for device d1, and indepedently 10 subscriptions for topics for device d2 | 10 |
@@ -255,7 +282,7 @@ For this release, the following limits are supported. The limits might be revise
 
 ### Frequently asked questionsFrequently asked questions
   
-* What happens if your device disconnects? 
+* What happens if your device disconnects?
   
   Persistent sessions are cleaned up by IoT Hub after an hour.
 
@@ -265,6 +292,4 @@ For this release, the following limits are supported. The limits might be revise
 
 * How long does it take for topic space updates to propagate?
   
-  It takes upto 5 minutes to propagate a topic space update.
-
-
+  It takes up-to 5 minutes to propagate a topic space update.

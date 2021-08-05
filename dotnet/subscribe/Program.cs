@@ -18,7 +18,7 @@ namespace subscribe
             mqttClient.UseApplicationMessageReceivedHandler(MessageReceived);
 
             var subRes = await mqttClient.SubscribeAsync("sample/topic", 
-                                                            MqttQualityOfServiceLevel.AtLeastOnce);
+                                                            MqttQualityOfServiceLevel.AtMostOnce);
             
             Console.WriteLine("Subscribed. " + subRes.Items.Count);
             Console.ReadLine();
