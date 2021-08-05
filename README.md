@@ -84,6 +84,7 @@ Follow these steps to configure the IoT Hub MQTT Broker with one client enabled 
   az iot hub topic-space create --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout" --hub-name myhub
   ```
   For more details see [topic spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/README.md#topic-spaces)
+
 3. Register devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
 4. Clone the samples from this GitHub Repo and follow the [README instructions](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples)
   * Update connection strings
@@ -131,7 +132,7 @@ For example if we want the device to publish on its own topic, you can use the t
 **Fanout** - The number of devices that will receive a given message. A low fanout message would be received by only a small number of devices. See [throttle limit](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/README.md#throttle-limits)
 
 ### Topic space management operations 
-We support topic space CRUD using Azure CLI. See [prerequisites](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/README.md#prerequisites)
+We support topic space CRUD using Azure CLI. See [prerequisites](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/README.md#prerequisites).
 
 #### Create topic space
   ```azurecli
@@ -189,15 +190,15 @@ PR Created to update doc - https://github.com/MicrosoftDocs/azure-docs-pr/pull/1
 
 New system properties `mqtt-topic` and `mqtt-qos` have been added that can be utilized for [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax). The table below lists all the system properties that are supported when the routing `broker` messages. 
  
-| Properties | Keyword for routing query|
+| Properties | Keyword for routing query| Description |
 | -------- | --------------- |---------- |
-|  iothub-connection-device-id | connectionDeviceId ||
-|  iothub-connection-module-id | connectionModuleId | |
-|  iothub-connection-auth-generation-id | connectionDeviceGenerationId | |
-|  iothub-enqueuedtime | enqueuedTime ||
-|  mqtt-topic | mqtt-topic | topic on which message was published | 
-|  mqtt-qos | mqtt-qos | qos level of the message published | 
-|  iothub-message-source | iothub-message-source | routing message source | 
+|  iothub-connection-device-id | connectionDeviceId | An ID set by IoT Hub on device-to-cloud messages. It contains the deviceId of the device that sent the message. |
+|  iothub-connection-module-id | connectionModuleId | An ID set by IoT Hub on device-to-cloud messages. It contains the moduleId of the device that sent the message. |
+|  iothub-connection-auth-generation-id | connectionDeviceGenerationId | An ID set by IoT Hub on device-to-cloud messages. It contains the connectionDeviceGenerationId (as per [device identity properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties)) of the device that sent the message.|
+|  iothub-enqueuedtime | enqueuedTime | Date and time the [Device-to-Cloud](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-d2c-guidance) message was received by IoT Hub. |
+|  mqtt-topic | mqtt-topic | Topic on which message was published | 
+|  mqtt-qos | mqtt-qos | QoS level of the message published | 
+|  iothub-message-source | iothub-message-source | The routing message source | 
 
 * Querying on body and application properties is not supported for `broker` messages.
 * Unlike existing Hub Telemetry, `broker` messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for `broker` as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
@@ -208,7 +209,6 @@ To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub mess
 ## Throttle limits
 
 For this release, the following limits are imposed to protect the services and ensure performance. The limits might be revised for future releases.
- Table in section 9.3 in [instructions doc](https://microsoft.sharepoint.com/:w:/r/teams/Azure_IoT/_layouts/15/Doc.aspx?sourcedoc=%7B567cfc86-23b8-43db-8d8b-48aafc2c3b8b%7D&action=edit&wdPid=1054f99c&share=IQGG_HxWuCPbQ42LSKr8LDuLAVwreCP06LQbBlEbM_eeEs0&cid=27c9a266-2a79-44e0-a5f8-e040ebea8b9d)
 
   **TBD INTERNAL BUG BASH : Review TABLE**
 
