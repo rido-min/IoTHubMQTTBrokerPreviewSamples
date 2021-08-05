@@ -80,7 +80,7 @@ Follow these steps to configure the IoT Hub MQTT Broker with one client enabled 
 1. We will enable the feature for the subscription ID you shared in the sign up form emailed to you. If you haven't responded, please fill out [this form](https://aka.ms/IoTHubMQTTBrokerPreviewSignup)
 2. Configure TopicSpace using the Azure CLI command guidance below:
   ```azurecli
-  az iot hub topic-space create --topic-name "SampleZero" --topic-template "sample/#" --type "LowFanout" --hub-name myhub
+  az iot hub topic-space create -n myhub --tsn SampleZero --tst LowFanout --template sample/#
   ```
   For more details see [topic spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/README.md#topic-spaces)
 
@@ -135,26 +135,31 @@ We support topic space CRUD using Azure CLI. See [prerequisites](https://github.
 
 #### Create topic space
   ```azurecli
-  az iot hub topic-space create --topic-name "Sample" --topic-template "sample/#" --type "LowFanout" --hub-name myhub
+  az iot hub topic-space create -n myhub --tsn SampleZero --template "sample/#" --tst LowFanout --hub-name myhub
+  ```
+  Topic spaces CLI can also use be configured using iot hub connection string 
+  
+  ```azurecli
+  az iot hub topic-space create -n myhub --tsn samplezero --template "sample/#" --tst LowFanout -l "##connectionString##"
   ```
 #### Get topic space
   ```azurecli
-  az iot hub topic-space show --topic-name "Sample" --hub-name myhub
-  ```
-#### List topic spaces within a hub
-  ```azurecli
-  az iot hub topic-space list --hub-name myhub
+  az iot hub topic-space show -n myhub --tsn samplezero
   ```
 #### Update topic space
 This can take up to 5 minutes to propagate. Type cannot be updated.
   ```azurecli
-  az iot hub topic-space update --topic-name "Sample" --topic-template "sample/#" "sampleupdate/#" --hub-name myhub
+  az iot hub topic-space create -n myhub --tsn samplezero --template sample/# sampleupdate/#
   ```  
 #### Delete topic space
 This can take up to 5 minutes to propagate.
   ```azurecli
-  az iot hub topic-space delete --topic-name "Sample" --hub-name myhub
-  ```  
+  az iot hub topic-space delete -n myhub --tsn samplezero
+  ```
+#### List topic spaces within a hub
+  ```azurecli
+  az iot hub topic-space list --n myhub
+  ```
 ### Topic space considerations
 
 * To publish or subscribe to any custom topic, a matching topic space must be configured. 
