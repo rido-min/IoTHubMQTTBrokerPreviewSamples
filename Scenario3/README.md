@@ -1,5 +1,5 @@
 
-This scenario showcases many-to-one communication pattern. Consider a use case where one needs to identify location of vehicles on a map. 
+This scenario simulates many-to-one communication pattern. Consider a use case where one needs to identify location of vehicles on a map. 
 
 | Device | Role| Topic | Topic Template | Topic Space Type|
 | -------- | --------------- |---------- |---------- |---------- |
