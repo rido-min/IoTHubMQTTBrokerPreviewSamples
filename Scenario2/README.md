@@ -1,3 +1,4 @@
+## Scenario 2 – Fan-out (one-to-many) messages over custom topics
 This scenario simulates cloud to device commands to several devices and can be leveraged for use cases such as sending alerts to devices. Consider the use case where a fleet management service needs to send a weather alert to all the vehicles in the fleet.  
 
 | Device | Role| Topic | 
