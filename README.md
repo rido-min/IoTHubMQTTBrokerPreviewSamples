@@ -18,8 +18,8 @@ IoT Hub MQTT broker is a pub/sub messaging broker, to enable secure transfer of 
 
 * [MQTT standard protocol](https://mqtt.org/)
 * [IoT Hub overview](https://docs.microsoft.com/azure/iot-hub/about-iot-hub)
-* [Topic spaces](##topic-spaces)
-* [Device authentication](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#Device-authentication)
+* [Topic spaces](#topic-spaces)
+* [Device authentication](#device-authentication)
 
 ## Capabilities available in this release
 
@@ -34,7 +34,7 @@ This private preview provides the following capabilities -
 * Topic Spaces is a new concept introduced to simplify management of topics used for pub/sub
 * Routing messages from MQTT Broker to custom endpoints
 * Code samples based on existing MQTT libraries
-* See [throttle limits](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/README.md#throttle-limits)
+* See [throttle limits](#throttle-limits)
 
 ## Capabilities coming up in future releases
 
@@ -75,17 +75,16 @@ To use the Azure IoT extension for Azure CLI with Topic Space, first remove the 
 ## Quickstart
 
 Follow these steps to configure the IoT Hub MQTT Broker with one clients enabled to publish and subscribe (many to many) –
-1. Configure TopicSpace using the below Azure CLI command:
+1. Configure TopicSpace using the below Azure CLI command: 
   ```azurecli
   az iot hub topic-space create -n myhub --tsn SampleZero --tst LowFanout --template sample/#
   ```
-  For more details see [topic spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/README.md#topic-spaces)
-
-3. Register devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
-4. Clone the samples from this GitHub Repo and follow the [README instructions](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples)
+  For more details see [topic spaces](#topic-spaces)
+2. Register devices using [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create).
+3. Clone the samples from this GitHub Repo and follow the [README instructions](https://github.com/Azure-Samples/IoTHub-MqttBroker-Samples)
   * Update connection strings
   * Execute the publish and subscribe programs
-5. Observe messages published from the client to the devices.
+4. Observe messages published from the client to the devices.
 
 ## Scenarios
 
@@ -125,19 +124,19 @@ For example, if we want the device to publish on its own topic, you can use the 
 
 **Topic space type** - The type of the topic space. Must be one of `LowFanout` or `PublishOnly`. The low fanout type is needed to adjust for the expected number of devices receiving each message, while the publish only option makes a topic space useable only for publishing.
 
-**Fanout** - The number of devices that will receive a given message. A low fanout message would be received by only a small number of devices. See [throttle limit](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/README.md#throttle-limits)
+**Fanout** - The number of devices that will receive a given message. A low fanout message would be received by only a small number of devices. See [throttle limit](#throttle-limits)
 
 ### Topic space management operations 
-We support topic space CRUD using Azure CLI. See [prerequisites](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/README.md#prerequisites).
+We support topic space CRUD using Azure CLI. See [prerequisites](#prerequisites).
 
 #### Create topic space
   ```azurecli
-  az iot hub topic-space create -n myhub --tsn SampleZero --template "sample/#" --tst LowFanout --hub-name myhub
+  az iot hub topic-space create -n myhub --tsn samplezero --template sample/# --tst LowFanout --hub-name myhub
   ```
-  Topic spaces CLI can also use be configured using iot hub connection string 
+  Topic space CLI can also use be configured using iot hub connection string 
   
   ```azurecli
-  az iot hub topic-space create -n myhub --tsn samplezero --template "sample/#" --tst LowFanout -l "##connectionString##"
+  az iot hub topic-space create -n myhub --tsn samplezero --template sample/# --tst LowFanout -l "##connectionString##"
   ```
 #### Get topic space
   ```azurecli
