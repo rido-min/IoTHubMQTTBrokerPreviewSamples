@@ -8,7 +8,7 @@ This scenario showcases how to configure route to send filtered messages from a 
 
 1. Configure TopicSpace using the Azure CLI command guidance below: 
  ```azurecli
-az iot hub topic-space create -n myhub --tsn publisher_ts --tst PublishOnly --template vehicles/vehicle1/GPS
+az iot hub topic-space create -n myhub --tsn publisher_ts --tst PublishOnly --template 'vehicles/${principal.deviceid}/GPS/#'
 ```
   For more details see [Topic Spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
 
