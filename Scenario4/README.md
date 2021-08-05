@@ -4,10 +4,10 @@ This scenario simulates the request-response messaging pattern. Request-response
 
 | Device | Role| Topic | Topic Template | Topic Space Type|
 | -------- | --------------- |---------- |---------- |---------- |
-| mobile_device | publisher | vehicles/unlock/req/car1  | vehicles/unlock/req/#  | PublishOnly
-| car_device | subscriber | vehicles/unlock/req/car1 | vehicles/unlock/req/${principal.deviceid}/# | LowFanout
-| car_device | publisher | vehicles/unlock/res/car1 | vehicles/unlock/res/${principal.deviceid}/# | PublishOnly
-| mobile_device | subscriber | vehicles/unlock/res/car1  | vehicles/unlock/res/#  | LowFanout
+| mobile_device | publisher | vehicles/unlock/req/car1  | vehicles/unlock/req/#  | PublishOnly|
+| car_device | subscriber | vehicles/unlock/req/car1 | vehicles/unlock/req/${principal.deviceid}/# | LowFanout|
+| car_device | publisher | vehicles/unlock/res/car1 | vehicles/unlock/res/${principal.deviceid}/# | PublishOnly|
+| mobile_device | subscriber | vehicles/unlock/res/car1  | vehicles/unlock/res/#  | LowFanout |
 
  
 1. Configure TopicSpace using the Azure CLI command guidance below: 
