@@ -68,11 +68,11 @@ To use the Azure IoT extension for Azure CLI with Topic Space, first remove the 
   ```
   az extension remove -n azure-iot
   ```
-  Then, run the following command after you installed an Azure CLI version of 2.17.1 or later:
+   Then, run the following command after you installed an Azure CLI version of 2.17.1 or later:
   ```
   az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
   ```
-  For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension).
+   For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension).
 
 5. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations will work (**TODO LINK info on connect packet**). The samples use authentication based on SharedAccessKeys.
 
