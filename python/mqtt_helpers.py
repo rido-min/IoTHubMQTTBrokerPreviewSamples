@@ -24,9 +24,9 @@ class IncomingAckList(object):
 
     def __init__(self) -> None:
         self.cv = threading.Condition()
-        self.lookup: Dict[int, Any] = {}
+        self.lookup: Dict[int, list[int]] = {}
 
-    def add_ack(self, key: int, value: Any) -> None:
+    def add_ack(self, key: int, value: list[int]) -> None:
         """
         Add the ack to the dict and notify any waiting listeners
         """
@@ -34,7 +34,9 @@ class IncomingAckList(object):
             self.lookup[key] = value
             self.cv.notify_all()
 
-    def wait_for_ack(self, key: int, timeout: float) -> Any:
+    # Returns a list of the granted qos for the requested subscription, or an empty list
+    # if no response was received in the timeout
+    def wait_for_ack(self, key: int, timeout: float) -> list[int]:
         """
         Wait for a given ack to be added to the dict.
         """
@@ -44,7 +46,7 @@ class IncomingAckList(object):
 
         with self.cv:
             if not self.cv.wait_for(received, timeout=timeout):
-                return None
+                return []
             else:
                 try:
                     return self.lookup.pop(key)
@@ -55,7 +57,7 @@ class IncomingAckList(object):
                             key
                         )
                     )
-                    return None
+                    return []
 
     def was_received(self, key: int) -> bool:
         """
