@@ -90,7 +90,7 @@ Below table enumerate the devices, topics and topic space used in this example.
 1. To enable pub/sub on `sample/#`, configure TopicSpace using the below Azure CLI command:
 
   ```azurecli
-  az iot hub topic-space create -n <myhub> --tsn SampleZero --tst LowFanout --template sample/#
+  az iot hub topic-space create -n {myhub} --tsn SampleZero --tst LowFanout --template sample/#
   ```
 
   For more details see [topic spaces](#topic-spaces).
@@ -99,11 +99,11 @@ Below table enumerate the devices, topics and topic space used in this example.
 Additionally use `connection-string` command to fetch the connection strings for these devices.
 
 ```azurecli
-az iot hub device-identity create -n <myhub> -d pub_device --am shared_private_key
-az iot hub device-identity connection-string show -n <myhub> -d pub_device
+az iot hub device-identity create -n {myhub} -d pub_device --am shared_private_key
+az iot hub device-identity connection-string show -n {myhub} -d pub_device
 
-az iot hub device-identity create -n <myhub> -d sub_device --am shared_private_key
-az iot hub device-identity connection-string show -n <myhub> -d sub_device
+az iot hub device-identity create -n {myhub} -d sub_device --am shared_private_key
+az iot hub device-identity connection-string show -n {myhub} -d sub_device
 ```
 
 3. Clone the [samples](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
@@ -161,19 +161,19 @@ We support topic space CRUD using Azure CLI. See [prerequisites](#prerequisites)
 #### Create topic space
 
   ```azurecli
-  az iot hub topic-space create -n <myhub> --tsn samplezero --template sample/# --tst LowFanout
+  az iot hub topic-space create -n {myhub} --tsn samplezero --template sample/# --tst LowFanout
   ```
 
   Topic space CLI can also use be configured using IoT hub connection string
   
   ```azurecli
-  az iot hub topic-space create -n <myhub> --tsn samplezero --template sample/# --tst LowFanout -l "##connectionString##"
+  az iot hub topic-space create -n {myhub} --tsn samplezero --template sample/# --tst LowFanout -l "##connectionString##"
   ```
 
 #### Get topic space
 
   ```azurecli
-  az iot hub topic-space show -n <myhub> --tsn samplezero
+  az iot hub topic-space show -n {myhub} --tsn samplezero
   ```
 
 #### Update topic space
@@ -181,7 +181,7 @@ We support topic space CRUD using Azure CLI. See [prerequisites](#prerequisites)
 This can take up to 5 minutes to propagate. Type cannot be updated.
 
   ```azurecli
-  az iot hub topic-space create -n <myhub> --tsn samplezero --template sample/# sampleupdate/#
+  az iot hub topic-space create -n {myhub} --tsn samplezero --template sample/# sampleupdate/#
   ```  
 
 #### Delete topic space
@@ -189,13 +189,13 @@ This can take up to 5 minutes to propagate. Type cannot be updated.
 This can take up to 5 minutes to propagate.
 
   ```azurecli
-  az iot hub topic-space delete -n <myhub> --tsn samplezero
+  az iot hub topic-space delete -n {myhub} --tsn samplezero
   ```
 
 #### List topic spaces within a hub
 
   ```azurecli
-  az iot hub topic-space list -n <myhub>
+  az iot hub topic-space list -n {myhub}
   ```
 
 ### Topic space considerations
