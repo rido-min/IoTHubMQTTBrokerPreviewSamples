@@ -1,20 +1,20 @@
 # Scenario 4 – One to one messaging 
 
-This scenario simulates the request-response messaging pattern. Request-response uses two topics: one for the request and one for the response. Consider a use case where a user can unlock their car from a mobile app. The request to unlock are use published on `vehicles/unlock/req/#` and the response of unlock operation are published on `vehicles/unlock/res/#`
+This scenario simulates the request-response messaging pattern. Request-response uses two topics: one for the request and one for the response. Consider a use case where a user can unlock their car from a mobile app. The request to unlock are use published on `vehicles/unlock/req/<carDeviceId>/<mobileDeviceId>` and the response of unlock operation are published on `vehicles/unlock/res/<mobileDeviceId>/<carDeviceId>`.
 
-| Device | Role| Topic | Topic Template | Topic Space Type|
+| Device | Role| Topic/Topic Filter | Topic Template | Topic Space Type
 | -------- | --------------- |---------- |---------- |---------- |
-| mobile_device | publisher | vehicles/unlock/req/car1  | vehicles/unlock/req/#  | PublishOnly|
-| car_device | subscriber | vehicles/unlock/req/car1 | vehicles/unlock/req/${principal.deviceid}/# | LowFanout|
-| car_device | publisher | vehicles/unlock/res/car1 | vehicles/unlock/res/${principal.deviceid}/# | PublishOnly|
-| mobile_device | subscriber | vehicles/unlock/res/car1  | vehicles/unlock/res/#  | LowFanout |
+| mobile_device | publisher | vehicles/unlock/req/car1/mobile1  | vehicles/unlock/req/+/${principal.deviceid}  | PublishOnly|
+| car_device | subscriber | vehicles/unlock/req/car1/# | vehicles/unlock/req/${principal.deviceid}/# | LowFanout|
+| car_device | publisher | vehicles/unlock/res/mobile1/car1 | vehicles/unlock/res/+/${principal.deviceid} | PublishOnly|
+| mobile_device | subscriber | vehicles/unlock/res/mobile1/#  | vehicles/unlock/res/${principal.deviceid}/#  | LowFanout |
 
 1. Configure TopicSpace using the Azure CLI command guidance below:
 
  ```azurecli
-az iot hub topic-space create -n myhub --tsn publisher_ts --tst PublishOnly --template 'vehicles/unlock/req/#' 'vehicles/unlock/res/${principal.deviceid}/#'
+az iot hub topic-space create -n myhub --tsn publisher_ts --tst PublishOnly --template 'vehicles/unlock/req/+/${principal.deviceid}' 'vehicles/unlock/res/+/${principal.deviceid}'
 
-az iot hub topic-space create -n myhub --tsn subscriber_ts --tst LowFanout --template 'vehicles/unlock/req/${principal.deviceid}/#' 'vehicles/unlock/res/#'
+az iot hub topic-space create -n myhub --tsn subscriber_ts --tst LowFanout --template 'vehicles/unlock/req/${principal.deviceid}/#' 'vehicles/unlock/res/${principal.deviceid}/#'
 ```
 
   For more details see [Topic Spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
