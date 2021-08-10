@@ -218,18 +218,14 @@ Similarly, `vehicles/vehicle1/telemetry/#` and `vehicles/${principal.deviceId}/t
   
 **TODO add example for bash**
   
-## Reference of Updated Hub APIs
+## Existing IoT Hub features 
 
-**TODO update this section**
-If you do not want to use the samples, then you can use these APIs to connect device to IoT Hub. 
-
-[TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this?
-PR Created to update doc - <https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226> . Need comments in PR for guidance around updates.
+IoT Hub delivers messaging via telemetry, device twin, direct method and C2D commands. These features will continue to work with existing SDKs. With introduction of MQTT broker, we are in process of updating the SDKs. Meanwhile, to utilize these capabilities, please see [MQTT 3.1.1 support for IoT Hub](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-reference-generated.md)
 
 ### Device authentication
 
-  **TODO Device auth section**
-  
+With the introduction of MQTT broker, we have revamped the [device authentication](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-conceptual.md#authentication) format.
+
 ## Message routing for MQTT Broker enabled IoT Hubs
 
 New system properties `mqtt-topic` and `mqtt-qos` have been added that can be utilized for [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax). The table below lists all the system properties that are supported when the routing `broker` messages.
