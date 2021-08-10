@@ -264,7 +264,7 @@ For this release, the following limits are supported. The limits might be revise
 | pub inbound | Inbound publish requests per second per IoT Hub per unit (counted together with D2C) | Varies per SKU, details in [Device-to-cloud sends](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-quotas-throttling#operation-throttles) |
 | pub inbound | inbound Publish requests per second per connection | 100 |
 | pub inbound | Maximum inbound unacknowledged QoS 1 publish requests (Receive Maximum (maximum number of allowed outstanding unacknowledged PUBLISH packets (in client-server direction) with QoS: 1)). If Hub failed to ack pub request for more than the limit, Hub will reject new pub request and disconnect the client. | 16 |
-| sub | total Subscriptions per IoT Hub (topics starting wtih $iothub are not counted) | 1 million |
+| sub | total Subscriptions per IoT Hub (topics starting with`$az/iot` are not counted) | 1 million |
 | sub | maximum subscriptions per connection (topics starting wtih $iothub are not counted and a single client can have no more than 50 subscriptions)  50 |
 | sub | individual Subscriptions per second per Hub per unit (topics starting wtih $iothub are not counted)  | same as existing (**TBD** confirm limit) |
 | sub | Maximum subscriptions per subscribe request | 8 |
