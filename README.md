@@ -110,9 +110,11 @@ az iot hub device-identity connection-string show -n {myhub} -d sub_device
   Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
   
      a. To use [dotnet](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/dotnet)
+     
           1. Build both publish and subscribe programs. 
           2. Update environment variable CS with connection string for publisher and subscriber.
           3. Execute the publish and subscribe programs.
+          
      b. To use [python](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python)
 
 4. Observe published messages to be delivered to subscriber.
