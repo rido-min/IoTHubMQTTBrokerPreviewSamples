@@ -221,10 +221,11 @@ Similarly, `vehicles/vehicle1/telemetry/#` and `vehicles/${principal.deviceId}/t
 ## Reference of Updated Hub APIs
 
 **TODO update this section**
-If you do not want to use the  samples, then you can use these APIs to connect device to IoT Hub.
+If you do not want to use the samples, then you can use these APIs to connect device to IoT Hub. 
+
 [TODO- Prashali/Max] – also where in the doc or instructions should customer leverage this?
 PR Created to update doc - <https://github.com/MicrosoftDocs/azure-docs-pr/pull/167226> . Need comments in PR for guidance around updates.
-  
+
 ### Device authentication
 
   **TODO Device auth section**
