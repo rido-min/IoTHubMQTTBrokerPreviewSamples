@@ -76,7 +76,7 @@ To use the Azure IoT extension for Azure CLI with Topic Space, first remove the 
 
   For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension). For Windows, please use `PowerShell`.
   
-5. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the new authentication guidelines, once the client is connected regular pub/sub operations will work (**TODO LINK info on connect packet**). The samples use authentication based on SharedAccessKeys.
+5. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the [new authentication guidelines](#device-authentication), once the client is connected regular pub/sub operations will work. The samples use authentication based on SharedAccessKeys.
 
 ## Quickstart
 
@@ -264,9 +264,9 @@ For this release, the following limits are supported. The limits might be revise
 | pub inbound | Inbound publish requests per second per IoT Hub per unit (counted together with D2C) | Varies per SKU, details in [Device-to-cloud sends](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-quotas-throttling#operation-throttles) |
 | pub inbound | inbound Publish requests per second per connection | 100 |
 | pub inbound | Maximum inbound unacknowledged QoS 1 publish requests (Receive Maximum (maximum number of allowed outstanding unacknowledged PUBLISH packets (in client-server direction) with QoS: 1)). If Hub failed to ack pub request for more than the limit, Hub will reject new pub request and disconnect the client. | 16 |
-| sub | total Subscriptions per IoT Hub (topics starting wtih $iothub are not counted) | 1 million |
-| sub | maximum subscriptions per connection (topics starting wtih $iothub are not counted and a single client can have no more than 50 subscriptions)  50 |
-| sub | individual Subscriptions per second per Hub per unit (topics starting wtih $iothub are not counted)  | same as existing (**TBD** confirm limit) |
+| sub | total Subscriptions per IoT Hub (topics starting with `$az/iot` are not counted) | 1 million |
+| sub | maximum subscriptions per connection (topics starting with `$az/iot` are not counted and a single client can have no more than 50 subscriptions) | 50 |
+| sub | individual Subscriptions per second per Hub per unit (topics starting with `$az/iot` are not counted)  | same as existing (**TBD** confirm limit) |
 | sub | Maximum subscriptions per subscribe request | 8 |
 | throughput | Throughput per second per connection  | (maximum inbound and outbound publish rates * number of 4KB) |
 
