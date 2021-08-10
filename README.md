@@ -242,7 +242,7 @@ New system properties `mqtt-topic` and `mqtt-qos` have been added that can be ut
 
 * Querying on body and application properties is not supported for `broker` messages.
 * Unlike existing Hub Telemetry, `broker` messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for `broker` as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
-* When routing messages for `broker` the dropped messages will not go to the fallback route (**TODO to be tested**) if the query condition is not met.
+* When routing messages for `broker` the dropped messages will not go to the fallback route if the query condition is not met.
   
 To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub message routing](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c)
 
