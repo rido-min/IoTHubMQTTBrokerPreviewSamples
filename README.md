@@ -106,8 +106,9 @@ az iot hub device-identity create -n {myhub} -d sub_device --am shared_private_k
 az iot hub device-identity connection-string show -n {myhub} -d sub_device
 ```
 
-3.Follow the steps below to run the device samples
+3. Follow the steps below to run the device samples. 
   Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
+  
      a. To use [dotnet](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/dotnet)
           1. Build both publish and subscribe programs. 
           2. Update environment variable CS with connection string for publisher and subscriber.
