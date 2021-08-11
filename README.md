@@ -251,50 +251,43 @@ New system properties `mqtt-topic` and `mqtt-qos` have been added that can be ut
   
 To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub message routing](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c)
 
-## Throttle limits
+## Limits
 
 For this release, the following limits are supported. The limits might be revised for future releases.
-
-  **TBD INTERNAL BUG BASH : Review TABLE**
 
 ### Broker
 
 | Category | Description | Limit |
 | -------- | ---- | ----------- |
-| connect | Connect requests per second per client ID | 1 |
-| connect | Keep alive limit (max delay for liveness check - 28.5min) | 19 mins |
+| connect | Connect requests per second per client ID | Not enforced. Recommend using 1 request/second |
+| connect | Keep alive limit | 19 mins |
+| disconnect | Maximum time before disconnected persisted sesssion is cleaned up | 1 hour|
 | pub inbound | Inbound publish requests per second per IoT Hub per unit (counted together with D2C) | Varies per SKU, details in [Device-to-cloud sends](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-quotas-throttling#operation-throttles) |
-| pub inbound | inbound Publish requests per second per connection | 100 |
-| pub inbound | Maximum inbound unacknowledged QoS 1 publish requests (Receive Maximum (maximum number of allowed outstanding unacknowledged PUBLISH packets (in client-server direction) with QoS: 1)). If Hub failed to ack pub request for more than the limit, Hub will reject new pub request and disconnect the client. | 16 |
-| sub | total Subscriptions per IoT Hub (topics starting with `$az/iot` are not counted) | 1 million |
-| sub | maximum subscriptions per connection (topics starting with `$az/iot` are not counted and a single client can have no more than 50 subscriptions) | 50 |
-| sub | individual Subscriptions per second per Hub per unit (topics starting with `$az/iot` are not counted)  | same as existing (**TBD** confirm limit) |
-| sub | Maximum subscriptions per subscribe request | 8 |
-| throughput | Throughput per second per connection  | (maximum inbound and outbound publish rates * number of 4KB) |
+| pub inbound | Maximum inbound unacknowledged QoS 1 publish requests | 16 |
+| sub | Maximum subscriptions per client ID (topics starting with `$az/iot` are also counted) | 50 |
+| sub | Maximum topic filters per subscribe request | 8 |
 
 ### Topic Spaces Limits
 
 | Category | Description | Limit |
 | -------- | ---- | ----------- |
-| topic space | lowFanout: Total subscriptions per substituted values set (e.g. for `devices/{deviceID}/#` you can have 10 subscriptions for topics for device d1, and indepedently 10 subscriptions for topics for device d2 | 10 |
-| topic space | lowFanout: Message rate per topic | 100 messages/second |
-| topic space | lowFanout: Total subscriptions | Unbounded (up to the limit for the IoT Hub) |
+| topic space | LowFanout: Total subscriptions per substituted topic template (e.g. for `devices/${principal.deviceid}/#` you can have 10 subscriptions for topics for device d1, and indepedently 10 subscriptions for topics for device d2 | 10 |
 | topic | Maximum number of slashes in topic and topic filter | 10 |
 | topic | Topic size | 256 bytes |
-| topic space | maximum of topic templates that can have within a topic space | 5 |
-| topic space | maximum number of topic spaces per Hub | 10 |
-| topic space management APIs | requests/s | 1/s with burst 10/s |
+| topic space | Maximum number of topic templates within a topic space | 5 |
+| topic space | Maximum number of topic spaces per IoT Hub | 10 |
+| topic space management APIs | Maximum requests per second | 1/s with burst 10/s |
 
 ### Frequently asked questions
   
-* What happens if your device disconnects?
   
-  Persistent sessions are cleaned up by IoT Hub after an hour.
+ *  Is monitoring metrics and logging is available?
+    None in this release. We will add monitoring metrics and diagnostic logs in the next release.
+ * What happens if device attempts to pub/sub on a topic when a matching topic space is not found?
+    Device connection will be closed. We will add monitoring metrics and diagnostic logs in the next release.
+ * How long does it take for topic space updates to propagate?
+    It takes up-to 5 minutes to propagate a topic space update.
+ * Can I use my existing SDK?
+    You can use any standard MQTT client SDK. See SDK samples [here](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples).
+ 
 
-* What happens if device attempts to pub/sub on a topic when a matching topic space is not found?
-  
-  Device connection will be closed. We will add monitoring metrics and diagnostic logs in the next release.
-
-* How long does it take for topic space updates to propagate?
-  
-  It takes up-to 5 minutes to propagate a topic space update.
