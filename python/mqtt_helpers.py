@@ -3,12 +3,14 @@
 # license information.
 import threading
 import logging
-from typing import Dict, List, Callable, Any
+from typing import Dict, List, Callable, Any, Generic, TypeVar, Optional
 
 logger = logging.getLogger(__name__)
 
+T = TypeVar('T')
 
-class IncomingAckList(object):
+
+class IncomingAckList(Generic[T]):
     """
     Dictionary-like object which supports the concept of "waiting" for a specific key to be
     set.  This way, code that needs to wait for a specific PUBACK or SUBACK to be returned
@@ -24,9 +26,9 @@ class IncomingAckList(object):
 
     def __init__(self) -> None:
         self.cv = threading.Condition()
-        self.lookup: Dict[int, list[int]] = {}
+        self.lookup: Dict[int, T] = {}
 
-    def add_ack(self, key: int, value: list[int]) -> None:
+    def add_ack(self, key: int, value: T) -> None:
         """
         Add the ack to the dict and notify any waiting listeners
         """
@@ -34,9 +36,9 @@ class IncomingAckList(object):
             self.lookup[key] = value
             self.cv.notify_all()
 
-    # Returns a list of the granted qos for the requested subscription, or an empty list
-    # if no response was received in the timeout
-    def wait_for_ack(self, key: int, timeout: float) -> list[int]:
+    # Returns the response to the ack or None if there is
+    # no response within the timeout
+    def wait_for_ack(self, key: int, timeout: float) -> Optional[T]:
         """
         Wait for a given ack to be added to the dict.
         """
@@ -46,7 +48,7 @@ class IncomingAckList(object):
 
         with self.cv:
             if not self.cv.wait_for(received, timeout=timeout):
-                return []
+                return None
             else:
                 try:
                     return self.lookup.pop(key)
@@ -57,7 +59,7 @@ class IncomingAckList(object):
                             key
                         )
                     )
-                    return []
+                    return None
 
     def was_received(self, key: int) -> bool:
         """
@@ -187,7 +189,7 @@ class ConnectionStatus(object):
     def __init__(self) -> None:
         self.cv = threading.Condition()
         self._connected = False
-        self._connection_error: Exception = None
+        self._connection_error: Optional[Exception] = None
 
     @property
     def connected(self) -> bool:

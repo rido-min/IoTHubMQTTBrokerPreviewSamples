@@ -34,7 +34,7 @@ print("Subscribing to {} at qos {}".format(topic_filter, qos))
 (rc, mid) = client.subscribe(topic_filter, qos)
 
 ack_result = client.incoming_subacks.wait_for_ack(mid, timeout=20)
-if len(ack_result) == 0:
+if not ack_result:
     print("SUBACK not received within 20 seconds")
     client.disconnect()
     client.connection_status.wait_for_disconnected()
