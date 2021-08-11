@@ -283,7 +283,7 @@ For this release, the following limits are supported. The limits might be revise
   
  *  Is monitoring metrics and logging is available?
    
-   None in this release. We will add monitoring metrics and diagnostic logs in the next release.
+    None in this release. We will add monitoring metrics and diagnostic logs in the next release.
     
  * What happens if device attempts to pub/sub on a topic when a matching topic space is not found?
     
