@@ -282,15 +282,19 @@ For this release, the following limits are supported. The limits might be revise
   
   
  *  Is monitoring metrics and logging is available?
-    None in this release. We will add monitoring metrics and diagnostic logs in the next release.
+   
+   None in this release. We will add monitoring metrics and diagnostic logs in the next release.
     
  * What happens if device attempts to pub/sub on a topic when a matching topic space is not found?
+    
     Device connection will be closed. We will add monitoring metrics and diagnostic logs in the next release.
     
  * How long does it take for topic space updates to propagate?
-    It takes up-to 5 minutes to propagate a topic space update.
+   
+   It takes up-to 5 minutes to propagate a topic space update.
     
  * Can I use my existing SDK?
+    
     You can use any standard MQTT client SDK. See SDK samples [here](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples).
  
 
