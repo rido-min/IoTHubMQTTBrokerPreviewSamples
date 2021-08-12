@@ -15,9 +15,11 @@ class PahoClient(object):
         self.mqtt_client: mqtt.Client = None
         self.auth: SymmetricKeyAuth = auth
         self.connection_status = ConnectionStatus()
-        self.incoming_subacks = IncomingAckList()
-        self.incoming_unsubacks = IncomingAckList()
-        self.incoming_pubacks = IncomingAckList()
+        # A list of the results for each subscription in the request - either the granted qos, or -1 on failure
+        self.incoming_subacks = IncomingAckList[list[int]]()
+        # All other acks just return the packet id
+        self.incoming_unsubacks = IncomingAckList[int]()
+        self.incoming_pubacks = IncomingAckList[int]()
         self.incoming_messages = IncomingMessageList()
 
     @classmethod
@@ -82,16 +84,22 @@ class PahoClient(object):
         client: mqtt.Client,
         userdata: Any,
         mid: int,
-        granted_qos: int,
+        granted_qos: Tuple[int, ...],  # tuple of ints
         properties: Any = None,
     ) -> None:
         """
         event handler for Paho on_subscribe events.  Do not call directly.
         """
         # In Paho thread.  Save what we need and return.
-        logger.info("Received SUBACK for mid {}".format(mid))
+        logger.info("Received SUBACK for mid {}, granted_qos {}".format(mid, granted_qos))
+        granted_qos_list = list(granted_qos)
         # causes code waiting for this mid via `self.incoming_subacks.wait_for_ack` to return
-        self.incoming_subacks.add_ack(mid, granted_qos)
+        for i in range(len(granted_qos_list)):
+            if granted_qos_list[i] == 128:
+                # Use -1 to make it easier for clients
+                granted_qos_list[i] = -1
+
+        self.incoming_subacks.add_ack(mid, granted_qos_list)
 
     def _handle_on_unsubscribe(
         self, client: mqtt.Client, userdata: Any, mid: int
@@ -178,3 +186,6 @@ class PahoClient(object):
 
     def unsubscribe(self, topic: str) -> Tuple[int, int]:
         return self.mqtt_client.unsubscribe(topic)  # type: ignore
+
+    def client_id(self) -> str:
+        return self.auth.client_id

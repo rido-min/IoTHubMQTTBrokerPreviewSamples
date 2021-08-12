@@ -33,13 +33,19 @@ qos = 1
 print("Subscribing to {} at qos {}".format(topic_filter, qos))
 (rc, mid) = client.subscribe(topic_filter, qos)
 
-if client.incoming_subacks.wait_for_ack(mid, timeout=20):
-    print("SUBACK received")
-else:
+ack_result = client.incoming_subacks.wait_for_ack(mid, timeout=20)
+if not ack_result:
     print("SUBACK not received within 20 seconds")
     client.disconnect()
     client.connection_status.wait_for_disconnected()
     sys.exit(1)
+elif ack_result[0] == -1:
+    print("Subscription was rejected")
+    client.disconnect()
+    client.connection_status.wait_for_disconnected()
+    sys.exit(1)
+else:
+    print("Subscription was granted with qos {}".format(ack_result[0]))
 
 time_to_listen_in_seconds = 600
 end_time = time.time() + time_to_listen_in_seconds
