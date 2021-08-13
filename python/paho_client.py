@@ -5,7 +5,7 @@ import logging
 from paho.mqtt import client as mqtt
 from symmetric_key_auth import SymmetricKeyAuth
 from mqtt_helpers import IncomingMessageList, IncomingAckList, ConnectionStatus
-from typing import Any, Tuple
+from typing import Any, Tuple, List
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ class PahoClient(object):
         self.auth: SymmetricKeyAuth = auth
         self.connection_status = ConnectionStatus()
         # A list of the results for each subscription in the request - either the granted qos, or -1 on failure
-        self.incoming_subacks = IncomingAckList[list[int]]()
+        self.incoming_subacks = IncomingAckList[List[int]]()
         # All other acks just return the packet id
         self.incoming_unsubacks = IncomingAckList[int]()
         self.incoming_pubacks = IncomingAckList[int]()
@@ -91,7 +91,11 @@ class PahoClient(object):
         event handler for Paho on_subscribe events.  Do not call directly.
         """
         # In Paho thread.  Save what we need and return.
-        logger.info("Received SUBACK for mid {}, granted_qos {}".format(mid, granted_qos))
+        logger.info(
+            "Received SUBACK for mid {}, granted_qos {}".format(
+                mid, granted_qos
+            )
+        )
         granted_qos_list = list(granted_qos)
         # causes code waiting for this mid via `self.incoming_subacks.wait_for_ack` to return
         for i in range(len(granted_qos_list)):
