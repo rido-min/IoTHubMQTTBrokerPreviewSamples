@@ -63,7 +63,7 @@ pip install -e .
 
 This should install Paho as well as a few other libraries that we need.  You can verify this with `pip list`:
 ```
-(new-broker) bertk@bertk-hp:~/projects/broker/IoTHubMQTTBrokerPreviewSamples/python$ pip list
+(iothub-broker) bertk@bertk-hp:~/projects/broker/IoTHubMQTTBrokerPreviewSamples/python$ pip list
 Package                        Version Location
 ------------------------------ ------- -----------------------------------------------------------------
 IoTHubMQTTBrokerPreviewSamples 0.0.0   /home/bertk/projects/broker/IoTHubMQTTBrokerPreviewSamples/python
@@ -72,7 +72,7 @@ pip                            21.2.4
 setuptools                     56.1.0
 six                            1.16.0
 wheel                          0.36.2
-(new-broker) bertk@bertk-hp:~/projects/broker/IoTHubMQTTBrokerPreviewSamples/python$
+(iothub-broker) bertk@bertk-hp:~/projects/broker/IoTHubMQTTBrokerPreviewSamples/python$
 ```
 
 ## Verifying your install
@@ -86,8 +86,8 @@ To verify that you have the libraries successfully installed, you can:
 
 For example:
 ```
-(new-broker) bertk@bertk-hp:~/projects/broker/IoTHubMQTTBrokerPreviewSamples/python$ cd ..
-(new-broker) bertk@bertk-hp:~/projects/broker/IoTHubMQTTBrokerPreviewSamples$ python
+(iothub-broker) bertk@bertk-hp:~/projects/broker/IoTHubMQTTBrokerPreviewSamples/python$ cd ..
+(iothub-broker) bertk@bertk-hp:~/projects/broker/IoTHubMQTTBrokerPreviewSamples$ python
 Python 3.6.10 (default, Jul  7 2020, 14:58:11)
 [GCC 7.4.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
