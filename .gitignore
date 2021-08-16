@@ -2,3 +2,4 @@
 obj/
 bin/
 python/__pycache__/
+*.egg-info/

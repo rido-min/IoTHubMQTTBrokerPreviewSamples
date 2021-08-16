@@ -32,6 +32,6 @@ az iot hub device-identity create -n myhub -d map_device --am shared_private_key
 az iot hub device-identity connection-string show -n myhub -d map_device
 ```
 
-3. Download the SDK samples (**TODO** SDK team to add git link for these)
+3. Store the device connection string for `map_device` in the environment variable `CS_MAP_DEVICE` and store the connection strings for `vehicle1` and `vehicle2` in `CS_VEHICLE_1` and `CS_VEHICLE_2`
 4. Use the solution code (**TODO** LINK) to publish to the topic.
 5. Use the device sample (**TODO** LINK) to subscribe to the topic and receive messages.

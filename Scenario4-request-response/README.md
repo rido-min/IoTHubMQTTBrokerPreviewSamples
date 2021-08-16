@@ -29,6 +29,6 @@ az iot hub device-identity create -n myhub -d mobile_device --am shared_private_
 az iot hub device-identity connection-string show -n myhub -d mobile_device
 ```
 
-3. Download the SDK samples (**TODO** SDK team to add git link for these)
+3. Store the device connection string for `mobile_device` in the environment variable `CS_MOBILE_DEVICE` and store the connection strings for `car_device` in `CS_CAR_DEVICE`.
 4. Use the solution code (**TODO** LINK) to publish to the topic.
 5. Use the device sample (**TODO** LINK) to subscribe to the topic and receive messages.

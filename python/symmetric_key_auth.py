@@ -35,11 +35,13 @@ def sign_password(base64_key: str, payload_to_sign: Union[str, bytes]) -> bytes:
         # If byte string, no need to encode
         pass
 
-    return hmac.HMAC(
-        key=decoded_key,
-        msg=payload_to_sign,  # type: ignore
-        digestmod=hashlib.sha256,
-    ).digest()
+    return base64.b64encode(
+        hmac.HMAC(
+            key=decoded_key,
+            msg=payload_to_sign,  # type: ignore
+            digestmod=hashlib.sha256,
+        ).digest()
+    )
 
 
 def encode_dict(obj: Dict[str, str]) -> str:
@@ -91,7 +93,7 @@ class SymmetricKeyAuth(abc.ABC):
             "h": self.hub_host_name,
             "did": self.device_id,
             "av": API_VERSION,
-            "am": "SAS",
+            "am": "SASb64",
             "se": str(self.password_expiry_time * 1000),
             "sa": str(self.password_creation_time * 1000),
         }

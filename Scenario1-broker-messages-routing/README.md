@@ -21,6 +21,8 @@ az iot hub device-identity create -n myhub -d vehicle1 --am shared_private_key
 az iot hub device-identity connection-string show -n myhub -d vehicle1
 ```
 
-3. Download the SDK samples (**TODO** SDK team to add git link for these)
+3. Store your device connection string in the environment variable named `CS_VEHICLE_1`.
 4. Use the device sample (**TODO** LINK) to publish to the topic
 5. You can monitor volume of messages delivered and troubleshoot routing via using CLI command - **az iot hub monitor-events**
+
+**TODO** Add specific instructions to configure routing for this scenario

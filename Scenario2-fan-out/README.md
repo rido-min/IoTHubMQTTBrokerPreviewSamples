@@ -11,7 +11,7 @@ This scenario simulates cloud to device commands to several devices and can be l
 1. Configure TopicSpace using the Azure CLI command guidance below:
 
 ```azurecli
-az iot hub topic-space create -n myhub --tsn alerts_ts --tst LowFanout --template 'vehicles/alerts/#'
+az iot hub topic-space create -n myhub --tsn alerts_ts --tst LowFanout --template 'vehicles/alerts/*'
   ```
 
   For more details see [Topic Spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
@@ -29,6 +29,6 @@ az iot hub device-identity create -n myhub -d vehicle2 --am shared_private_key
 az iot hub device-identity connection-string show -n myhub -d vehicle2
 ```
 
-3. Download the SDK samples (**TODO** SDK team to add git link for these)
+3. Store the device connection string for `fleet_mgt_device` in the environment variable `CS_FLEET_MGT_DEVICE` and store the connection strings for `vehicle1` and `vehicle2` in `CS_VEHICLE_1` and `CS_VEHICLE_2`
 4. Use the solution code (**TODO** LINK) to publish to the topic.
 5. Use the device sample (**TODO** LINK) to subscribe to the topic.
