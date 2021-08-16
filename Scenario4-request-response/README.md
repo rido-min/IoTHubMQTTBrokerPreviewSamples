@@ -39,7 +39,7 @@ az iot hub device-identity connection-string show -n myhub -d mobile_device
 1. If you haven't installed the required modules, follow the instructions in the [python README file](../python/README.md).
 2. Open 2 command windows.  Activate the `iothub-broker` virtual environment in both.
 3. In the first command window (the mobile device window), set the `CS_MOBILE_DEVICE` and `CS_CAR_DEVICE`  environment variable to the correct connection strings.
-3. In the second command window (the car device window), set the `CS_CAR_DEVICE` environment variable to the correct connection string.
-4. In the second (car device) command window, type `python python/car_device.py` to run the car device app.
-5. In the first (mobile device) command window, type `python python/mobile_device.py` to run the mobile device app.
+4. In the second command window (the car device window), set the `CS_CAR_DEVICE` environment variable to the correct connection string.
+5. In the second (car device) command window, type `python python/car_device.py` to run the car device app.
+6. In the first (mobile device) command window, type `python python/mobile_device.py` to run the mobile device app.
 
