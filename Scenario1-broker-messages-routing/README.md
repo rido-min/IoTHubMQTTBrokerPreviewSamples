@@ -27,8 +27,6 @@ az iot hub device-identity connection-string show -n myhub -d vehicle1
 4. Use the device sample (instructions below) to publish to the topic
 5. You can monitor volume of messages delivered and troubleshoot routing via using CLI command - **az iot hub monitor-events**
 
-**TODO** Add specific instructions to configure routing for this scenario
-
 ## Running the python version of this sample:
 
 1. If you haven't installed the required modules, follow the instructions in the [python README file](../python/README.md).
