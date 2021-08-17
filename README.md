@@ -117,7 +117,7 @@ az iot hub device-identity connection-string show -n {myhub} -d sub_device
           
      b. To use [python](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python)
 
-4. Observe published messages to be delivered to subscriber.
+4. Observe messages delivered to subscriber.
 
 ## Scenarios
 
