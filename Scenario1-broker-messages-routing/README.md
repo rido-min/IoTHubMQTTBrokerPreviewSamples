@@ -8,7 +8,23 @@ For this scenario, please ensure you have deployed a IoT Hub with routing using 
 | -------- | --------------- |---------- |---------- |---------- |
 | vehicle1 | publisher | vehicles/vehicle1/GPS | vehicles/${principal.deviceid}/GPS/# | PublishOnly|
 
-1. Configure TopicSpace using the Azure CLI command guidance below:
+1. Validate routing setup. 
+```azurecli
+az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.routes"
+```
+```[
+  {
+    "condition": "STARTS_WITH($mqtt-topic, \"vehicles/\") and $twin.tags.model = \"model1\"",
+    "endpointNames": [
+      "events"
+    ],
+    "isEnabled": true,
+    "name": "MqttBrokerRoute",
+    "source": "MqttBrokerMessages"
+  }
+]```
+
+2. Configure TopicSpace using the Azure CLI command guidance below:
 
  ```azurecli
 az iot hub topic-space create -n {iothub_name} --tsn publisher_ts --tst PublishOnly --template 'vehicles/${principal.deviceid}/GPS/#'
@@ -16,22 +32,22 @@ az iot hub topic-space create -n {iothub_name} --tsn publisher_ts --tst PublishO
 
   For more details see [Topic Spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
 
-2. Register devices using the [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
+3. Register devices using the [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
 
 ```azure cli
 az iot hub device-identity create -n {iothub_name} -d vehicle1 --am shared_private_key
 az iot hub device-identity connection-string show -n {iothub_name} -d vehicle1
 ```
-3. If using tags in routing query, set up device with relevant tags.
+4. If using tags in routing query, set up device with relevant tags.
 ```azure cli
 az iot hub device-twin update -n {iothub_name} -d vehicle1 --tags '{"model": "model1"}'
 ```
-4. Store your device connection string in the environment variable named `CS_VEHICLE_1`.
-5. You can turn on monitoring of messages delivered by routing capability via using CLI 
+5. Store your device connection string in the environment variable named `CS_VEHICLE_1`.
+6. You can turn on monitoring of messages delivered by routing capability via using CLI 
 ```azure cli
 az iot hub monitor-events -n {iothub_name}
 ```
-6. Use the device sample (instructions below) to publish to the topic.
+7. Use the device sample (instructions below) to publish to the topic.
 
 
 ## Running the python version of this sample:
