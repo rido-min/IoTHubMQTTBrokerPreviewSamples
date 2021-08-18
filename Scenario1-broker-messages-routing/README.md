@@ -12,7 +12,9 @@ For this scenario, please ensure you have deployed a IoT Hub with routing using 
 ```azurecli
 az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.routes"
 ```
-```[
+Expected:
+```
+[
   {
     "condition": "STARTS_WITH($mqtt-topic, \"vehicles/\") and $twin.tags.model = \"model1\"",
     "endpointNames": [
@@ -22,7 +24,8 @@ az rest --method get --url 'https://management.azure.com/subscriptions/{subscrip
     "name": "MqttBrokerRoute",
     "source": "MqttBrokerMessages"
   }
-]```
+]
+```
 
 2. Configure TopicSpace using the Azure CLI command guidance below:
 
