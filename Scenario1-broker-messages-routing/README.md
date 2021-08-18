@@ -11,7 +11,7 @@ For this scenario, please ensure you have deployed a IoT Hub with routing using 
 1. Configure TopicSpace using the Azure CLI command guidance below:
 
  ```azurecli
-az iot hub topic-space create -n {myhub} --tsn publisher_ts --tst PublishOnly --template 'vehicles/${principal.deviceid}/GPS/#'
+az iot hub topic-space create -n {iothub_name} --tsn publisher_ts --tst PublishOnly --template 'vehicles/${principal.deviceid}/GPS/#'
 ```
 
   For more details see [Topic Spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
@@ -19,13 +19,16 @@ az iot hub topic-space create -n {myhub} --tsn publisher_ts --tst PublishOnly --
 2. Register devices using the [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
 
 ```azure cli
-az iot hub device-identity create -n {myhub} -d vehicle1 --am shared_private_key
-az iot hub device-identity connection-string show -n {myhub} -d vehicle1
+az iot hub device-identity create -n {iothub_name} -d vehicle1 --am shared_private_key
+az iot hub device-identity connection-string show -n {iothub_name} -d vehicle1
 ```
-
-3. Store your device connection string in the environment variable named `CS_VEHICLE_1`.
-4. Use the device sample (instructions below) to publish to the topic
-5. You can monitor volume of messages delivered and troubleshoot routing via using CLI command - **az iot hub monitor-events**
+3. If using tags in routing query, set up device with relevant tags.
+```azure cli
+az iot hub device-twin update -n {iothub_name} -d vehicle1 --tags '{"model": "model1"}'
+```
+4. Store your device connection string in the environment variable named `CS_VEHICLE_1`.
+5. Use the device sample (instructions below) to publish to the topic
+6. You can monitor volume of messages delivered and troubleshoot routing via using CLI command - **az iot hub monitor-events**
 
 ## Running the python version of this sample:
 
