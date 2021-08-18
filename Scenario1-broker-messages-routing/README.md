@@ -27,11 +27,12 @@ az iot hub device-identity connection-string show -n {iothub_name} -d vehicle1
 az iot hub device-twin update -n {iothub_name} -d vehicle1 --tags '{"model": "model1"}'
 ```
 4. Store your device connection string in the environment variable named `CS_VEHICLE_1`.
-5. Use the device sample (instructions below) to publish to the topic
-6. You can monitor volume of messages delivered and troubleshoot routing via using CLI 
+5. You can turn on monitoring of messages delivered by routing capability via using CLI 
 ```azure cli
 az iot hub monitor-events -n {iothub_name}
 ```
+6. Use the device sample (instructions below) to publish to the topic.
+
 
 ## Running the python version of this sample:
 
