@@ -76,7 +76,7 @@ To use the Azure IoT extension for Azure CLI with Topic Space, first remove the 
 
   For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension). For Windows, please use `PowerShell`.
   
-5. For all the scenarios below we have provided dotnet and python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client and .NET with MQTTnet. To connect to hub, the clients must follow the [new authentication guidelines](#device-authentication), once the client is connected regular pub/sub operations will work. The samples use authentication based on SharedAccessKeys.
+5. For all the scenarios below we have provided python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client. To connect to hub, the clients must follow the [new authentication guidelines](#device-authentication), once the client is connected regular pub/sub operations will work. The samples use authentication based on SharedAccessKeys.
 
 ## Quickstart
 
@@ -108,14 +108,7 @@ az iot hub device-identity connection-string show -n {myhub} -d sub_device
 
 3. Follow the steps below to run the device samples. 
   Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
-  
-     a. To use [dotnet](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/dotnet)
-     
-          1. Build both publish and subscribe programs. 
-          2. Update environment variable CS with connection string for publisher and subscriber.
-          3. Execute the publish and subscribe programs.
-          
-     b. To use [python](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python)
+  Samples in python: https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python
 
 4. Observe messages delivered to subscriber.
 
