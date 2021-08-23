@@ -106,9 +106,13 @@ az iot hub device-identity create -n {myhub} -d sub_device --am shared_private_k
 az iot hub device-identity connection-string show -n {myhub} -d sub_device
 ```
 
-3. Follow the steps below to run the device samples. 
-  Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
-  Samples in python: https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python
+3. To run the sample, 
+  * Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
+  * Follow the instructions in the [Python README](Samples in python: https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python/README.md) to configure your environment. 
+  * Python quickstart sample code is in [python](Samples in python: https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python) directory.
+  * Set your `pub_device` connection string into the `CS_PUB` environment variable.
+  * Set your `sub_device` connection string into the `CS_SUB` environment variable.
+  * Run `python subscribe.py` to subscribe and run `python publish.py` to publish.
 
 4. Observe messages delivered to subscriber.
 

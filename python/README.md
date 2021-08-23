@@ -16,6 +16,12 @@ For extra safety, upgrade the Python pacakge manager (PIP) by running `python3 -
 
 In case of `/usr/bin/python3: No module named pip` error, install `sudo apt install python3-pip`
 
+You can ignore this warning.  When you crate your virtual environment, it will enable the correct vdrsion of pip.
+```
+The scripts pip.exe, pip3.9.exe and pip3.exe are installed in 'C:\Users\bertk\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+```
+
 
 ## Set up your virtual environment
 
@@ -26,21 +32,31 @@ First, install the `virtualenv` library
 python3 -m pip install virtualenv
 ```
 
-Then, create your virtual environment in some directory.  This can go anywhere.  The last directory segment defines the name of the environment.  Let's use `~/env/iothub-broker`:
+Then, create your virtual environment in some directory.  This can go anywhere.  The last directory segment defines the name of the environment.  Let's use `env/iothub-broker`:
 
 ```
-python3 -m venv ~/env/iothub-broker
+python3 -m venv env/iothub-broker
 ```
 
 In case of `The virtual environment was not created successfully because ensurepip is not available.  On Debian/Ubuntu systems, you need to install the python3-venv
 package using the following command.` error, install `sudo apt install python3.8-venv`
 
 Then, activate your virtual environment.  You need to do this any time you want to work with this code.
+
+In Linux:
 ```
-source ~/env/iothub-broker/bin/activate
+source env/iothub-broker/bin/activate
 ```
 
-On Windows, there will be an `activate.cmd` in the `env/iothub-broker/bin` directory that does the same thing.
+In Windows command prompt:
+```
+env\iothub-broker\Scripts\activate.bat
+```
+
+In powershell:
+```
+.\env\iothub-broker\Scripts\Activate.ps1
+```
 
 After you do this, your prompt will change to include the `iothub-broker` name.
 
@@ -49,7 +65,7 @@ bertk@bertk-hp:~$ source ~/env/iothub-broker/bin/activate
 (iothub-broker) bertk@bertk-hp:~$
 ```
 
-At this point, you are using the python and pip executables from inside the `~/env/iothub-broker` directory, and all libraries that you install will also be stored in this directory.
+At this point, you are using the python and pip executables from inside the `env/iothub-broker` directory, and all libraries that you install will also be stored in this directory.
 
 Also, now that we're in the virtual environment, you can use `python3` or `python` commands since they both point to the same thing.
 
@@ -60,6 +76,8 @@ To install the modules that you will need to run these tests, run pip to install
 ```
 pip install -e .
 ```
+
+If you see `ERROR: Failed building wheel for paho.mqtt`, run `pip install wheel`, then run `pip install -e .` again. 
 
 This should install Paho as well as a few other libraries that we need.  You can verify this with `pip list`:
 ```
@@ -97,4 +115,3 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> exit()
 
 ```
-
