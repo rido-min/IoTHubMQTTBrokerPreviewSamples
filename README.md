@@ -54,9 +54,10 @@ The following features are not in scope for this release, but they will be suppo
 ## Prerequisites
 
 1. We will enable the feature for the subscription ID you shared in the sign up form emailed to you. If you haven't responded, please fill out [this form](https://aka.ms/IoTHubMQTTBrokerPreviewSignup)
-2. To create an IoT Hub without routing use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker).
-3. To create an IoT Hub with routing use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages).
-   * The new IoT Hub will be created in your subscription. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin. This feature is not available for existing IoT Hubs in this release.
+2. For [scenario 1](### Scenario-1-–-Route-data-published-on-a-topic-to-the-built-in-endpoint), to create an IoT Hub with routing use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages). You can use this IoT Hub for all other scenarios.
+3. To create an IoT Hub without routing use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker).
+   * The new IoT Hub will be created in your subscription. 
+   * If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin. This feature is not available for existing IoT Hubs in this release.
    * Central EUAP is the only region where MQTT Broker is currently supported.
    * You can customize the SKU and number of units for this IoT Hub in the template.
    * You can customize the routing query. See [Routing limitations](#message-routing-for-MQTT-Broker-enabled-IoT-Hubs).
