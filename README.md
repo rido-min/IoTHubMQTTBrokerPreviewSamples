@@ -219,8 +219,6 @@ Similarly, `vehicles/vehicle1/telemetry/#` and `vehicles/${principal.deviceId}/t
 '"vehicles/${principal.deviceId|dollar}/#"'
 'vehicles/${principal.deviceId"|"dollar}/#'
   
-**TODO add example for bash**
-  
 ## Existing IoT Hub features 
 
 IoT Hub delivers messaging via telemetry, device twin, direct method and C2D commands. These features will continue to work with existing SDKs. With introduction of MQTT broker, we are in process of updating the SDKs. Meanwhile, to utilize these capabilities, please see [MQTT 3.1.1 support for IoT Hub](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-reference-generated.md)
