@@ -163,8 +163,8 @@ class PahoClient(object):
         Connection isn't established until `self._handle_on_connect` has been called and
         `self.connection_status.connected` is `True`.
         """
-        self.mqtt_client.loop_start()
         self.mqtt_client.connect(self.auth.hostname, self.auth.port)
+        self.mqtt_client.loop_start()
 
     def disconnect(self) -> None:
         """
