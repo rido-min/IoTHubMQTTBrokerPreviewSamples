@@ -1,4 +1,4 @@
-ub
+
 # Scenario 3 – Fan-in (many to one) messaging
 
 This scenario simulates many-to-one communication pattern. Consider a use case where one needs to identify location of vehicles on a map.
@@ -14,7 +14,7 @@ This scenario simulates many-to-one communication pattern. Consider a use case w
  ```azurecli
 az iot hub topic-space create -n {iothub_name} --tsn publisher_ts --tst PublishOnly --template 'vehicles/${principal.deviceid}/GPS/#'
 
-az iot hub topic-space create -n {iothub_name} --tsn subcriber_ts --tst LowFanout --template 'vehicles/+/GPS/#'
+az iot hub topic-space create -n {iothub_name} --tsn subscriber_ts --tst LowFanout --template 'vehicles/+/GPS/#'
 ```
 
   For more details see [Topic Spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
