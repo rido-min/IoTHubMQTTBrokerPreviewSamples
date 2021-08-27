@@ -10,5 +10,5 @@ setup(
     license="MIT License",
     author="Microsoft Corporation",
     author_email="opensource@microsoft.com",
-    install_requires=["paho.mqtt>=1.5.1", "six"],
+    install_requires=["paho-mqtt>=1.5.1", "six"],
 )
