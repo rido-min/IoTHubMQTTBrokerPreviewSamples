@@ -35,7 +35,7 @@ if not client.connection_status.wait_for_connected(timeout=20):
 # PUBLISH
 ##################################
 
-topic = "sample/topic"
+topic = "vehicles/{}/GPS/position".format(client.auth.device_id)
 
 for i in range(1, 20):
     payload = {

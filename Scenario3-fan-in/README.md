@@ -1,4 +1,4 @@
-
+ub
 # Scenario 3 – Fan-in (many to one) messaging
 
 This scenario simulates many-to-one communication pattern. Consider a use case where one needs to identify location of vehicles on a map.
