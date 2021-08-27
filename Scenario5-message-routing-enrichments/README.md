@@ -1,24 +1,24 @@
-# Scenarios 1 - Route data published on a topic to the built-in-endpoint
+# Scenarios 5 - Route data published on a topic to the built-in-endpoint
 
-This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. For more details, see [routing support for broker hubs](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#message-routing-for-mqtt-broker-enabled-iot-hubs)
+This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example `vehicles/<VIN>/GPS`. 
 
-Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example `vehicles/<VIN>/GPS`.
 | Device | Role| Topic | Topic Template | Topic Space Type|
 | -------- | --------------- |---------- |---------- |---------- |
 | vehicle1 | publisher | vehicles/vehicle1/GPS | vehicles/${principal.deviceid}/GPS/# | PublishOnly|
 
-1. Setup
+This scenario also showcases routing query and message enrichments which are existing IoT Hub message routing capabilities. Also see [routing](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#message-routing-for-mqtt-broker-enabled-iot-hubs)
 
-For this scenario, please ensure you have deployed a IoT Hub with routing using the [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages). 
+For this scenario, please ensure you have deployed a IoT Hub with routing using the [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-enrich-messages).
 
-Validate routing setup.
+1. Validate setup.
+
+* Routing query setup.
 
 ```azurecli
 az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.routes"
 ```
 
 Expected:
-
 ```
 [
   {
@@ -30,8 +30,24 @@ Expected:
     "name": "MqttBrokerRoute",
     "source": "MqttBrokerMessages"
   }
-]
+]```
+
+* Enrichment setup.
+
+```azurecli
+az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.enrichments"
 ```
+Expected:
+```
+[
+  {
+    "endpointNames": [
+      "events"
+    ],
+    "key": "iothub-name",
+    "value": "$iothubname"
+  }
+]
 
 2. Configure TopicSpace using the Azure CLI command guidance below:
 
@@ -48,14 +64,20 @@ az iot hub device-identity create -n {iothub_name} -d vehicle1 --am shared_priva
 az iot hub device-identity connection-string show -n {iothub_name} -d vehicle1
 ```
 
-4. Store your device connection string in the environment variable named `CS_VEHICLE_1`.
-5. You can turn on monitoring of messages delivered by routing capability via using CLI
+4. If using tags in routing query, set up device with relevant tags.
+
+```azure cli
+az iot hub device-twin update -n {iothub_name} -d vehicle1 --tags '{"model": "model1"}'
+```
+
+5. Store your device connection string in the environment variable named `CS_VEHICLE_1`.
+6. You can turn on monitoring of messages delivered by routing capability via using CLI
 
 ```azure cli
 az iot hub monitor-events -n {iothub_name} -p all
 ```
 
-6. Use the device sample (instructions below) to publish to the topic.
+7. Use the device sample (instructions below) to publish to the topic.
 
 ## Running the python version of this sample
 

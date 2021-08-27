@@ -12,9 +12,9 @@ This scenario simulates the request-response messaging pattern. Request-response
 1. Configure TopicSpace using the Azure CLI command guidance below:
 
  ```azurecli
-az iot hub topic-space create -n myhub --tsn publisher_ts --tst PublishOnly --template 'vehicles/unlock/req/+/${principal.deviceid}' 'vehicles/unlock/res/+/${principal.deviceid}'
+az iot hub topic-space create -n {iothub_name} --tsn publisher_ts --tst PublishOnly --template 'vehicles/unlock/req/+/${principal.deviceid}' 'vehicles/unlock/res/+/${principal.deviceid}'
 
-az iot hub topic-space create -n myhub --tsn subscriber_ts --tst LowFanout --template 'vehicles/unlock/req/${principal.deviceid}/#' 'vehicles/unlock/res/${principal.deviceid}/#'
+az iot hub topic-space create -n {iothub_name} --tsn subscriber_ts --tst LowFanout --template 'vehicles/unlock/req/${principal.deviceid}/#' 'vehicles/unlock/res/${principal.deviceid}/#'
 ```
 
   For more details see [Topic Spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
@@ -22,11 +22,11 @@ az iot hub topic-space create -n myhub --tsn subscriber_ts --tst LowFanout --tem
 2. Register devices using the [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
 
 ```azure cli
-az iot hub device-identity create -n myhub -d car_device --am shared_private_key
-az iot hub device-identity connection-string show -n myhub -d car_device
+az iot hub device-identity create -n {iothub_name} -d car_device --am shared_private_key
+az iot hub device-identity connection-string show -n {iothub_name} -d car_device
 
-az iot hub device-identity create -n myhub -d mobile_device --am shared_private_key
-az iot hub device-identity connection-string show -n myhub -d mobile_device
+az iot hub device-identity create -n {iothub_name} -d mobile_device --am shared_private_key
+az iot hub device-identity connection-string show -n {iothub_name} -d mobile_device
 ```
 
 3. Store the device connection string for `mobile_device` in the environment variable `CS_MOBILE_DEVICE` and store the connection strings for `car_device` in `CS_CAR_DEVICE`.

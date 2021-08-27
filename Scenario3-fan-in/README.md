@@ -12,9 +12,9 @@ This scenario simulates many-to-one communication pattern. Consider a use case w
 1. Configure TopicSpace using the Azure CLI command guidance below:
 
  ```azurecli
-az iot hub topic-space create -n myhub --tsn publisher_ts --tst PublishOnly --template 'vehicles/${principal.deviceid}/GPS/#'
+az iot hub topic-space create -n {iothub_name} --tsn publisher_ts --tst PublishOnly --template 'vehicles/${principal.deviceid}/GPS/#'
 
-az iot hub topic-space create -n myhub --tsn subcriber_ts --tst LowFanout --template 'vehicles/+/GPS/#'
+az iot hub topic-space create -n {iothub_name} --tsn subcriber_ts --tst LowFanout --template 'vehicles/+/GPS/#'
 ```
 
   For more details see [Topic Spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
@@ -22,14 +22,14 @@ az iot hub topic-space create -n myhub --tsn subcriber_ts --tst LowFanout --temp
 2. Register devices using the [Azure CLI](https://docs.microsoft.com/cli/azure/iot/hub/device-identity?view=azure-cli-latest#az_iot_hub_device_identity_create)
 
 ```azure cli
-az iot hub device-identity create -n myhub -d vehicle1 --am shared_private_key
-az iot hub device-identity connection-string show -n myhub -d vehicle1
+az iot hub device-identity create -n {iothub_name} -d vehicle1 --am shared_private_key
+az iot hub device-identity connection-string show -n {iothub_name} -d vehicle1
 
-az iot hub device-identity create -n myhub -d vehicle2 --am shared_private_key
-az iot hub device-identity connection-string show -n myhub -d vehicle2
+az iot hub device-identity create -n {iothub_name} -d vehicle2 --am shared_private_key
+az iot hub device-identity connection-string show -n {iothub_name} -d vehicle2
 
-az iot hub device-identity create -n myhub -d map_device --am shared_private_key
-az iot hub device-identity connection-string show -n myhub -d map_device
+az iot hub device-identity create -n {iothub_name} -d map_device --am shared_private_key
+az iot hub device-identity connection-string show -n {iothub_name} -d map_device
 ```
 
 3. Store the device connection string for `map_device` in the environment variable `CS_MAP_DEVICE` and store the connection strings for `vehicle1` and `vehicle2` in `CS_VEHICLE_1` and `CS_VEHICLE_2`

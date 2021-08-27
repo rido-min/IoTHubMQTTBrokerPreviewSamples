@@ -22,6 +22,7 @@ In case of `/usr/bin/python3: No module named pip` error, install `sudo apt inst
 Next, we set up a virtual environment.  This gives us a safe space to install Python libraries without changing your "global" python configuration.
 
 First, install the `virtualenv` library
+
 ```
 python3 -m pip install virtualenv
 ```
@@ -78,6 +79,7 @@ wheel                          0.36.2
 ## Verifying your install
 
 To verify that you have the libraries successfully installed, you can:
+
 1. Type `cd ..` to move into the root of the repo.
 2. Type `python` to launch the pyton interpreter
 3. Inside python, type `import paho_client`.
