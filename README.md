@@ -233,6 +233,10 @@ IoT Hub delivers messaging via telemetry, device twin, direct method and C2D com
 
 With the introduction of MQTT broker, we have revamped the [device authentication](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-conceptual.md#authentication) format.
 
+### IoT Hub API reference
+
+System topics supported by IoT Hub have been updated. Please see [details] (https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-conceptual.md#message-topics-and-subscriptions). The device SDK will be updated in future release.
+
 ## Message routing for MQTT Broker enabled IoT Hubs
 
 New system properties `mqtt-topic` and `mqtt-qos` have been added that can be utilized for [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax). The table below lists all the system properties that are supported when the routing `broker` messages.
