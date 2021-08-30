@@ -2,11 +2,9 @@
  title: Azure IoT Hub MQTT 3.1.1 support (preview)
  description: Learn about MQTT 3.1.1 support in IoT Hub
  services: iot-hub
- author: jlian
  ms.service: iot-fundamentals
  ms.topic: conceptual
- ms.date: 04/05/2021
- ms.author: jlian
+ ms.date: 08/30/2021
 ---
 
 # IoT Hub MQTT 3.1.1 support overview (preview)
@@ -31,7 +29,7 @@ IoT Hub support for MQTT 3.1.1 is limited in following ways:
 - Assigned Client IDs aren't supported.
 - `Keep Alive` is limited to `19 min` (maximum delay for liveness check is `28.5 min` per MQTT specification).
 - Maximum number of outstanding unacknowledged PUBLISH packets (in client-server direction) with `QoS: 1` is `16`.
-- Single client can have no more than `50` subscriptions. **TODO: link iot hub limits page**
+- Single client can have no more than `50` subscriptions.
   When the limit's reached, SUBACK will return `0x80` (Failure) reason code for subscriptions.
 
 ## Connection lifecycle
@@ -77,8 +75,6 @@ Supported properties are:
 | dct  | string | no        | Content Type to be used by default on this connection. Only `application/json` and `application/cbor` are supported.                               |
 | dtmi | string | no        | Defines Digital Twin model identity.                                                                                                                 |
 
-**TODO: note or section on how module connection differs from device connection**
-
 IoT Hub responds with CONNACK packet once it completes authentication. If connection is established successfully, CONNACK looks like:
 
 ```text
@@ -88,10 +84,6 @@ IoT Hub responds with CONNACK packet once it completes authentication. If connec
 ```
 
 `Session Present` flag indicates whether IoT Hub has restored previously created MQTT session.
-
-**TODO: talk/link session expiry explanation**.
-
-**TODO: talk about opening web socket connection**
 
 ### Authentication
 
@@ -107,9 +99,7 @@ If connection's authentication method doesn't match the device's configured meth
 
 #### SAS
 
-When using SAS-based authentication, client must provide the signature of connection context. This proves authenticity of the MQTT connection. The signature must be based on one of two authentication keys in the client's configuration in IoT Hub or one of two shared access keys of a [Shared access policy](iot-hub-devguide-security.md).
-
-**TODO: FIX THE LINK ^^^**
+When using SAS-based authentication, client must provide the signature of connection context. This proves authenticity of the MQTT connection. The signature must be based on one of two authentication keys in the client's configuration in IoT Hub or one of two shared access keys of a [Shared access policy](https://docs.microsoft.com/en-us/cli/azure/iot/hub/device-identity/connection-string?view=azure-cli-latest).
 
 String to sign must be formed as follows:
 
@@ -147,8 +137,7 @@ MyDevice15/sensor_1
 #### X509
 
 If `am` (Authentication Method) property in CONNECT packet is set to `X509`, IoT Hub authenticates the connection based on the provided client certificate.
-
-**TODO: link to documentation for client certificate based authentication**
+For more details see [certificate based authentication](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-dev-guide-sas?tabs=node#supported-x509-certificates)
 
 ### Disconnection
 
@@ -157,14 +146,6 @@ Server can disconnect client for a few reasons:
 - client is misbehaving in a way that is impossible to respond to with negative acknowledgment (or response) directly,
 - server is failing to keep state of the connection up to date,
 - client with the same identity has connected.
-
-**TODO: guidance on how to get more info on why connection was closed**
-
-## MQTT Broker
-
-For all the messages and subscriptions with topic not beginning with `$` IoT Hub acts as an MQTT broker.
-
-**TODO: reference docs for broker**
 
 ## Operations
 
@@ -288,8 +269,6 @@ Sending messages with properties not defined in this specification will result i
 
 Where user-defined properties are allowed, their names must follow the format `@{property name}`. User-defined properties only support valid UTF-8 string values.
 
-**TODO: limit length charset for name/value of property?**
-
 All system properties have one of the following data types:
 
 - `string`: UTF-8 string
@@ -311,7 +290,6 @@ For example, telemetry message with a topic name `$az/iot/telemetry/?ct=applicat
 Interactions can complete with different outcomes: `Success`, `Bad Request`, `Not Found`, and others.
 
 For Message-Ack interactions, MQTT 3.1.1 provides a way to communicate only `Success` outcome. For any other outcome IoT Hub is going to close the connection and specify the outcome as a reason.
-**TODO: mention where it can be seen: AzMon, Event Grid**
 
 For Request-Response interactions, outcomes are distinguished from each other by `s` property.
 Every operation has a default (success) outcome with `s` property not set.
