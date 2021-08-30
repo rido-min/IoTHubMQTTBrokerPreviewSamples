@@ -22,7 +22,7 @@ Expected:
 ```
 [
   {
-    "condition": "STARTS_WITH($mqtt-topic, \"vehicles/\") and $twin.tags.model = \"model1\"",
+    "condition": "STARTS_WITH($mqtt-topic, \"vehicles/\")",
     "endpointNames": [
       "events"
     ],
