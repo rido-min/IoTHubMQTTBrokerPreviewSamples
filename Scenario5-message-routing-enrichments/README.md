@@ -1,12 +1,10 @@
-# Scenarios 5 - Route data published on a topic to the built-in-endpoint
+# Scenarios 5 - Route and enrich data published on a topic to the built-in-endpoint
 
-This scenario showcases how to configure route to send filtered messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles. The vehicles publish their GPS data on topics with their device ID in the path, for example `vehicles/<VIN>/GPS`. 
+This scenario showcases how to configure [message routing](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-d2c) and [message enrichments](https://docs.microsoft.com/azure/iot-hub/iot-hub-message-enrichments-overview) to send filtered and enriched messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles and the IoT Hub that the device connected to. The vehicles publish their GPS data on topics with their device ID in the path, for example `vehicles/<VIN>/GPS`, and IoT Hub name is stamped on the messages before routing them to the built-in Event Hubs.
 
 | Device | Role| Topic | Topic Template | Topic Space Type|
 | -------- | --------------- |---------- |---------- |---------- |
 | vehicle1 | publisher | vehicles/vehicle1/GPS | vehicles/${principal.deviceid}/GPS/# | PublishOnly|
-
-This scenario also showcases routing query and message enrichments which are existing IoT Hub message routing capabilities. Also see [routing](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#message-routing-for-mqtt-broker-enabled-iot-hubs)
 
 For this scenario, please ensure you have deployed a IoT Hub with routing using the [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-enrich-messages).
 
