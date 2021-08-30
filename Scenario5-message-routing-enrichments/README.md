@@ -46,6 +46,7 @@ Expected:
     "value": "$iothubname"
   }
 ]
+```
 
 2. Configure TopicSpace using the Azure CLI command guidance below:
 
