@@ -6,17 +6,18 @@ This scenario showcases how to configure [message routing](https://docs.microsof
 | -------- | --------------- |---------- |---------- |---------- |
 | vehicle1 | publisher | vehicles/vehicle1/GPS | vehicles/${principal.deviceid}/GPS/# | PublishOnly|
 
+1. Set up
+
 For this scenario, please ensure you have deployed a IoT Hub with routing using the [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-enrich-messages).
 
-1. Validate setup.
+You can validate the configuration of message routing and message enrichments on your IoT Hub using the Azure CLI commands below -
 
-* Routing query setup.
+* Routing query setup validation
 
 ```azurecli
 az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.routes"
 ```
-
-Expected:
+  Expected response: 
 ```
 [
   {
@@ -30,12 +31,12 @@ Expected:
   }
 ]```
 
-* Enrichment setup.
+* Message enrichment setup validation
 
 ```azurecli
 az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.enrichments"
 ```
-Expected:
+  Expected response:
 ```
 [
   {
