@@ -54,15 +54,14 @@ The following features are not in scope for this release, but they will be suppo
 ## Prerequisites
 
 1. We will enable the feature for the subscription ID you shared in the sign up form emailed to you. If you haven't responded, please fill out [this form](https://aka.ms/IoTHubMQTTBrokerPreviewSignup)
-2. For [scenario 1](#scenario-1--route-data-published-on-a-topic-to-the-built-in-endpoint), to create an IoT Hub with routing, use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages). You can use this IoT Hub for all other scenarios.
-3. To create an IoT Hub without routing, use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker).
+2. To create an IoT Hub, use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker). 
    * The new IoT Hub will be created in your subscription.
    * If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin. This feature is not available for existing IoT Hubs in this release.
    * Central EUAP is the only region where MQTT Broker is currently supported.
    * You can customize the SKU and number of units for this IoT Hub in the template.
    * You can customize the routing query. See [Routing limitations](#message-routing-for-MQTT-Broker-enabled-IoT-Hubs).
    * The routing source `MQTTBrokerMessages` is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.
-4. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+3. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 To use the Azure IoT extension for Azure CLI with Topic Space, first remove the current Azure IoT extension using:
 
   ``` azure cli
@@ -77,7 +76,7 @@ To use the Azure IoT extension for Azure CLI with Topic Space, first remove the 
 
   For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension). For Windows, please use `PowerShell`.
   
-5. Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
+4. Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
 
  For all the scenarios below we have provided python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client. To connect to hub, the clients must follow the [new authentication guidelines](#device-authentication), once the client is connected regular pub/sub operations will work. The samples use authentication based on SharedAccessKeys.
 
