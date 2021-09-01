@@ -262,7 +262,7 @@ With the introduction of MQTT broker, we have revamped the [device authenticatio
 
 System topics supported by IoT Hub have been updated. Please see [details](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-conceptual.md#message-topics-and-subscriptions). The device SDK will be updated in future release.
 
-## Message routing for MQTT Broker enabled IoT Hubs
+### Message routing for MQTT Broker enabled IoT Hubs
 
 Routing source `MQTTBrokerMessages` is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.
 Use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages) to deploy routing enabled hub. 
