@@ -12,16 +12,22 @@ On Linux, you can install python3 with `sudo apt install python3 python3-pip`
 
 ## Update PIP
 
-For extra safety, upgrade the Python pacakge manager (PIP) by running `python3 -m pip install --upgrade pip`
+For extra safety, upgrade the Python package manager (PIP) by running the following command.
 
-In case of `/usr/bin/python3: No module named pip` error, install `sudo apt install python3-pip`
+```
+python3 -m pip install virtualenv
+```
 
-You can ignore this warning.  When you crate your virtual environment, it will enable the correct vdrsion of pip.
+* In case of `/usr/bin/python3: No module named pip` error, install as follows
+  ```
+  sudo apt install python3-pip
+  ```
+  
+* You can ignore the below warning.  When you create your virtual environment, it will enable the correct version of pip.
 ```
 The scripts pip.exe, pip3.9.exe and pip3.exe are installed in 'C:\Users\bertk\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts' which is not on PATH.
   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
 ```
-
 
 ## Set up your virtual environment
 
