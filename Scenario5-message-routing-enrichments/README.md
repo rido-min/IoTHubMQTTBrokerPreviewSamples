@@ -83,6 +83,35 @@ az iot hub monitor-events -n {iothub_name} -p all
 ```
 
 7. Use the device sample (instructions below) to publish to the topic.
+8. Below is a sample output from `monitor-events` command
+
+```
+{
+    "event": {
+        "origin": "vehicle1",
+        "module": "",
+        "interface": "",
+        "component": "",
+        "properties": {
+            "application": {
+                "iothub-name": "myhub"
+            }
+        },
+        "annotations": {
+            "iothub-connection-device-id": "vehicle1",
+            "iothub-connection-auth-generation-id": "637661152537314785",
+            "iothub-enqueuedtime": 1630528313434,
+            "iothub-message-source": "broker",
+            "mqtt-qos": "1",
+            "mqtt-topic": "vehicles/vehicle1/GPS/position",
+            "x-opt-sequence-number": 104,
+            "x-opt-offset": "36960",
+            "x-opt-enqueued-time": 1630528313512
+        },
+        "payload": "{\"latitude\": 28.63962283908785, \"longitude\": -122.12718926895407, \"index\": 19}"
+    }
+}
+```
 
 ## Running the python version of this sample
 
