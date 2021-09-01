@@ -31,9 +31,8 @@ az iot hub device-identity create -n {iothub_name} -d x509_pub_device --am x509_
 az iot hub device-identity create -n {iothub_name} -d x509_sub_device --am x509_thumbprint --output-dir ./certs
 ```
 
-
-4. Use the subscribe device sample (instructions below) to subscribe to the topic, receive messages, and return responses.
-5. Use the publish device sample code (instructions below) to publish to the topic.
+3. Use the subscribe device sample (instructions below) to subscribe to the topic, receive messages, and return responses.
+4. Use the publish device sample code (instructions below) to publish to the topic.
 
 
 ## Running the python version of this sample:
@@ -53,6 +52,6 @@ export SUB_CERT_PATH=./certs/x509_sub_device-cert.pem
 export SUB_KEY_PATH=./certs/x509_sub_device-key.pem
 ```
 
-5. In the first (subscribe device) command window, type `python python/subscribe_x509.py` to run the subscribe app.
-6. In the second (publish device) command window, type `python python/publish_x509.py` to run the publish app.
+4. In the first (subscribe device) command window, type `python python/subscribe_x509.py` to run the subscribe app.
+5. In the second (publish device) command window, type `python python/publish_x509.py` to run the publish app.
 
