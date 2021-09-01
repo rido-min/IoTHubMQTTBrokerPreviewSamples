@@ -57,7 +57,10 @@ az iot hub monitor-events -n {iothub_name} -p all
 
 6. Use the device sample using the instructions below to publish to the topic.
 
-  1. If you haven't installed the required modules, follow the instructions in the [python README file](../python/README.md).
-  2. Make sure you have the `iothub-broker` virtual environment activated by running `source ~/env/iothub-broker/bin/activate` in Linux or `env/iothub-broker/bin/activate` in Windows
-  3. Make sure you have the `CS_VEHICLE_1` environment variable set to the connection string for your `vehicle1` device identity.
-  4. Type `python python/publish_1.py` to run the sample
+  * If you haven't installed the required modules, follow the instructions in the [python README file](../python/README.md).
+  * Make sure you have the `iothub-broker` virtual environment activated by running `source ~/env/iothub-broker/bin/activate` in Linux or `env/iothub-broker/bin/activate` in Windows
+  * Make sure you have the `CS_VEHICLE_1` environment variable set to the connection string for your `vehicle1` device identity.
+  * Run the sample within `Scenario1-broker-messages-routing` using the below command
+    ```
+    python python/publish_1.py
+    ```
