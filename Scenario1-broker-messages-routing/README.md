@@ -64,3 +64,29 @@ az iot hub monitor-events -n {iothub_name} -p all
     ```
     python python/publish_1.py
     ```
+7. Below is the sample output of events.
+  ```
+  {
+    "event": {
+        "origin": "vehicle1",
+        "module": "",
+        "interface": "",
+        "component": "",
+        "properties": {
+            "application": {}
+        },
+        "annotations": {
+            "iothub-connection-device-id": "vehicle1",
+            "iothub-connection-auth-generation-id": "637661152537314785",
+            "iothub-enqueuedtime": 1630520083289,
+            "iothub-message-source": "broker",
+            "mqtt-qos": "1",
+            "mqtt-topic": "vehicles/vehicle1/GPS/position",
+            "x-opt-sequence-number": 19,
+            "x-opt-offset": "6536",
+            "x-opt-enqueued-time": 1630520083476
+        },
+        "payload": "{\"latitude\": 46.63962283908785, \"longitude\": -122.12718926895407, \"index\": 1}"
+    }
+}
+```
