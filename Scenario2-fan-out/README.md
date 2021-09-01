@@ -37,8 +37,8 @@ az iot hub device-identity connection-string show -n {iothub_name} -d vehicle2
 
 1. If you haven't installed the required modules, follow the instructions in the [python README file](../python/README.md).
 2. Open 2 command windows.  Activate the `iothub-broker` virtual environment in both.
-3. In the first command window (the publisher window), set the `CS_FLEET_MGT_DEVICE` environment variable to the correct connection string.
-4. In the second command window (the subscriber window), set the `CS_VEHICLE_1` and `CS_VEHICLE_2`  environment variable to the correct connection strings.
+3. In the first command window (the publisher window), set the `CS_FLEET_MGT_DEVICE` environment variable to the connection string of the `fleet_mgt_device`.
+4. In the second command window (the subscriber window), set the `CS_VEHICLE_1` and `CS_VEHICLE_2`  environment variable to the connection strings of `vehicle1` and `vehicle2` respectively. 
 5. In the second (subscriber) command window, type `python python/subscribe_2.py` to run the subscriber app.
     * The subscriber app will create two threads and connect using both vehicle identities in a single app.
 6. In the first (publisher) command window, type `python python/publish_2.py` to run the publisher app.

@@ -71,9 +71,7 @@ class PahoClient(object):
         event handler for Paho on_connect events.  Do not call directly.
         """
         logger.info(
-            "_handle_on_connect called with status='{}'".format(
-                mqtt.connack_string(rc)
-            )
+            "_handle_on_connect called with status='{}'".format(mqtt.connack_string(rc))
         )
 
         # In Paho thread.  Save what we need and return.
@@ -83,9 +81,7 @@ class PahoClient(object):
         else:
             # causes code waiting in `self.connection_status.wait_for_connected` to raise this exception
             # causes code waiting in `self.connection_status.wait_for_disconnected` to return
-            self.connection_status.connection_error = Exception(
-                mqtt.connack_string(rc)
-            )
+            self.connection_status.connection_error = Exception(mqtt.connack_string(rc))
 
     def _handle_on_disconnect(
         self, client: mqtt.Client, userdata: Any, rc: int
@@ -95,9 +91,7 @@ class PahoClient(object):
         """
         # In Paho thread.  Save what we need and return.
         logger.info(
-            "_handle_on_disconnect called with error='{}'".format(
-                mqtt.error_string(rc)
-            )
+            "_handle_on_disconnect called with error='{}'".format(mqtt.error_string(rc))
         )
         # causes code waiting in `self.connection_status.wait_for_disconnected` to raise this exception
         self.connection_status.connected = False
@@ -115,9 +109,7 @@ class PahoClient(object):
         """
         # In Paho thread.  Save what we need and return.
         logger.info(
-            "Received SUBACK for mid {}, granted_qos {}".format(
-                mid, granted_qos
-            )
+            "Received SUBACK for mid {}, granted_qos {}".format(mid, granted_qos)
         )
         granted_qos_list = list(granted_qos)
         # causes code waiting for this mid via `self.incoming_subacks.wait_for_ack` to return
@@ -139,9 +131,7 @@ class PahoClient(object):
         # causes code waiting for this mid via `self.incoming_unsubacks.wait_for_ack` to return
         self.incoming_unsubacks.add_ack(mid, mid)
 
-    def _handle_on_publish(
-        self, client: mqtt.Client, userdata: Any, mid: int
-    ) -> None:
+    def _handle_on_publish(self, client: mqtt.Client, userdata: Any, mid: int) -> None:
         """
         event handler for Paho on_publish events.  Do not call directly.
         """
@@ -157,7 +147,7 @@ class PahoClient(object):
         event handler for Paho on_message events.  Do not call directly.
         """
         # In Paho thread.  Save what we need and return.
-        print("received message on {}".format(message.topic))
+        logger.info("received message on {}".format(message.topic))
         # causes code waiting for messages via `self.incoming_messages.wait_for_message` and
         # `self.incoming_messages.pop_next_message` to return.
         self.incoming_messages.add_message(message)
@@ -167,9 +157,7 @@ class PahoClient(object):
         Create a Paho MQTT client object to use for communicating
         with the server and store it in `self.mqtt_client`.
         """
-        self.mqtt_client = mqtt.Client(
-            self.auth.client_id, clean_session=clean_session
-        )
+        self.mqtt_client = mqtt.Client(self.auth.client_id, clean_session=clean_session)
         self.mqtt_client.enable_logger()
         self.mqtt_client.username_pw_set(self.auth.username, self.auth.password)
         self.mqtt_client.tls_set_context(self.auth.create_tls_context())
@@ -198,15 +186,9 @@ class PahoClient(object):
         self.mqtt_client.disconnect()
 
     def publish(
-        self,
-        topic: str,
-        payload: Any = None,
-        qos: int = 0,
-        retain: bool = False,
+        self, topic: str, payload: Any = None, qos: int = 0, retain: bool = False
     ) -> Tuple[int, int]:
-        return self.mqtt_client.publish(  # type: ignore
-            topic, payload, qos, retain
-        )
+        return self.mqtt_client.publish(topic, payload, qos, retain)  # type: ignore
 
     def subscribe(self, topic: str, qos: int = 0) -> Tuple[int, int]:
         return self.mqtt_client.subscribe(topic, qos)  # type: ignore
