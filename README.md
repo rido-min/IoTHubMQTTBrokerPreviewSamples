@@ -59,8 +59,6 @@ The following features are not in scope for this release, but they will be suppo
    * If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin. This feature is not available for existing IoT Hubs in this release.
    * Central EUAP is the only region where MQTT Broker is currently supported.
    * You can customize the SKU and number of units for this IoT Hub in the template.
-   * You can customize the routing query. See [Routing limitations](#message-routing-for-MQTT-Broker-enabled-IoT-Hubs).
-   * The routing source `MQTTBrokerMessages` is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.
 3. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 To use the Azure IoT extension for Azure CLI with Topic Space, first remove the current Azure IoT extension using:
 
@@ -239,7 +237,10 @@ System topics supported by IoT Hub have been updated. Please see [details] (http
 
 ## Message routing for MQTT Broker enabled IoT Hubs
 
-New system properties `mqtt-topic` and `mqtt-qos` have been added that can be utilized for [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax). The table below lists all the system properties that are supported when the routing `broker` messages.
+Routing source `MQTTBrokerMessages` is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.
+Use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages) to deploy routing enabled hub. 
+
+New system properties `mqtt-topic` and `mqtt-qos` have been added that can be utilized for [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax). The table below lists all the system properties that are supported when the routing broker messages.
 
 | Properties | Keyword for routing query| Description |
 | -------- | --------------- |---------- |
@@ -252,8 +253,8 @@ New system properties `mqtt-topic` and `mqtt-qos` have been added that can be ut
 |  iothub-message-source | iothub-message-source | The routing message source |
 
 * Querying on body and application properties is not supported for `broker` messages.
-* Unlike existing Hub Telemetry, `broker` messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for `broker` as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
-* When routing messages for `broker` the dropped messages will not go to the fallback route if the query condition is not met.
+* Unlike existing Hub Telemetry, broker messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for broker as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
+* When routing messages for broker the dropped messages will not go to the fallback route if the query condition is not met.
   
 To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub message routing](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c)
 
