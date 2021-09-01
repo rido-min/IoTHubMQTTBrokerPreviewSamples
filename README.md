@@ -329,3 +329,6 @@ For this release, the following limits are supported. The limits might be revise
 * Can I use my existing SDK?
 
     You can use any standard MQTT client SDK. See SDK samples [here](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples).
+* How can I fix `Subscription was rejected` error when running the samples?
+
+  Topic space updates take up-tp 5 minutes to propagate, please retry the samples post that.
