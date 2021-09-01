@@ -262,7 +262,7 @@ With the introduction of MQTT broker, we have revamped the [device authenticatio
 
 System topics supported by IoT Hub have been updated. Please see [details](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-conceptual.md#message-topics-and-subscriptions). The device SDK will be updated in future release.
 
-### Message routing for MQTT Broker enabled IoT Hubs
+## Message routing for MQTT Broker enabled IoT Hubs
 
 Routing source `MQTTBrokerMessages` is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.
 Use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages) to deploy routing enabled hub. 
@@ -279,7 +279,7 @@ New system properties `mqtt-topic` and `mqtt-qos` have been added that can be ut
 |  mqtt-qos | mqtt-qos | QoS level of the message published, this is set by IoT Hub on messages sent to broker topics. |
 |  iothub-message-source | iothub-message-source | The routing message source |
 
-* Querying on body and application properties is not supported for `broker` messages.
+* Querying on body and application properties is not supported for broker messages.
 * Unlike existing Hub Telemetry, broker messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for broker as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
 * When routing messages for broker the dropped messages will not go to the fallback route if the query condition is not met.
   
