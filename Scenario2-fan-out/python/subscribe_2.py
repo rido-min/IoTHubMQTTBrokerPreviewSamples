@@ -45,7 +45,7 @@ def listen(client: PahoClient) -> None:
     ##################################
 
     qos = 1
-    topic_filter = "vehicles/alerts/#"
+    topic_filter = "fleet/alerts/#"
 
     print(
         "{}: Subscribing to {} at qos {}".format(

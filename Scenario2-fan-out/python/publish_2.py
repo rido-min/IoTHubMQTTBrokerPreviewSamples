@@ -34,7 +34,7 @@ if not client.connection_status.wait_for_connected(timeout=20):
 # PUBLISH
 ##################################
 
-topic = "vehicles/alerts/weather/alert1"
+topic = "fleet/alerts/weather/alert1"
 payload = {
     "message": "The national weather service has issued a tornado watch for Milwaukee County until 8 PM tomight"
 }

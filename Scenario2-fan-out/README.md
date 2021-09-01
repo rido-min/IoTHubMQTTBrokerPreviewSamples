@@ -4,15 +4,15 @@ This scenario simulates cloud to device commands to several devices and can be l
 
 | Device | Role| Topic |
 | -------- | --------------- |---------- |
-| fleet_mgt_device | publisher | vehicles/alerts/weather/alert1  |
-| vehicle1 | subscriber | vehicles/alerts/# |
-| vehicle2 | subscriber | vehicles/alerts/# |
+| fleet_mgt_device | publisher | fleet/alerts/weather/alert1  |
+| vehicle1 | subscriber | fleet/alerts/# |
+| vehicle2 | subscriber | fleet/alerts/# |
 
 1. Configure TopicSpace using the Azure CLI command guidance below:
 
 ```azurecli
-az iot hub topic-space create -n {iothub_name} --tsn alerts_ts --tst LowFanout --template 'vehicles/alerts/#'
-  ```
+az iot hub topic-space create -n {iothub_name} --tsn alerts_ts --tst LowFanout --template 'fleet/alerts/#'
+```
 
   For more details see [Topic Spaces](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples#topic-spaces)
 
@@ -42,4 +42,3 @@ az iot hub device-identity connection-string show -n {iothub_name} -d vehicle2
 5. In the second (subscriber) command window, type `python python/subscribe_2.py` to run the subscriber app.
     * The subscriber app will create two threads and connect using both vehicle identities in a single app.
 6. In the first (publisher) command window, type `python python/publish_2.py` to run the publisher app.
-
