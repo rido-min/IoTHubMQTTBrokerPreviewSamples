@@ -1,53 +1,57 @@
 # Scenarios 5 - Route and enrich data published on a topic to the built-in-endpoint
 
-This scenario showcases how to configure [message routing](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-d2c) and [message enrichments](https://docs.microsoft.com/azure/iot-hub/iot-hub-message-enrichments-overview) to send filtered and enriched messages from a custom topic to the built-in Event Hubs endpoint. Consider a use case where one needs to identify location of vehicles and the IoT Hub that the device connected to. The vehicles publish their GPS data on topics with their device ID in the path, for example `vehicles/<VIN>/GPS`, and IoT Hub name is stamped on the messages before routing them to the built-in Event Hubs.
+This scenario showcases how to configure [message routing](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-d2c) and [message enrichments](https://docs.microsoft.com/azure/iot-hub/iot-hub-message-enrichments-overview) to send filtered and enriched messages from a custom topic to the built-in Event Hubs endpoint.
+
+Consider a use case where one needs to identify location of vehicles and the IoT Hub that the device connected to. The vehicles publish their GPS data on topics with their device ID in the path, for example `vehicles/<VIN>/GPS`, and IoT Hub name is stamped on the messages before routing them to the built-in Event Hubs.
 
 | Device | Role| Topic | Topic Template | Topic Space Type|
 | -------- | --------------- |---------- |---------- |---------- |
 | vehicle1 | publisher | vehicles/vehicle1/GPS | vehicles/${principal.deviceid}/GPS/# | PublishOnly|
 
-1. Set up
+1. Setup
 
-For this scenario, please ensure you have deployed a IoT Hub with routing using the [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-enrich-messages).
+  For this scenario, please ensure you have deployed a IoT Hub with routing using the [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-enrich-messages).
 
-You can validate the configuration of message routing and message enrichments on your IoT Hub using the Azure CLI commands below -
+  You can validate the configuration of message routing and message enrichments on your IoT Hub using the Azure CLI commands below
 
-* Routing query setup validation
+  * Routing query setup validation
 
-```azurecli
-az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.routes"
-```
-  Expected response: 
-```
-[
-  {
-    "condition": "STARTS_WITH($mqtt-topic, \"vehicles/\") and $twin.tags.model = \"model1\"",
-    "endpointNames": [
-      "events"
-    ],
-    "isEnabled": true,
-    "name": "MqttBrokerRoute",
-    "source": "MqttBrokerMessages"
-  }
-]```
+  ```azurecli
+  az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.routes"
+  ```
 
-* Message enrichment setup validation
+    Expected response: 
+  ```
+  [
+    {
+      "condition": "STARTS_WITH($mqtt-topic, \"vehicles/\") and $twin.tags.model = \"model1\"",
+      "endpointNames": [
+        "events"
+      ],
+      "isEnabled": true,
+      "name": "MqttBrokerRoute",
+      "source": "MqttBrokerMessages"
+    }
+  ]```
 
-```azurecli
-az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.enrichments"
-```
-  Expected response:
-```
-[
-  {
-    "endpointNames": [
-      "events"
-    ],
-    "key": "iothub-name",
-    "value": "$iothubname"
-  }
-]
-```
+  * Message enrichment setup validation
+
+  ```azurecli
+  az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.enrichments"
+  ```
+
+    Expected response:
+  ```
+  [
+    {
+      "endpointNames": [
+        "events"
+      ],
+      "key": "iothub-name",
+      "value": "$iothubname"
+    }
+  ]
+  ```
 
 2. Configure TopicSpace using the Azure CLI command guidance below:
 
