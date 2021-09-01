@@ -168,6 +168,10 @@ This scenario simulates publishing messages from one client to another. Consider
 
 This scenario showcases how to configure route to send filtered messages from broker to the built-in Event Hubs endpoint. This scenario also uses routing query and message enrichments which are existing IoT Hub message routing capabilities. Consider a use case where one needs to identify location of vehicles. For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario5-message-routing-enrichments).
 
+### Scenario 6 – X509 Authentication
+
+This scenario shows how to connection to IoT Hub using X509 authentication.  For instructions see [README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/Scenario6-x509-authentication).
+
 ## Topic Spaces
   
 Topic space is a new concept introduced to simplify management of topics used for pub/sub.
