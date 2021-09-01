@@ -59,20 +59,21 @@ The following features are not in scope for this release, but they will be suppo
    * If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin. This feature is not available for existing IoT Hubs in this release.
    * Central EUAP is the only region where MQTT Broker is currently supported.
    * You can customize the SKU and number of units for this IoT Hub in the template.
-3. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-To use the Azure IoT extension for Azure CLI with Topic Space, first remove the current Azure IoT extension using:
+3. Azure CLI. 
+* This quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+* In this release, topic space management commands can be enabled as follows.
+
+Remove the current Azure IoT extension using:
 
   ``` azure cli
   az extension remove -n azure-iot
   ```
-
-   Then, run the following command:
+Run the following command to re-add Azure IoT extension:
 
   ``` azure cli
   az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
   ```
-
-  For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension). For Windows, please use `PowerShell`.
+For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension). For Windows, please use `PowerShell`.
   
 4. Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
 
