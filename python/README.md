@@ -33,48 +33,51 @@ The scripts pip.exe, pip3.9.exe and pip3.exe are installed in 'C:\Users\bertk\Ap
 
 Next, we set up a virtual environment.  This gives us a safe space to install Python libraries without changing your "global" python configuration.
 
-First, install the `virtualenv` library
+1. Install the `virtualenv` library
 
-```
-python3 -m pip install virtualenv
-```
+  ```
+  python3 -m pip install virtualenv
+  ```
 
-Then, create your virtual environment in some directory.  This can go anywhere.  The last directory segment defines the name of the environment.  Let's use `env/iothub-broker`:
+2. Create your virtual environment in some directory.  This can go anywhere. The last directory segment defines the name of the environment. Let's use `env/iothub-broker`:
 
-```
-python3 -m venv env/iothub-broker
-```
+  ```
+  python3 -m venv env/iothub-broker
+  ```
 
-In case of `The virtual environment was not created successfully because ensurepip is not available.  On Debian/Ubuntu systems, you need to install the python3-venv
-package using the following command.` error, install `sudo apt install python3.8-venv`
+  In case of `The virtual environment was not created successfully because ensurepip is not available. On Debian/Ubuntu systems, you need to install the python3-venv package using the following command.` error, install virtual environment as follows.
 
-Then, activate your virtual environment.  You need to do this any time you want to work with this code.
+  ```
+  sudo apt install python3.8-venv
+  ```
 
-In Linux:
-```
-source env/iothub-broker/bin/activate
-```
+3. Activate your virtual environment.  You need to do this any time you want to work with this code.
 
-In Windows command prompt:
-```
-env\iothub-broker\Scripts\activate.bat
-```
+  In Linux:
+  ```
+  source env/iothub-broker/bin/activate
+  ```
 
-In powershell:
-```
-.\env\iothub-broker\Scripts\Activate.ps1
-```
+  In Windows command prompt:
+  ```
+  env\iothub-broker\Scripts\activate.bat
+  ```
 
-After you do this, your prompt will change to include the `iothub-broker` name.
+  In powershell:
+  ```
+  .\env\iothub-broker\Scripts\Activate.ps1
+  ```
 
-```
-bertk@bertk-hp:~$ source ~/env/iothub-broker/bin/activate
-(iothub-broker) bertk@bertk-hp:~$
-```
+  After you do this, your prompt will change to include the `iothub-broker` name.
 
-At this point, you are using the python and pip executables from inside the `env/iothub-broker` directory, and all libraries that you install will also be stored in this directory.
+  ```
+  bertk@bertk-hp:~$ source ~/env/iothub-broker/bin/activate
+  (iothub-broker) bertk@bertk-hp:~$
+  ```
 
-Also, now that we're in the virtual environment, you can use `python3` or `python` commands since they both point to the same thing.
+4. Now you are using the python and pip executables from inside the `env/iothub-broker` directory, and all libraries that you install will also be stored in this directory.
+
+  Also, now that we're in the virtual environment, you can use `python3` or `python` commands since they both point to the same thing.
 
 ## Install helper modules
 
