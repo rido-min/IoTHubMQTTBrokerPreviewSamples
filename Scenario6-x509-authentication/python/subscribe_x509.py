@@ -24,9 +24,9 @@ topic_filter = "sample/#"
 
 client = PahoClient.create_from_x509_certificate(
     host_name=os.environ["IOTHUB_HOST_NAME"],
-    device_id=os.environ["PUB_DEVICE_ID"],
-    certificate_filename=os.environ["PUB_CERT_PATH"],
-    key_filename=os.environ["PUB_KEY_PATH"],
+    device_id=os.environ["SUB_DEVICE_ID"],
+    certificate_filename=os.environ["SUB_CERT_PATH"],
+    key_filename=os.environ["SUB_KEY_PATH"],
     clean_session=True,
 )
 

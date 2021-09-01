@@ -49,8 +49,8 @@ export PUB_CERT_PATH=./certs/x509_pub_device-cert.pem
 export PUB_KEY_PATH=./certs/x509_pub_device-key.pem
 
 export SUB_DEVICE_ID=x509_sub_device
-export SUB_CERT_PATH=./certs/x509_pub_sevice-cert.pem
-export SUB_KEY_PATH=./certs/x509_pub_sevice-key.pem
+export SUB_CERT_PATH=./certs/x509_sub_device-cert.pem
+export SUB_KEY_PATH=./certs/x509_sub_device-key.pem
 ```
 
 5. In the first (subscribe device) command window, type `python python/subscribe_x509.py` to run the subscribe app.
