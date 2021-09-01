@@ -36,7 +36,7 @@ if not client.connection_status.wait_for_connected(timeout=20):
 
 topic = "fleet/alerts/weather/alert1"
 payload = {
-    "message": "The national weather service has issued a tornado watch for Milwaukee County until 8 PM tomight"
+    "message": "The national weather service has issued a tornado watch for Milwaukee County until 8 PM tonight"
 }
 
 print("{}: Publishing to {} at QOS=1: {}".format(client.auth.device_id, topic, payload))
