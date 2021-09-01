@@ -59,22 +59,25 @@ The following features are not in scope for this release, but they will be suppo
    * If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin. This feature is not available for existing IoT Hubs in this release.
    * Central EUAP is the only region where MQTT Broker is currently supported.
    * You can customize the SKU and number of units for this IoT Hub in the template.
-   * You can customize the routing query. See [Routing limitations](#message-routing-for-MQTT-Broker-enabled-IoT-Hubs).
-   * The routing source `MQTTBrokerMessages` is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.
-3. Azure CLI. You can run all commands in this quickstart using the Azure Cloud Shell, an interactive CLI shell that runs in your browser. If you use the Cloud Shell, you don't need to install anything. If you prefer to use the CLI locally, this quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-To use the Azure IoT extension for Azure CLI with Topic Space, first remove the current Azure IoT extension using:
+3. Azure CLI.
+   * This quickstart requires Azure CLI version 2.17.1 or later. Run the below command to find the version.
+      ```azure cli
+      az --version
+      ```  
+     To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+   * In this release, topic space management commands can be enabled as follows.
 
-  ``` azure cli
-  az extension remove -n azure-iot
-  ```
+      Remove the current Azure IoT extension using:
 
-   Then, run the following command:
+        ``` azure cli
+        az extension remove -n azure-iot
+        ```
+      Run the following command to re-add Azure IoT extension:
 
-  ``` azure cli
-  az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
-  ```
-
-  For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension). For Windows, please use `PowerShell`.
+        ``` azure cli
+        az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
+        ```
+For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension). For Windows, please use `PowerShell`.
   
 4. Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
 
@@ -111,13 +114,35 @@ az iot hub device-identity connection-string show -n {iothub_name} -d sub_device
 3. To run the sample,
 
 * Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
-* Follow the instructions in the [Python README](Samples in python: <https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python/README.md>) to configure your environment.
-* Python quickstart sample code is in [python](Samples in python: <https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python>) directory.
+* Follow the instructions in the [Python README](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python/README.md) to configure your environment.
+* Python quickstart sample code is in [python](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/tree/main/python) directory.
 * Set your `pub_device` connection string into the `CS_PUB` environment variable.
 * Set your `sub_device` connection string into the `CS_SUB` environment variable.
 * Run `python subscribe.py` to subscribe and run `python publish.py` to publish.
 
 4. Observe messages delivered to subscriber.
+
+Publisher sample output:
+```
+(iothub-broker) contoso@fabrikam:~/code/IoTHubMQTTBrokerPreviewSamples/python$ python publish.py
+Starting connection
+Waiting for CONNACK
+Publishing to sample/topic at QOS=1
+Publish returned rc=0: No error.
+Waiting for PUBACK for mid=1
+PUBACK received
+Disconnecting
+```
+
+Subscriber sample output:
+```
+(iothub-broker) prashmo@prashmo7:~/code/IoTHubMQTTBrokerPreviewSamples/python$ python subscribe.py
+Connecting
+Subscribing to sample/# at qos 1
+Subscription was granted with qos 1
+Message received on topic sample/topic
+Payload: {'latitude': 47.63962283908785, 'longitude': -122.12718926895407}
+```
 
 ## Scenarios
 
@@ -235,11 +260,14 @@ With the introduction of MQTT broker, we have revamped the [device authenticatio
 
 ### IoT Hub API reference
 
-System topics supported by IoT Hub have been updated. Please see [details] (https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-conceptual.md#message-topics-and-subscriptions). The device SDK will be updated in future release.
+System topics supported by IoT Hub have been updated. Please see [details](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-conceptual.md#message-topics-and-subscriptions). The device SDK will be updated in future release.
 
 ## Message routing for MQTT Broker enabled IoT Hubs
 
-New system properties `mqtt-topic` and `mqtt-qos` have been added that can be utilized for [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax). The table below lists all the system properties that are supported when the routing `broker` messages.
+Routing source `MQTTBrokerMessages` is only supported in REST/ARM template. Azure Portal experience is not enabled for routing MQTT Broker topic messages in this release.
+Use [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages) to deploy routing enabled hub. 
+
+New system properties `mqtt-topic` and `mqtt-qos` have been added that can be utilized for [routing query](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax). The table below lists all the system properties that are supported when the routing broker messages.
 
 | Properties | Keyword for routing query| Description |
 | -------- | --------------- |---------- |
@@ -252,8 +280,8 @@ New system properties `mqtt-topic` and `mqtt-qos` have been added that can be ut
 |  iothub-message-source | iothub-message-source | The routing message source |
 
 * Querying on body and application properties is not supported for `broker` messages.
-* Unlike existing Hub Telemetry, `broker` messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for `broker` as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
-* When routing messages for `broker` the dropped messages will not go to the fallback route if the query condition is not met.
+* Unlike existing Hub Telemetry, broker messages will not flow to the built-in endpoint by default. Customers need to explicitly configure routing for broker as source to send data to the desired endpoint (built-in Event Hubs, or other custom endpoints).  
+* When routing messages for broker the dropped messages will not go to the fallback route if the query condition is not met.
   
 To learn more about IoT Hub routing, please visit [Understand Azure IoT Hub message routing](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c)
 

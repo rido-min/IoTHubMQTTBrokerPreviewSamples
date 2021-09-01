@@ -1,7 +1,6 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.S
 # Licensed under the MIT License. See License.txt in the project root for
 # license information.
-import os
 import sys
 import logging  # noqa: F401
 import json
@@ -22,8 +21,12 @@ topic_filter = "sample/#"
 # CREATE CLIENT
 ##################################
 
-client = PahoClient.create_from_connection_string(
-    os.environ["CS_SUB"], clean_session=True
+client = PahoClient.create_from_x509_certificate(
+    host_name="my-hub.azure-devices.net",
+    device_id="my_device_id",
+    certificate_filename="./path/to/device-cert.pem",
+    key_filename="./path/to/device-key.pem",
+    clean_session=True,
 )
 
 ##################################

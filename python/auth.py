@@ -55,7 +55,7 @@ def encode_dict(obj: Dict[str, str]) -> str:
     )
 
 
-class SymmetricKeyAuth(abc.ABC):
+class BaseAuth(abc.ABC):
     def __init__(self) -> None:
         self.device_id = ""
         self.module_id = ""
@@ -64,38 +64,24 @@ class SymmetricKeyAuth(abc.ABC):
         self.hub_host_name = ""
         self.dtmi = ""
         self.product_info = ""
-
         self.server_verification_cert: str = None
-        self.password_creation_time = 0
-        self.password_expiry_time = 0
-        self.shared_access_key_name = None
 
     @property
+    @abc.abstractmethod
     def password(self) -> bytes:
         """
         The password to pass in the body of MQTT CONNECT packet.
         """
-        ss = "{host_name}\n{identity}\n{sas_policy}\n{sas_at}\n{sas_expiry}\n".format(
-            host_name=self.hub_host_name,
-            identity=self.client_id,
-            sas_policy=self.shared_access_key_name or "",
-            sas_at=self.password_creation_time * 1000,
-            sas_expiry=self.password_expiry_time * 1000,
-        )
-        return sign_password(self.shared_access_key, ss)
+        pass
 
-    @property
-    def username(self) -> str:
+    def get_base_connect_props(self) -> Dict[str, str]:
         """
-        Value to be sent in the MQTT `username` field.
+        Get properties for connect packet
         """
         props = {
             "h": self.hub_host_name,
             "did": self.device_id,
             "av": API_VERSION,
-            "am": "SASb64",
-            "se": str(self.password_expiry_time * 1000),
-            "sa": str(self.password_creation_time * 1000),
         }
 
         if self.module_id:
@@ -107,11 +93,15 @@ class SymmetricKeyAuth(abc.ABC):
         if self.product_info:
             props["ca"] = self.product_info
 
-        if self.shared_access_key_name:
-            props["sp"] = self.shared_access_key_name
+        return props
 
-        # TOOD: when we test this, we want to verify the characters in the spec
-        return encode_dict(props)
+    @property
+    @abc.abstractmethod
+    def username(self) -> str:
+        """
+        Value to be sent in the MQTT `username` field.
+        """
+        pass
 
     @property
     def client_id(self) -> str:
@@ -122,16 +112,6 @@ class SymmetricKeyAuth(abc.ABC):
             return "{}/{}".format(self.device_id, self.module_id)
         else:
             return self.device_id
-
-    def update_expiry(self) -> None:
-        """
-        Update the expiry of for the generated password.  This causes the values returned for
-        the `username` and `password` properties to be updated.
-        """
-        self.password_creation_time = int(time.time())
-        self.password_expiry_time = int(
-            self.password_creation_time + DEFAULT_PASSWORD_RENEWAL_INTERVAL
-        )
 
     @property
     def hostname(self) -> str:
@@ -163,6 +143,55 @@ class SymmetricKeyAuth(abc.ABC):
 
         return ssl_context
 
+
+class SymmetricKeyAuth(BaseAuth):
+    def __init__(self) -> None:
+        super(SymmetricKeyAuth, self).__init__()
+        self.password_creation_time = 0
+        self.password_expiry_time = 0
+        self.shared_access_key: str = None
+        self.shared_access_key_name: str = None
+
+    @property
+    def password(self) -> bytes:
+        """
+        The password to pass in the body of MQTT CONNECT packet.
+        """
+        ss = "{host_name}\n{identity}\n{sas_policy}\n{sas_at}\n{sas_expiry}\n".format(
+            host_name=self.hub_host_name,
+            identity=self.client_id,
+            sas_policy=self.shared_access_key_name or "",
+            sas_at=self.password_creation_time * 1000,
+            sas_expiry=self.password_expiry_time * 1000,
+        )
+        return sign_password(self.shared_access_key, ss)
+
+    @property
+    def username(self) -> str:
+        """
+        Value to be sent in the MQTT `username` field.
+        """
+        props = self.get_base_connect_props()
+        props["am"] = "SASb64"
+        props["se"] = str(self.password_expiry_time * 1000)
+        props["sa"] = str(self.password_creation_time * 1000)
+
+        if self.shared_access_key_name:
+            props["sp"] = self.shared_access_key_name
+
+        # TOOD: when we test this, we want to verify the characters in the spec
+        return encode_dict(props)
+
+    def update_expiry(self) -> None:
+        """
+        Update the expiry of for the generated password.  This causes the values returned for
+        the `username` and `password` properties to be updated.
+        """
+        self.password_creation_time = int(time.time())
+        self.password_expiry_time = int(
+            self.password_creation_time + DEFAULT_PASSWORD_RENEWAL_INTERVAL
+        )
+
     @classmethod
     def create_from_connection_string(cls, connection_string: str) -> Any:
         """
@@ -190,6 +219,104 @@ class SymmetricKeyAuth(abc.ABC):
         self.shared_access_key = cs_dict["SharedAccessKey"]
 
         self.update_expiry()
+
+
+class X509Auth(BaseAuth):
+    def __init__(self) -> None:
+        super(X509Auth, self).__init__()
+        self.certificate_filename: str = None
+        self.key_filename: str = None
+        self.pass_phrase: str = None
+
+    @property
+    def password(self) -> bytes:
+        """
+        The password to pass in the body of MQTT CONNECT packet.
+        """
+        pass
+
+    @property
+    def username(self) -> str:
+        """
+        Value to be sent in the MQTT `username` field.
+        """
+        props = self.get_base_connect_props()
+        props["am"] = "X509"
+
+        return encode_dict(props)
+
+    @classmethod
+    def create_from_x509_certificate(
+        cls,
+        host_name: str,
+        device_id: str,
+        certificate_filename: str,
+        module_id: str = None,
+        key_filename: str = None,
+        pass_phrase: str = None,
+        gateway_host_name: str = None,
+    ) -> Any:
+        """
+        create a new auth object from a connection string
+
+        :param hostname: Name of the IoTHub host
+        :param gateway_hostname: Name of the protocol gateway or IoTEdge instance
+        :param device_id: deviceId for the IoTHub device or module
+        :param module_id: moduleId for teh IoTHub module
+        :param cert_filename: The file path to contents of the certificate (or certificate chain)
+            used to authenticate the device.
+        :param key_filename: The file path to the key associated with the certificate.
+        :param pass_phrase: (optional) The pass_phrase used to encode the key file.
+
+        :returns: X509Auth object created by this function.
+        """
+        obj = cls()
+        obj._initialize(
+            host_name=host_name,
+            device_id=device_id,
+            certificate_filename=certificate_filename,
+            module_id=module_id,
+            key_filename=key_filename,
+            pass_phrase=pass_phrase,
+            gateway_host_name=gateway_host_name,
+        )
+        return obj
+
+    def _initialize(
+        self,
+        host_name: str,
+        device_id: str,
+        certificate_filename: str,
+        module_id: str,
+        key_filename: str,
+        pass_phrase: str,
+        gateway_host_name: str,
+    ) -> None:
+        """
+        Helper function to initialize a newly created auth object.
+        """
+        self.hub_host_name = host_name
+        self.device_id = device_id
+        self.module_id = module_id
+        self.gateway_host_name = gateway_host_name
+
+        self.certificate_filename = certificate_filename
+        self.key_filename = key_filename
+        self.pass_phrase = pass_phrase
+
+    def create_tls_context(self) -> ssl.SSLContext:
+        """
+        Create an SSLContext object based on this object.
+
+        :returns: SSLContext object which can be used to secure the TLS connection.
+        """
+        context = super(X509Auth, self).create_tls_context()
+
+        context.load_cert_chain(
+            self.certificate_filename, self.key_filename, self.pass_phrase
+        )
+
+        return context
 
 
 class PasswordRenewalTimer(object):

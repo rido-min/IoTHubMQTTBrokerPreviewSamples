@@ -12,63 +12,72 @@ On Linux, you can install python3 with `sudo apt install python3 python3-pip`
 
 ## Update PIP
 
-For extra safety, upgrade the Python pacakge manager (PIP) by running `python3 -m pip install --upgrade pip`
-
-In case of `/usr/bin/python3: No module named pip` error, install `sudo apt install python3-pip`
-
-You can ignore this warning.  When you crate your virtual environment, it will enable the correct vdrsion of pip.
-```
-The scripts pip.exe, pip3.9.exe and pip3.exe are installed in 'C:\Users\bertk\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts' which is not on PATH.
-  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
-```
-
-
-## Set up your virtual environment
-
-Next, we set up a virtual environment.  This gives us a safe space to install Python libraries without changing your "global" python configuration.
-
-First, install the `virtualenv` library
+For extra safety, upgrade the Python package manager (PIP) by running the following command.
 
 ```
 python3 -m pip install virtualenv
 ```
 
-Then, create your virtual environment in some directory.  This can go anywhere.  The last directory segment defines the name of the environment.  Let's use `env/iothub-broker`:
-
+* In case of `/usr/bin/python3: No module named pip` error, install as follows
+  ```
+  sudo apt install python3-pip
+  ```
+  
+* You can ignore the below warning.  When you create your virtual environment, it will enable the correct version of pip.
 ```
-python3 -m venv env/iothub-broker
-```
-
-In case of `The virtual environment was not created successfully because ensurepip is not available.  On Debian/Ubuntu systems, you need to install the python3-venv
-package using the following command.` error, install `sudo apt install python3.8-venv`
-
-Then, activate your virtual environment.  You need to do this any time you want to work with this code.
-
-In Linux:
-```
-source env/iothub-broker/bin/activate
+The scripts pip.exe, pip3.9.exe and pip3.exe are installed in 'C:\Users\bertk\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
 ```
 
-In Windows command prompt:
-```
-env\iothub-broker\Scripts\activate.bat
-```
+## Set up your virtual environment
 
-In powershell:
-```
-.\env\iothub-broker\Scripts\Activate.ps1
-```
+Next, we set up a virtual environment.  This gives us a safe space to install Python libraries without changing your "global" python configuration.
 
-After you do this, your prompt will change to include the `iothub-broker` name.
+1. Install the `virtualenv` library
 
-```
-bertk@bertk-hp:~$ source ~/env/iothub-broker/bin/activate
-(iothub-broker) bertk@bertk-hp:~$
-```
+  ```
+  python3 -m pip install virtualenv
+  ```
 
-At this point, you are using the python and pip executables from inside the `env/iothub-broker` directory, and all libraries that you install will also be stored in this directory.
+2. Create your virtual environment in some directory.  This can go anywhere. The last directory segment defines the name of the environment. Let's use `env/iothub-broker`:
 
-Also, now that we're in the virtual environment, you can use `python3` or `python` commands since they both point to the same thing.
+  ```
+  python3 -m venv env/iothub-broker
+  ```
+
+  In case of `The virtual environment was not created successfully because ensurepip is not available. On Debian/Ubuntu systems, you need to install the python3-venv package using the following command.` error, install virtual environment as follows.
+
+  ```
+  sudo apt install python3.8-venv
+  ```
+
+3. Activate your virtual environment.  You need to do this any time you want to work with this code.
+
+  In Linux:
+  ```
+  source env/iothub-broker/bin/activate
+  ```
+
+  In Windows command prompt:
+  ```
+  env\iothub-broker\Scripts\activate.bat
+  ```
+
+  In powershell:
+  ```
+  .\env\iothub-broker\Scripts\Activate.ps1
+  ```
+
+  After you do this, your prompt will change to include the `iothub-broker` name.
+
+  ```
+  bertk@bertk-hp:~$ source ~/env/iothub-broker/bin/activate
+  (iothub-broker) bertk@bertk-hp:~$
+  ```
+
+4. Now you are using the python and pip executables from inside the `env/iothub-broker` directory, and all libraries that you install will also be stored in this directory.
+
+  Also, now that we're in the virtual environment, you can use `python3` or `python` commands since they both point to the same thing.
 
 ## Install helper modules
 
@@ -99,7 +108,7 @@ wheel                          0.36.2
 To verify that you have the libraries successfully installed, you can:
 
 1. Type `cd ..` to move into the root of the repo.
-2. Type `python` to launch the pyton interpreter
+2. Type `python` to launch the python interpreter
 3. Inside python, type `import paho_client`.
 4. If no error is displayed, then the library was successfully installed.
 5. type `exit()` to exit the Python interpreter.

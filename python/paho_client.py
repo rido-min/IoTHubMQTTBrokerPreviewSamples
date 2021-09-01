@@ -3,7 +3,7 @@
 # license information.
 import logging
 from paho.mqtt import client as mqtt
-from symmetric_key_auth import SymmetricKeyAuth
+from auth import SymmetricKeyAuth, X509Auth
 from mqtt_helpers import IncomingMessageList, IncomingAckList, ConnectionStatus
 from typing import Any, Tuple, List
 
@@ -39,6 +39,29 @@ class PahoClient(object):
         cls, connection_string: str, clean_session: bool = False
     ) -> Any:
         auth = SymmetricKeyAuth.create_from_connection_string(connection_string)
+        return cls.create_from_auth(auth, clean_session)
+
+    @classmethod
+    def create_from_x509_certificate(
+        cls,
+        host_name: str,
+        device_id: str,
+        certificate_filename: str,
+        module_id: str = None,
+        key_filename: str = None,
+        pass_phrase: str = None,
+        gateway_host_name: str = None,
+        clean_session: bool = False,
+    ) -> Any:
+        auth = X509Auth.create_from_x509_certificate(
+            host_name=host_name,
+            device_id=device_id,
+            certificate_filename=certificate_filename,
+            module_id=module_id,
+            key_filename=key_filename,
+            pass_phrase=pass_phrase,
+            gateway_host_name=gateway_host_name,
+        )
         return cls.create_from_auth(auth, clean_session)
 
     def _handle_on_connect(
@@ -192,4 +215,4 @@ class PahoClient(object):
         return self.mqtt_client.unsubscribe(topic)  # type: ignore
 
     def client_id(self) -> str:
-        return self.auth.client_id
+        return self.auth.client_id  # type: ignore
