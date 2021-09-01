@@ -17,7 +17,7 @@ Consider a use case where one needs to identify location of vehicles and the IoT
   * Routing query setup validation
 
   ```azurecli
-  az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.routes"
+  az rest --method get --url 'https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iothubName}?api-version=2021-07-01-preview' --query "properties.routing.routes"  
   ```
 
     Expected response: 
@@ -32,7 +32,8 @@ Consider a use case where one needs to identify location of vehicles and the IoT
       "name": "MqttBrokerRoute",
       "source": "MqttBrokerMessages"
     }
-  ]```
+  ]
+  ```
 
   * Message enrichment setup validation
 
