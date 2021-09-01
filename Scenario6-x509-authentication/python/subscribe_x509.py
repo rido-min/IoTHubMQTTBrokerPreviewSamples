@@ -1,6 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.S
 # Licensed under the MIT License. See License.txt in the project root for
 # license information.
+import os
 import sys
 import logging  # noqa: F401
 import json
@@ -11,8 +12,8 @@ from paho_client import PahoClient
 Uncomment the following lines to enable debug logging
 """
 
-logging.basicConfig(level=logging.INFO)
-logging.getLogger("paho").setLevel(level=logging.DEBUG)
+# logging.basicConfig(level=logging.INFO)
+# logging.getLogger("paho").setLevel(level=logging.DEBUG)
 
 topic_filter = "sample/#"
 
@@ -22,10 +23,10 @@ topic_filter = "sample/#"
 ##################################
 
 client = PahoClient.create_from_x509_certificate(
-    host_name="my-hub.azure-devices.net",
-    device_id="my_device_id",
-    certificate_filename="./path/to/device-cert.pem",
-    key_filename="./path/to/device-key.pem",
+    host_name=os.environ["IOTHUB_HOST_NAME"],
+    device_id=os.environ["PUB_DEVICE_ID"],
+    certificate_filename=os.environ["PUB_CERT_PATH"],
+    key_filename=os.environ["PUB_KEY_PATH"],
     clean_session=True,
 )
 

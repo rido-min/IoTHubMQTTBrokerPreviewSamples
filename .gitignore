@@ -4,3 +4,4 @@ bin/
 python/__pycache__/
 *.egg-info/
 env/
+certs/

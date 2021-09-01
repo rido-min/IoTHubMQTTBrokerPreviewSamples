@@ -12,8 +12,8 @@ from paho_client import PahoClient
 Uncomment the following lines to enable debug logging
 """
 
-logging.basicConfig(level=logging.INFO)
-logging.getLogger("paho").setLevel(level=logging.DEBUG)
+# logging.basicConfig(level=logging.INFO)
+# logging.getLogger("paho").setLevel(level=logging.DEBUG)
 
 topic_filter = "sample/#"
 
