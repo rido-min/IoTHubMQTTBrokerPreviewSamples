@@ -260,7 +260,7 @@ With the introduction of MQTT broker, we have revamped the [device authenticatio
 
 ### IoT Hub API reference
 
-System topics supported by IoT Hub have been updated. Please see [details] (https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-conceptual.md#message-topics-and-subscriptions). The device SDK will be updated in future release.
+System topics supported by IoT Hub have been updated. Please see [details](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples/blob/main/references/mqtt-3-1-1-conceptual.md#message-topics-and-subscriptions). The device SDK will be updated in future release.
 
 ## Message routing for MQTT Broker enabled IoT Hubs
 
