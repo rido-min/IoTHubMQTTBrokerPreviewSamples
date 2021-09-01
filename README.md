@@ -122,6 +122,28 @@ az iot hub device-identity connection-string show -n {iothub_name} -d sub_device
 
 4. Observe messages delivered to subscriber.
 
+Publisher sample output:
+```
+(iothub-broker) contoso@fabrikam:~/code/IoTHubMQTTBrokerPreviewSamples/python$ python publish.py
+Starting connection
+Waiting for CONNACK
+Publishing to sample/topic at QOS=1
+Publish returned rc=0: No error.
+Waiting for PUBACK for mid=1
+PUBACK received
+Disconnecting
+```
+
+Subscriber sample output:
+```
+(iothub-broker) prashmo@prashmo7:~/code/IoTHubMQTTBrokerPreviewSamples/python$ python subscribe.py
+Connecting
+Subscribing to sample/# at qos 1
+Subscription was granted with qos 1
+Message received on topic sample/topic
+Payload: {'latitude': 47.63962283908785, 'longitude': -122.12718926895407}
+```
+
 ## Scenarios
 
 Here are a few additional scenarios you can try out. Please refer the details below about the limitations.
