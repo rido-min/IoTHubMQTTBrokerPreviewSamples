@@ -59,9 +59,13 @@ The following features are not in scope for this release, but they will be suppo
    * If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin. This feature is not available for existing IoT Hubs in this release.
    * Central EUAP is the only region where MQTT Broker is currently supported.
    * You can customize the SKU and number of units for this IoT Hub in the template.
-3. Azure CLI. 
-* This quickstart requires Azure CLI version 2.17.1 or later. Run az --version to find the version. To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-* In this release, topic space management commands can be enabled as follows.
+3. Azure CLI.
+   * This quickstart requires Azure CLI version 2.17.1 or later. Run the below command to find the version.
+      ```azure cli
+      az --version
+      ```  
+    To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+   * In this release, topic space management commands can be enabled as follows.
 
 Remove the current Azure IoT extension using:
 
