@@ -81,7 +81,9 @@ For more details on the Azure IoT extension for Azure CLI see [here](https://git
   
 4. Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
 
- For all the scenarios below we have provided python sample code. Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. We are providing sample code in Python using the Paho MQTT client. To connect to hub, the clients must follow the [new authentication guidelines](#device-authentication), once the client is connected regular pub/sub operations will work. The samples use authentication based on SharedAccessKeys.
+ For all the scenarios below we have provided sample code in Python using the Paho MQTT client. 
+ 
+ Microsoft SDK to interact with the broker will be provided in the next release. Current samples use existing MQTT libraries and include helper functions that can be used in your own applications. To connect to hub, the clients must follow the [new authentication guidelines](#device-authentication), once the client is connected regular pub/sub operations will work. The samples use authentication based on SharedAccessKeys.
 
 ## Quickstart
 
@@ -136,7 +138,7 @@ Disconnecting
 
 Subscriber sample output:
 ```
-(iothub-broker) prashmo@prashmo7:~/code/IoTHubMQTTBrokerPreviewSamples/python$ python subscribe.py
+(iothub-broker) contoso@fabrikam:~/code/IoTHubMQTTBrokerPreviewSamples/python$ python subscribe.py
 Connecting
 Subscribing to sample/# at qos 1
 Subscription was granted with qos 1
