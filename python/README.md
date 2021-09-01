@@ -81,7 +81,7 @@ Next, we set up a virtual environment.  This gives us a safe space to install Py
 
 ## Install helper modules
 
-To install the modules that you will need to run these tests, run pip to install the code in this directoy in 'editable' mode.
+To install the modules that you will need to run these tests, run pip to install the code in this directory in 'editable' mode.
 
 ```
 pip install -e .

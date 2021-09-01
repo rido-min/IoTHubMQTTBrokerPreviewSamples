@@ -26,7 +26,7 @@ DEFAULT_PASSWORD_RENEWAL_MARGIN = 300
 
 
 def sign_password(base64_key: str, payload_to_sign: Union[str, bytes]) -> bytes:
-    # assumme base64_key is a string.
+    # assume base64_key is a string.
     decoded_key = base64.b64decode(base64_key)
 
     try:
@@ -117,7 +117,7 @@ class BaseAuth(abc.ABC):
     def hostname(self) -> str:
         """
         host to connect to.  This may be the name of the IoTHub instance, or, in the case of a
-        gateway, it may be the name of the gateway intance.
+        gateway, it may be the name of the gateway instance.
         """
         if self.gateway_host_name:
             return self.gateway_host_name

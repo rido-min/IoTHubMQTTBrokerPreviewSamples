@@ -1,6 +1,6 @@
 # Scenario 6 – x509 authentication
 
-This scenario shows how to authenticat with IoTHub using an x509 certificate. A modified publish/subscribe example from the quickstart is used to show successful communcation.
+This scenario shows how to authenticate with IoTHub using an x509 certificate. A modified publish/subscribe example from the quickstart is used to show successful communication.
 
 | Device | Role| Topic | Topic Template |
 | -------- | --------------- |---------- |---------- |

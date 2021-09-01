@@ -7,7 +7,7 @@ from typing import Dict, List, Callable, Any, Generic, TypeVar, Optional
 
 logger = logging.getLogger(__name__)
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class IncomingAckList(Generic[T]):
@@ -19,7 +19,7 @@ class IncomingAckList(Generic[T]):
     These "wait" operations are done in a thread-safe manner using the `Condition` class
     provided by the `threading` module.
 
-    Callers using `async3yyio` instead of `threading` should consider writing an awaitable version
+    Callers using `asyncio` instead of `threading` should consider writing an awaitable version
     of this class using the `asyncio.Condition` class for synchronization.  Submitting a pull
     request with this functionality is encouraged.
     """
@@ -150,7 +150,7 @@ class IncomingMessageList(object):
         Wait for the list to be not-empty.  If the list already has a
         message, return `True` immediately.  If not, then wait up to `timeout`
         seconds for an item to be added, and then return `True`.  If no item
-        is addeded within `timeout` seconds, return False.
+        is added within `timeout` seconds, return False.
 
         :param float timeout: Amount of time to wait before returning.
 
@@ -178,7 +178,7 @@ class IncomingMessageList(object):
 class ConnectionStatus(object):
     """
     Connection status object which can be used to know if the transport is connected or not
-    and if there was a connection errror.  This object is also waitable, so users can  call
+    and if there was a connection error.  This object is also waitable, so users can  call
     wait_for_connected or wait_for_disconnected functions to wait for the specific states.
 
     Callers using `asyncio` instead of `threading` should consider writing an awaitable version
@@ -246,7 +246,7 @@ class ConnectionStatus(object):
     def wait_for_disconnected(self, timeout: float = None) -> None:
         """
         Wait for the transport to enter the disconnected state.
-        Returns imediately if the transport is already disconnected.
+        Returns immediately if the transport is already disconnected.
         """
         with self.cv:
             self.cv.wait_for(lambda: not self._connected, timeout=timeout)
