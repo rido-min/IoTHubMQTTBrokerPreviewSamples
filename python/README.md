@@ -108,7 +108,7 @@ wheel                          0.36.2
 To verify that you have the libraries successfully installed, you can:
 
 1. Type `cd ..` to move into the root of the repo.
-2. Type `python` to launch the pyton interpreter
+2. Type `python` to launch the python interpreter
 3. Inside python, type `import paho_client`.
 4. If no error is displayed, then the library was successfully installed.
 5. type `exit()` to exit the Python interpreter.
