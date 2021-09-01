@@ -8,7 +8,7 @@ import json
 import uuid
 import time
 from paho_client import PahoClient
-from symmetric_key_auth import SymmetricKeyAuth
+from auth import SymmetricKeyAuth
 
 """
 Uncomment the following lines to enable debug logging

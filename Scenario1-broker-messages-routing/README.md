@@ -9,7 +9,7 @@ Consider a use case where one needs to identify location of vehicles. The vehicl
 
 1. Setup
 
-For this scenario, please ensure you have deployed a IoT Hub with routing using the [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages). 
+For this scenario, please ensure you have deployed a IoT Hub with routing using the [ARM template](https://github.com/prashmo/azure-quickstart-templates/tree/master/quickstarts/microsoft.devices/iothub-mqtt-broker-route-messages).
 
 Validate routing setup.
 
@@ -57,14 +57,17 @@ az iot hub monitor-events -n {iothub_name} -p all
 
 6. Use the device sample using the instructions below to publish to the topic.
 
-  * If you haven't installed the required modules, follow the instructions in the [python README file](../python/README.md).
-  * Make sure you have the `iothub-broker` virtual environment activated by running `source ~/env/iothub-broker/bin/activate` in Linux or `env/iothub-broker/bin/activate` in Windows
-  * Make sure you have the `CS_VEHICLE_1` environment variable set to the connection string for your `vehicle1` device identity.
-  * Run the sample within `Scenario1-broker-messages-routing` using the below command
+* If you haven't installed the required modules, follow the instructions in the [python README file](../python/README.md).
+* Make sure you have the `iothub-broker` virtual environment activated by running `source ~/env/iothub-broker/bin/activate` in Linux or `env/iothub-broker/bin/activate` in Windows
+* Make sure you have the `CS_VEHICLE_1` environment variable set to the connection string for your `vehicle1` device identity.
+* Run the sample within `Scenario1-broker-messages-routing` using the below command
+
     ```
     python python/publish_1.py
     ```
+
 7. Below is the sample output of events.
+
   ```
   {
     "event": {
