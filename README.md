@@ -64,19 +64,19 @@ The following features are not in scope for this release, but they will be suppo
       ```azure cli
       az --version
       ```  
-    To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+     To install or upgrade, see [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
    * In this release, topic space management commands can be enabled as follows.
 
-Remove the current Azure IoT extension using:
+      Remove the current Azure IoT extension using:
 
-  ``` azure cli
-  az extension remove -n azure-iot
-  ```
-Run the following command to re-add Azure IoT extension:
+        ``` azure cli
+        az extension remove -n azure-iot
+        ```
+      Run the following command to re-add Azure IoT extension:
 
-  ``` azure cli
-  az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
-  ```
+        ``` azure cli
+        az extension add --source 'https://topicspaceapp.blob.core.windows.net/files/azure_iot-255.255.3-py3-none-any.whl'
+        ```
 For more details on the Azure IoT extension for Azure CLI see [here](https://github.com/Azure/azure-iot-cli-extension). For Windows, please use `PowerShell`.
   
 4. Clone the [repo](https://github.com/Azure/IoTHubMQTTBrokerPreviewSamples)
