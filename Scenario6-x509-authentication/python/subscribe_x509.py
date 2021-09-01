@@ -34,10 +34,11 @@ client = PahoClient.create_from_x509_certificate(
 # CONNECT
 ##################################
 
-print("Connecting")
+print("Connecting to {}".format(client.auth.device_id))
 client.start_connect()
 if not client.connection_status.wait_for_connected(timeout=20):
     sys.exit(1)
+print("Connected")
 
 ##################################
 # SUBSCRIBE

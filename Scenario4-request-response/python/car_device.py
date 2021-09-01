@@ -32,6 +32,7 @@ client.start_connect()
 if not client.connection_status.wait_for_connected(timeout=20):
     print("{}: Connection failed.  Exiting.".format(client.auth.device_id))
     sys.exit(1)
+print("{}: Connected".format(client.auth.device_id))
 
 ##################################
 # SUBSCRIBE

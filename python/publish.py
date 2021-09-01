@@ -27,13 +27,13 @@ client = PahoClient.create_from_connection_string(os.environ["CS_PUB"])
 # CONNECT
 ##################################
 
-print("Starting connection")
+print("Connecting to {}".format(client.auth.device_id))
 client.start_connect()
 
-print("Waiting for CONNACK")
 if not client.connection_status.wait_for_connected(timeout=20):
     print("failed to connect.  exiting")
     sys.exit(1)
+print("Connected")
 
 ##################################
 # PUBLISH

@@ -32,13 +32,13 @@ client = PahoClient.create_from_x509_certificate(
 # CONNECT
 ##################################
 
-print("Starting connection")
+print("Connecing to {}".format(client.auth.device_id))
 client.start_connect()
 
-print("Waiting for CONNACK")
 if not client.connection_status.wait_for_connected(timeout=20):
     print("failed to connect.  exiting")
     sys.exit(1)
+print("Connected")
 
 ##################################
 # PUBLISH
