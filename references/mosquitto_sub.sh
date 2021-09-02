@@ -7,7 +7,7 @@ az iot hub device-identity show -n $hub -d $dev --query properties.deviceId  2>/
     (echo "creating device $dev" && \
     az iot hub device-identity create -n $hub -d $dev)
 
-mqttCreds=$(az iot hub device-identity generate-mqtt-credentials -n $hub -d $dev --du 3600 --only-show-errors)
+mqttCreds=$(az iot hub device-identity generate-mqtt-credentials -n $hub -d $dev --only-show-errors)
 
 host=$hub.azure-devices.net
 clientid=$dev
