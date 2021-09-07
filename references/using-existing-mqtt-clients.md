@@ -68,9 +68,9 @@ Subscribed (mid: 1): 0
 - Protocol: mqtt://
 - Host: myiothubwithbroker.azure-devices.net
 - Port: 8883
-- Username: <copy/paste the user name obtained with az iot hub device-identity generate-mqtt-credentials >
-- Password: <copy/paste the user password obtained with az iot hub device-identity generate-mqtt-credentials >
-- Advanced/ClientId: <your device id >
+- Username: < copy/paste the user name obtained with az iot hub device-identity generate-mqtt-credentials >
+- Password: < copy/paste the user password obtained with az iot hub device-identity generate-mqtt-credentials >
+- Advanced/ClientId: < your device id >
 - Advanced/Certificate/Server Certificate (CA): path to BaltimoreCA.pem
 
 ![MQTT Explorer Options](mqttex_options.png)
